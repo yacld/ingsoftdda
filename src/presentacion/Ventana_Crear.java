@@ -5,10 +5,16 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
+
+import datos.DAO_Paso;
+import negocio.Servicio_Paso;
 
 public class Ventana_Crear {
 
@@ -72,19 +78,28 @@ public class Ventana_Crear {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String[] datos = new String[3];
+				if(textField.getText().isEmpty() || textField_1.getText().isEmpty() || textField_2.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Te falta llenar datos");
+				}else {
 				datos[0] = textField.getText();
 				datos[1] = textField_1.getText();
-				datos[2] = textField_2.getText();
-					
-				try {
+				datos[2] = textField_2.getText();try {
 					cc.crear(datos);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+				}	
+				
 			}
 		});
 		
+		
+	}
+
+	public void mostrarNueva(File name) {
+		Tabla tabla = new Tabla(new Control_Paso(new Servicio_Paso(new DAO_Paso())), name);
+		tabla.frmProceso.setVisible(true);
 		
 	}
 }
