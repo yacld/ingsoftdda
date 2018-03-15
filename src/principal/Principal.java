@@ -2,15 +2,15 @@ package principal;
 //prueba de branch
 import java.io.IOException;
 
-import negocio.Servicio_Crear;
+import negocio.Servicio_Crear_Plantilla;
 import negocio.Servicio_Paso;
-import presentacion.Control_Crear;
+import presentacion.Control_Crear_Plantilla;
 import presentacion.Control_Paso;
 import presentacion.Primera_Ventana;
 
 public class Principal {
 	Servicio_Paso sp;
-	Servicio_Crear sc;
+	Servicio_Crear_Plantilla sc;
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -31,7 +31,7 @@ public class Principal {
 	}
 	
 	public void Crear() {
-		Control_Crear cc = new Control_Crear(this.sc);
+		Control_Crear_Plantilla cc = new Control_Crear_Plantilla(this.sc);
 		cc.iniciar();
 	}
 

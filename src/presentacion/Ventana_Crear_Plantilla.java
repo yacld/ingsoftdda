@@ -16,16 +16,16 @@ import javax.swing.JTextField;
 import datos.DAO_Paso;
 import negocio.Servicio_Paso;
 
-public class Ventana_Crear {
+public class Ventana_Crear_Plantilla {
 
 	private JFrame frmCrearPlantilla;
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
-	private Control_Crear cc;
+	private Control_Crear_Plantilla cc;
 
 
-	public Ventana_Crear(Control_Crear control_Crear) {
+	public Ventana_Crear_Plantilla(Control_Crear_Plantilla control_Crear) {
 		this.cc = control_Crear;
 	}
 

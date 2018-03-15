@@ -18,7 +18,7 @@ import jxl.Workbook;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 
-public class DAO_Crear {
+public class DAO_Crear_Plantilla {
 
 	public File crear(String[] datos) throws IOException {
 		JFileChooser dialog = new JFileChooser();
