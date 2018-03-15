@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -15,8 +16,9 @@ import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 
 public class PDF {
 	
-	public void Generador_PDF(DefaultTableModel modelo) throws IOException{
+	public void Generador_PDF(JTable tabla) throws IOException{
 		PDDocument document = new PDDocument();
+		System.out.println(tabla.toString());
 	      //Creacion de una pagina
 	      PDPage page = new PDPage(PDRectangle.LETTER);
 	      //Se agraga esa pagina al documento

@@ -26,7 +26,7 @@ public class DAO_Crear {
 //		        "Plantillas xls, csv", "xls");
 //		dialog.setFileFilter(filter);
 //		int opcion = dialog.showSaveDialog(new JFrame());
-		File name = new File("/Users/alumnocbi/Desktop/" + datos[0] +".xls");
+		File name = new File(datos[0] +".xls");
 		
 //		if (opcion == JFileChooser.APPROVE_OPTION) {
 //
