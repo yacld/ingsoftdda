@@ -115,6 +115,12 @@ public class Tabla {
 		Tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		Tabla.doLayout();
 		frmProceso.getContentPane().add(Tabla);
+		try {
+			CrearTabla(paso);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			System.out.println("Si esto falla me doy un tiro");
+		}
 
 		JButton btnInsertar = new JButton("Insertar");
 		btnInsertar.setBounds(180, 280, 90, 25);
@@ -137,12 +143,6 @@ public class Tabla {
 		JButton btnComentarios = new JButton("Agregar Comentarios");
 		btnComentarios.setBounds(720, 280, 150, 25);
 		frmProceso.getContentPane().add(btnComentarios);
-		Random btncom = new Random();
-		if(btncom.nextBoolean()){
-			btnComentarios.setEnabled(false);;
-		}else{
-			btnComentarios.setEnabled(true);
-		}
 
 		texFiltro = new JTextField();
 		texFiltro.setBounds(770, 89, 90, 25);
@@ -239,24 +239,7 @@ public class Tabla {
 
 			private void btnInsertarActionPerformed(ActionEvent evt) {
 				// TODO Auto-generated method stub
-				String[] datos = new String[7];
-				datos[0] = TexidPaso.getText();
-				datos[1] = texNombre.getText();
-				datos[2] = AreaDescripcion.getText();
-				datos[3] = TexidPasoAnt.getText();
-				datos[4] = texConector.getText();
-				datos[5] = TexForma.getText();
-				datos[6] = texResponsable.getText();
-				modelo.addRow(datos);
-				TexidPaso.setText("");
-				texNombre.setText("");
-				AreaDescripcion.setText("");
-				TexidPasoAnt.setText("");
-				texConector.setText("");
-				TexForma.setText("");
-				texResponsable.setText("");
-				//TexCodigo.requestFocus();
-
+				new Ventana_Comentario("Comentarios", Tabla);
 			}
 		});
 		
@@ -269,7 +252,7 @@ public class Tabla {
 				// TODO Auto-generated method stub
 				PDF pdf = new PDF();
 				try {
-					pdf.Generador_PDF(modelo);
+					pdf.Generador_PDF(Tabla);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -290,49 +273,13 @@ public class Tabla {
 
 			private void btnImportarActionPerformed(ActionEvent evt) throws IOException {// GEN-FIRST:event_btnImportarTablaActionPerformed
 				
-				
-				File file =null;
+				File file = null;
 				file = cp.importar();
-				importado =file.getAbsolutePath();
+				//importado = file.getAbsolutePath();
 //				System.out.println(importado);
 				eliminar();
 				CrearTabla(file);
 				Tabla.setEnabled(false);
-			}
-
-			private void CrearTabla(File file) throws IOException {
-				if(importado.endsWith(".xls")){
-					Workbook workbook = null;
-					try {
-						workbook = Workbook.getWorkbook(file);
-						Sheet sheet = workbook.getSheet(0);
-						columna.clear();
-						for (int i = 0; i < sheet.getColumns(); i++) {
-							Cell cell1 = sheet.getCell(i, 0);
-							columna.add(cell1.getContents());
-						}
-						filas.clear();
-						for (int j = 1; j < sheet.getRows(); j++) {
-							Vector d = new Vector();
-							for (int i = 0; i < sheet.getColumns(); i++) {
-								Cell cell = sheet.getCell(i, j);
-									d.add(cell.getContents());
-							}
-							d.add("\n");
-							modelo.addRow(d);
-						}
-					} catch (BiffException e) {
-						e.printStackTrace();
-					}
-				}else if(importado.endsWith(".csv")){
-					Scanner scanner = new Scanner(new File(importado));
-			        while (scanner.hasNext()) {
-			            List<String> line = CSVUtils.parseLine(scanner.nextLine());
-			            //System.out.println("Country [id= " + line.get(0) + ", code= " + line.get(1) + " , name=" + line.get(2) + "]");
-			            modelo.addRow(line.toArray());
-			        }
-			        scanner.close();
-				}
 			}
 			
 			private void eliminar(){
@@ -367,7 +314,7 @@ public class Tabla {
 
 			private void btnActualizarActionPerformed(ActionEvent evt) {
 				if(cp.editar(Tabla,importado) == true) {
-					JOptionPane.showMessageDialog(null, "TABLA ACTUALIZADA CON EXITOS!");
+					JOptionPane.showMessageDialog(null, "TABLA ACTUALIZADA CON EXITO!");
 					Tabla.setEnabled(false);
 				}else {
 					JOptionPane.showMessageDialog(null, "HUBO PROBLEMAS AL ACTUALIZAR!");
@@ -426,4 +373,45 @@ public class Tabla {
 		
 		
 	}
+	/**
+	 * 
+	 *Este codigo tiene que estar fuera del metodo inicializar para que funcione bien
+	 *
+	 **/
+	private void CrearTabla(File file) throws IOException {
+		importado = file.getAbsolutePath();
+		if(importado.endsWith(".xls")){
+			Workbook workbook = null;
+			try {
+				workbook = Workbook.getWorkbook(file);
+				Sheet sheet = workbook.getSheet(0);
+				columna.clear();
+				for (int i = 0; i < sheet.getColumns(); i++) {
+					Cell cell1 = sheet.getCell(i, 0);
+					columna.add(cell1.getContents());
+				}
+				filas.clear();
+				for (int j = 1; j < sheet.getRows(); j++) {
+					Vector d = new Vector();
+					for (int i = 0; i < sheet.getColumns(); i++) {
+						Cell cell = sheet.getCell(i, j);
+							d.add(cell.getContents());
+					}
+					d.add("\n");
+					modelo.addRow(d);
+				}
+			} catch (BiffException e) {
+				e.printStackTrace();
+			}
+		}else if(importado.endsWith(".csv")){
+			Scanner scanner = new Scanner(new File(importado));
+	        while (scanner.hasNext()) {
+	            List<String> line = CSVUtils.parseLine(scanner.nextLine());
+	            //System.out.println("Country [id= " + line.get(0) + ", code= " + line.get(1) + " , name=" + line.get(2) + "]");
+	            modelo.addRow(line.toArray());
+	        }
+	        scanner.close();
+		}
+	}
+	
 }
