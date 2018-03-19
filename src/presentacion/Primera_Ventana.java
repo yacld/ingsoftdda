@@ -85,6 +85,8 @@ public class Primera_Ventana {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				app.Crear(usuario);
+				frmPrincipal.dispose();
+				initialize(usuario);
 			}
 		});
 		/**
