@@ -32,7 +32,7 @@ public class DAO_Usuario {
 			ResultSet rs = statement.executeQuery(Todos_usuarios);
 			while (rs.next()) { // Crea una nueva instancia del objeto
 				Usuario usuario = new Usuario(rs.getString("Nombre"), rs.getString("Apellido"), rs.getInt("Asesor"),
-						rs.getString("Contraseña"),rs.getString("Nick"));
+						rs.getString("Contrasenia"),rs.getString("Nick"));
 				usuarioTemp.add(usuario);
 			}
 			Usuario usuarioTempArreglo[] = new Usuario[usuarioTemp.size()];
@@ -55,7 +55,7 @@ public class DAO_Usuario {
 			// Envia instruccion SQL, nota el DEFAULT es para insertar la llave
 			// autogeneradaraduacion,String adicion
 			statement.execute("INSERT INTO Usuario VALUES ('"+u.getNombre() + "','"
-					+ u.getApellido() + "','" + u.getAsesor() + "','" + u.getContraseña() + "','" + u.getNick() +"')",
+					+ u.getApellido() + "','" + u.getAsesor() + "','" + u.getContrasenia() + "','" + u.getNick() +"')",
 					Statement.RETURN_GENERATED_KEYS);
 			return true;
 		} catch (SQLException e) {
@@ -64,5 +64,25 @@ public class DAO_Usuario {
 			return false;
 		}
 	}
+public Usuario buscarUsuario(String usuario) throws SQLException {
+		
+		final String bUsuario = ("Select * from Usuario where Nick = "+usuario+"");
+		Connection connection = DriverManager.getConnection(CONNECTION_URL, USERNAME, PASSWORD);
+		
+		
+		try { // Crea el statement
+			Statement statement = connection.createStatement();
+			// Recibe los resutados
+			ResultSet rs = statement.executeQuery(bUsuario);
+				Usuario us = new Usuario(rs.getString("Nombre"), rs.getString("Apellido"), rs.getInt("Asesor"),
+						rs.getString("Contrasenia"),rs.getString("Nick"));				
+			return us;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 
 }
