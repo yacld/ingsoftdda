@@ -114,28 +114,34 @@ public class Ventana_Crear_Usuario {
 		
 		btnAgregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
-				String nombre = textNombre.getText();
-				System.out.println(textNombre.getText());
-				String apellido = textApellido.getText();
-				String nick = textNick.getText();
-				String contra1 = textContra1.getText();
-				//String contra2 = textContra2.getText();
-				int asesor = 1;
-				if(cbTipo.getSelectedItem() == "SI") {
-					asesor =0;	
-				}
-				try {
-					if(cc.agregarUsuario(nombre, apellido, asesor, contra1, nick)) {
-						JOptionPane.showMessageDialog(null, "¡¡ El usuario nueo ha sido agregado con exito!!");
+				if(textNombre.getText() == null || textApellido.getText() == null || textNick.getText() == null || textContra1.getText() == null) {
+					JOptionPane.showMessageDialog(null, "Debes de llenar todos los campos");
+				}else {
+					String nombre = textNombre.getText();
+					//System.out.println(textNombre.getText());
+					String apellido = textApellido.getText();
+					String nick = textNick.getText();
+					String contra1 = textContra1.getText();
+					String contra2 = textContra2.getText();
+					if(contra1 != contra2) {
+						JOptionPane.showMessageDialog(null, "Vuelve a verificar la contraseña");
 					}else {
-						JOptionPane.showMessageDialog(null, "¡¡ Ha ocurrido un error interno y no se pudo agregar el usuario!!");
+						int asesor = 1;
+						if(cbTipo.getSelectedItem() == "SI") {
+							asesor =0;	
+						}
+						try {
+							if(cc.agregarUsuario(nombre, apellido, asesor, contra1, nick)) {
+								JOptionPane.showMessageDialog(null, "¡¡ El usuario nueo ha sido agregado con exito!!");
+							}else {
+								JOptionPane.showMessageDialog(null, "¡¡ Ha ocurrido un error interno y no se pudo agregar el usuario!!");
+							}
+						} catch (HeadlessException | SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 					}
-				} catch (HeadlessException | SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
 				}
-				
-				
 			}
 		});
 	}

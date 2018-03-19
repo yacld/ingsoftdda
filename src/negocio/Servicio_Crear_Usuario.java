@@ -31,15 +31,17 @@ public boolean valida(String nombre2, String nick2, String contraseña2) throws 
 	}
 
 	public boolean agregarUsuario(String nombre, String apellido, int asesor, String contraseña, String nick) throws SQLException {
-		if(valida(nombre,nick,contraseña) == true) {
-				Usuario u= new Usuario(nombre, apellido, asesor,contraseña, nick);
-				if(daou.crear(u) == true) {
+		if (valida(nombre, nick, contraseña) == true) {
+			Usuario u = new Usuario(nombre, apellido, asesor, contraseña, nick);
+			if (daou.crear(u) == true) {
 				return true;
-			}else {
+			} else {
 				return false;
 			}
-		}
-		return false;	
+		}else {
+			//JOptionPane.showMessageDialog(null, "El usuario ya existe");
+			return true;
+		}	
 	}
 
 }
