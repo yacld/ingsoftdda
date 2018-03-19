@@ -30,7 +30,7 @@ public class Ventana_Principal extends javax.swing.JFrame {
 		labelSOS = new javax.swing.JLabel();
 		btnEntrar = new javax.swing.JButton();
 		btnCrearCuenta = new javax.swing.JButton();
-
+		this.setVisible(true);
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
 		btnEntrar.setText("Entrar al Sistema");

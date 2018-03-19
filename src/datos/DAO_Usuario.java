@@ -14,11 +14,11 @@ import negocio.Usuario;
 public class DAO_Usuario {
 	
 	final String DRIVER_NAME = "com.mysql.jdbc.Driver";
-	final String HOSTNAME = "mydb-ealpha.cdtc5pclholt.us-west-1.rds.amazonaws.com";
-	final String DBNAME = "dbeadda";
+	final String HOSTNAME = "localhost";
+	final String DBNAME = "Generador";
 	final String CONNECTION_URL = "jdbc:mysql://"+HOSTNAME +":3306/"+DBNAME;
-	final String USERNAME = "masterUser";
-	final String PASSWORD = "equipoalpha";
+	final String USERNAME = "root";
+	final String PASSWORD = "";
 	
 
 	public Usuario[] Retrieve() throws SQLException {

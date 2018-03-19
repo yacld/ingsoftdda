@@ -115,6 +115,6 @@ public class Primera_Ventana {
 	}
 	
 	public static void main(String[] args){
-		Primera_Ventana pv = new Primera_Ventana("yacld");
+		Primera_Ventana pv = new Primera_Ventana("garo");
 	}
 }

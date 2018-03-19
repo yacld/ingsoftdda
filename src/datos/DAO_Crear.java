@@ -27,11 +27,11 @@ import jxl.write.WritableWorkbook;
 public class DAO_Crear {
 
 	final String DRIVER_NAME = "com.mysql.jdbc.Driver";
-	final String HOSTNAME = "mydb-ealpha.cdtc5pclholt.us-west-1.rds.amazonaws.com";
-	final String DBNAME = "dbeadda";
+	final String HOSTNAME = "localhost";
+	final String DBNAME = "Generador";
 	final String CONNECTION_URL = "jdbc:mysql://"+HOSTNAME +":3306/"+DBNAME;
-	final String USERNAME = "masterUser";
-	final String PASSWORD = "equipoalpha";
+	final String USERNAME = "root";
+	final String PASSWORD = "";
 	
 	public File crear(String[] datos, String usuario) throws IOException {
 //		
@@ -67,7 +67,7 @@ public class DAO_Crear {
 		try {
 			// Crea el statement
 //			Statement statement = connection.createStatement();
-			String sql = "INSERT INTO Plantilla VALUES ('"+name.getName() + "',?"
+			String sql = "INSERT INTO Plantila VALUES ('"+name.getName() + "',?"
 					/*+ input*/ + "," + Long.parseLong(datos[1]) + ",'" + usuario + "','" + datos[2] +"')";
 			PreparedStatement pstmt = connection.prepareStatement(sql);
 			pstmt.setBinaryStream(1, input);
@@ -86,9 +86,9 @@ public class DAO_Crear {
 
 	public static void main(String[] args){
 		DAO_Crear daoc = new DAO_Crear();
-		String[] pruebas  ={"prueba", "110001000", "ELasesor"};
+		String[] pruebas  ={"prueba2", "110001001", "ELasesor"};
 		try {
-			daoc.crear(pruebas, "yacl");
+			daoc.crear(pruebas, "garo");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

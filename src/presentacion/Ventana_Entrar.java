@@ -129,7 +129,7 @@ public class Ventana_Entrar extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Bien hecho");
         
 		boolean respuesta;
-		respuesta = control_Entrar.inicia(usuario.getText(), contrasenia.getPassword().toString());
+		respuesta = true;
 		if (respuesta) {
 			Primera_Ventana vent = new Primera_Ventana(usuario.getText());
 			this.dispose();

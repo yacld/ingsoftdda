@@ -8,7 +8,7 @@ package presentacion;
  */
 
 
-import java.awt.EventQueue;
+//import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -124,7 +124,13 @@ public class Ventana_Crear_Usuario {
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBounds(328, 309, 114, 25);
 		frmNuevoUsuario.getContentPane().add(btnCancelar);
-		
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				frmNuevoUsuario.dispose();
+				Ventana_Principal  v= new Ventana_Principal();
+				
+			}
+		});
 		/**
 		 * Se agrega funcionalidad al boton agregar, lo que se hace es capturar los datos 
 		 * que ingreso el usuario y se le pasa al control para que agrague al  usuario
@@ -142,10 +148,8 @@ public class Ventana_Crear_Usuario {
 					String apellido = textApellido.getText();
 					String nick = textNick.getText();
 					String contra1 = textContra1.getText();
-					String contra2 = textContra2.getText();
-					if(contra1 != contra2) {
-						JOptionPane.showMessageDialog(null, "Vuelve a verificar la contrasenia");
-					}else {
+					//String contra2 = textContra2.getText();
+					
 						int asesor = 1;
 						if(cbTipo.getSelectedItem() == "SI") {
 							asesor =0;	
@@ -160,7 +164,7 @@ public class Ventana_Crear_Usuario {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-					}
+					
 				}
 			}
 		});

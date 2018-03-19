@@ -25,7 +25,7 @@ tipoErr=1;
 	}
 
 	public boolean inicia(String usuario, String contrasenia) {
-		 boolean respuesta;
+		 boolean respuesta=false;
 		respuesta= Servicio_Entrar.entrar(usuario, contrasenia);
 		return respuesta;
 		
