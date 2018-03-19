@@ -7,6 +7,7 @@ import negocio.Servicio_Paso;
 import presentacion.Control_Crear;
 import presentacion.Control_Paso;
 import presentacion.Primera_Ventana;
+import presentacion.Ventana_Principal;
 
 public class Principal {
 	Servicio_Paso sp;
@@ -20,8 +21,8 @@ public class Principal {
 	}
 	
 	public void inicia() {
-		Primera_Ventana ventana = new Primera_Ventana();
-		ventana.iniciar();
+		Ventana_Principal ventana = new Ventana_Principal();
+		ventana.setVisible(true);
 	}
 	
 	
