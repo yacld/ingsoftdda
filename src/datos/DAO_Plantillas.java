@@ -20,7 +20,11 @@ import javax.swing.DefaultListModel;
 
 import negocio.Usuario;
 
-
+/**
+ * Clase que lee las plantillas de base de datos 
+ * @author Yaeld
+ * Su unica funcion es obten_plantillas
+ */
 public class DAO_Plantillas {
 
 	final String DRIVER_NAME = "com.mysql.jdbc.Driver";
@@ -30,6 +34,13 @@ public class DAO_Plantillas {
 	final String USERNAME = "masterUser";
 	final String PASSWORD = "equipoalpha";
 	
+	/**
+	 * Funcion que llena el modelo del Jlist en primer ventana
+	 * @param usuario
+	 * @param listModel
+	 * @return
+	 * @throws SQLException
+	 */
 	public boolean Obten_Plantillas(String usuario, DefaultListModel<File> listModel) throws SQLException {
 		
 		final String todas_plantillas = "Select * from Plantilla where Usuario = " +usuario;
@@ -39,14 +50,11 @@ public class DAO_Plantillas {
 	 
 	     try (Connection connection = DriverManager.getConnection(CONNECTION_URL, USERNAME, PASSWORD);
 	                PreparedStatement pstmt = connection.prepareStatement(todas_plantillas);) {
-	            // set parameter;
-//	            pstmt.setInt(1, candidateId);
+	         
 	            rs = pstmt.executeQuery();
 	 
 	            // write binary stream into file
 	           
-	 
-//	            System.out.println("Writing to file " + file.getAbsolutePath());
 	            while (rs.next()) {
 	            	File file = new File(rs.getString("Nombre"));
 	 	            FileOutputStream output = new FileOutputStream(file);

@@ -87,7 +87,13 @@ public class Primera_Ventana {
 				app.Crear();
 			}
 		});
-		
+		/**
+		 * Boton abrir, al seleccionarlo activa
+		 * Evento que abrira la plantilla
+		 * anteriormente hacia lo de importar
+		 * ahora abre la plantilla seleccionada de la lista
+		 * @param file seleccionado
+		 */
 		JButton btnAbrir = new JButton("ABRIR");
 		btnAbrir.setBounds(249, 220, 89, 23);
 		frmPrincipal.getContentPane().add(btnAbrir);
