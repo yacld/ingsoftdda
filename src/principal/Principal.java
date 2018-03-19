@@ -1,4 +1,5 @@
 package principal;
+import java.io.File;
 //prueba de branch
 import java.io.IOException;
 
@@ -26,9 +27,9 @@ public class Principal {
 	}
 	
 	
-	public void paso() throws IOException {
+	public void paso(File file) throws IOException {
 		Control_Paso cp = new Control_Paso(this.sp);
-		cp.iniciar();
+		cp.iniciar(file);
 	}
 	
 	public void Crear() {

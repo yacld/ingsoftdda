@@ -21,9 +21,9 @@ public class Control_Paso {
 		sp = new Servicio_Paso(daops);
 	}
 
-	public void iniciar() throws IOException {
+	public void iniciar(File file2) throws IOException {
 		File file;
-		file = sp.iniciar();
+		file = file2;
 		Tabla ventana = new Tabla(this, file);
 		ventana.frmProceso.setVisible(true);
 		

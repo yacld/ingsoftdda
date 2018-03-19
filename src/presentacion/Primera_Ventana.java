@@ -67,8 +67,8 @@ public class Primera_Ventana {
 			public void valueChanged(ListSelectionEvent arg0) {
 				// TODO Auto-generated method stub
 				if (!arg0.getValueIsAdjusting()) {
-                    final List<File> selectedValuesList = lista_p.getSelectedValuesList();
-                    System.out.println(selectedValuesList);
+                    final File selectedValue = lista_p.getSelectedValue();
+                    System.out.println(selectedValue.getName());
                 }
 			}
         });
@@ -96,7 +96,7 @@ public class Primera_Ventana {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					app.paso();
+					app.paso(lista_p.getSelectedValue());
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
