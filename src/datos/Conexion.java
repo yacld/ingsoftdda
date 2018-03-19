@@ -1,16 +1,32 @@
 package datos;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+import negocio.Usuario;
+
 public class Conexion {
 	
-	Object[][] data = null;
-
 	final String DRIVER_NAME = "com.mysql.jdbc.Driver";
-	final String CONNECTION_URL = "jdbc:mysql://localhost:3306/Ejemplo_Usuario";
-	final String USERNAME = "root";
-	final String PASSWORD = "camara";
+	final static String HOSTNAME = "mydb-ealpha.cdtc5pclholt.us-west-1.rds.amazonaws.com";
+	final static String DBNAME = "dbeadda";
+	final static String CONNECTION_URL = "jdbc:mysql://"+HOSTNAME +":3306/"+DBNAME;
+	final static String USERNAME = "masterUser";
+	final static String PASSWORD = "equipoalpha";
 	
-	final String QUERY = "Select * from Usuario";
+
+	public static void main(String[] args){
+		
+//		final String Todos_usuarios = "Select * from Usuario";
+		try {
+			Connection connection = DriverManager.getConnection(CONNECTION_URL, USERNAME, PASSWORD);
+			System.out.println("conectado");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	
-	
+	}
 
 }

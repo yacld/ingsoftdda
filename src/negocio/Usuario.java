@@ -4,15 +4,15 @@ public class Usuario {
 	private String Nombre;
 	private String Apellido;
 	private int Asesor;
-	private String ContraseÃ±a;
+	private String Contraseña;
 	private String Nick;
 	
-	public Usuario(String nombre, String apellido, int asesor2, String contraseÃ±a, String nick) {
+	public Usuario(String nombre, String apellido, int asesor2, String contraseña, String nick) {
 		super();
 		Nombre = nombre;
 		Apellido = apellido;
 		Asesor = asesor2;
-		ContraseÃ±a = contraseÃ±a;
+		Contraseña = contraseña;
 		Nick = nick;
 	}
 
@@ -40,12 +40,12 @@ public class Usuario {
 		Asesor = asesor;
 	}
 
-	public String getContraseÃ±a() {
-		return ContraseÃ±a;
+	public String getContraseña() {
+		return Contraseña;
 	}
 
-	public void setContraseÃ±a(String contraseÃ±a) {
-		ContraseÃ±a = contraseÃ±a;
+	public void setContraseña(String contraseña) {
+		Contraseña = contraseña;
 	}
 
 	public String getNick() {

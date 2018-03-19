@@ -14,8 +14,8 @@ public class Control_Crear_Usuario {
 		sc = new Servicio_Crear_Usuario(daou);
 	}
 	
-	public boolean agregarUsuario(String nombre, String apellido, int asesor, String contraseÃ±a, String nick) throws SQLException {
-		if(sc.agregarUsuario(nombre, apellido, asesor, contraseÃ±a, nick)) {
+	public boolean agregarUsuario(String nombre, String apellido, int asesor, String contraseña, String nick) throws SQLException {
+		if(sc.agregarUsuario(nombre, apellido, asesor, contraseña, nick)) {
 			return true;
 		}else {
 		return false;
