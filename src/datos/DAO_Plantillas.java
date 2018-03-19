@@ -43,7 +43,7 @@ public class DAO_Plantillas {
 	 */
 	public boolean Obten_Plantillas(String usuario, DefaultListModel<File> listModel) throws SQLException {
 		
-		final String todas_plantillas = "Select * from Plantilla where Usuario = " +usuario;
+		final String todas_plantillas = "Select * from Plantilla where Usuario = '" +usuario+ "'";
 //		Connection connection = DriverManager.getConnection(CONNECTION_URL, USERNAME, PASSWORD);
 					
 	     ResultSet rs = null;
