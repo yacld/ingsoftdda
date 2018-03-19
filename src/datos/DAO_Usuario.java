@@ -62,6 +62,7 @@ public class DAO_Usuario {
 			statement.execute("INSERT INTO Usuario VALUES ('"+u.getNick() + "','"
 					+ u.getContrasenia() + "','" + u.getNombre() + "','" + u.getApellido() + "','" + u.getAsesor() +"')",
 
+
 					Statement.RETURN_GENERATED_KEYS);
 			return true;
 		} catch (SQLException e) {
