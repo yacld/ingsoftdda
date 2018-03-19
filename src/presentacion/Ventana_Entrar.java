@@ -132,7 +132,7 @@ public class Ventana_Entrar extends javax.swing.JFrame {
 		respuesta = control_Entrar.inicia(usuario.getText(), contrasenia.getPassword().toString());
 		if (respuesta) {
 			Primera_Ventana vent = new Primera_Ventana(usuario.getText());
-			this.setVisible(false);
+			this.dispose();
 		} else {
 			int tipoErr = control_Entrar.tipoErr;
 			switch (tipoErr) {
