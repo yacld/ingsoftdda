@@ -32,9 +32,9 @@ public class Principal {
 		cp.iniciar(file);
 	}
 	
-	public void Crear() {
+	public void Crear(String usuario) {
 		Control_Crear cc = new Control_Crear(this.sc);
-		cc.iniciar();
+		cc.iniciar(usuario);
 	}
 
 }
