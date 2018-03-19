@@ -85,6 +85,7 @@ public class Ventana_Crear {
 				datos[1] = textField_1.getText();
 				datos[2] = textField_2.getText();try {
 					cc.crear(datos, usuario);
+					frmCrearPlantilla.dispose();
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

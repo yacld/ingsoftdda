@@ -43,7 +43,7 @@ public class DAO_Crear {
 				// -------------------
 				export_excel excelExporter = new export_excel(tb, new File(name.getAbsolutePath()));
 				if (excelExporter.export()) {
-					JOptionPane.showMessageDialog(null, "TABLAS CREADA CON EXITO!");
+					
 					System.out.println("Esta es la direccion "+name);
 					input = new FileInputStream(name);
 //					return name;
@@ -75,6 +75,7 @@ public class DAO_Crear {
 			// autogeneradaraduacion,String adicion
 
 			pstmt.executeUpdate();
+			JOptionPane.showMessageDialog(null, "TABLAS CREADA CON EXITO!");
 			return name;
 		} catch (SQLException e) {
 			// Cacha excepcion

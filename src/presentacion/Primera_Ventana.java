@@ -24,7 +24,7 @@ import javax.swing.JButton;
 public class Primera_Ventana {
 	
 	private JFrame frmPrincipal;
-	private Principal app;
+	private Principal app= new Principal();
 	private JList<File> lista_p;
 	 
 	public Primera_Ventana(String usuario){
@@ -61,8 +61,12 @@ public class Primera_Ventana {
 		}
 		lista_p = new JList<>(listModel);
 		lista_p.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        
+        JScrollPane jsp_l = new JScrollPane(lista_p);
+        frmPrincipal.add(jsp_l);
+        jsp_l.setBounds(85, 10, 250, 200);
         lista_p.addListSelectionListener(new ListSelectionListener() {
-                    
+            
 			@Override
 			public void valueChanged(ListSelectionEvent arg0) {
 				// TODO Auto-generated method stub
@@ -71,11 +75,7 @@ public class Primera_Ventana {
                     System.out.println(selectedValue.getName());
                 }
 			}
-        });
- 
-        frmPrincipal.add(new JScrollPane(lista_p));
-        lista_p.setBounds(10, 10, 250, 150);
-				
+        });	
 		
 		JButton btnCrear = new JButton("CREAR");
 		btnCrear.setBounds(86, 220, 89, 23);
@@ -86,7 +86,7 @@ public class Primera_Ventana {
 			public void actionPerformed(ActionEvent arg0) {
 				app.Crear(usuario);
 				frmPrincipal.dispose();
-				initialize(usuario);
+				//initialize(usuario);
 			}
 		});
 		/**
@@ -112,5 +112,9 @@ public class Primera_Ventana {
 			}
 		});
 		
+	}
+	
+	public static void main(String[] args){
+		Primera_Ventana pv = new Primera_Ventana("yacld");
 	}
 }
