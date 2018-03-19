@@ -21,22 +21,22 @@ import jxl.write.WritableWorkbook;
 public class DAO_Crear {
 
 	public File crear(String[] datos) throws IOException {
-		JFileChooser dialog = new JFileChooser();
-		FileNameExtensionFilter filter = new FileNameExtensionFilter(
-		        "Plantillas xls, csv", "xls");
-		dialog.setFileFilter(filter);
-		int opcion = dialog.showSaveDialog(new JFrame());
-		File name = dialog.getSelectedFile();
+//		JFileChooser dialog = new JFileChooser();
+//		FileNameExtensionFilter filter = new FileNameExtensionFilter(
+//		        "Plantillas xls, csv", "xls");
+//		dialog.setFileFilter(filter);
+//		int opcion = dialog.showSaveDialog(new JFrame());
+		File name = new File(datos[0] +".xls");
 		
-		if (opcion == JFileChooser.APPROVE_OPTION) {
-
-			File dir = dialog.getSelectedFile();
+//		if (opcion == JFileChooser.APPROVE_OPTION) {
+//
+//			File dir = dialog.getSelectedFile();
 
 			try {
 				List<JTable> tb = new ArrayList<JTable>();
 				
 				// -------------------
-				export_excel excelExporter = new export_excel(tb, new File(dir.getAbsolutePath()));
+				export_excel excelExporter = new export_excel(tb, name);//new File(dir.getAbsolutePath()));
 				if (excelExporter.export()) {
 					JOptionPane.showMessageDialog(null, "TABLAS CREADA CON EXITO!");
 					System.out.println("Esta es la direccion "+name);
@@ -49,8 +49,8 @@ public class DAO_Crear {
 				ex.printStackTrace();
 				return null;
 			}
-		}
-		return null;
+//		}
+//		return null;
        
 	}
 

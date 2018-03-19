@@ -12,10 +12,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-
-
-
 public class DAO_Paso {
+	
 	private JFileChooser FileChooser = new JFileChooser();
 
 	public boolean editar(JTable Tabla, String importado) {
@@ -72,6 +70,7 @@ public class DAO_Paso {
 		File file =null;
 //		System.out.println("Gato");
 		file = FileChooser.getSelectedFile();
+		//System.out.println(file.getPath());
 		if (!file.getName().endsWith("xls") && !file.getName().endsWith("csv")) {
 
 
@@ -81,7 +80,7 @@ public class DAO_Paso {
 //			System.out.println("Gato6");
 			return file;
 		}
-		return file;
+		return null;
 	}
 
 

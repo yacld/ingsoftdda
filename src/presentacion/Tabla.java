@@ -12,6 +12,7 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.List;
+import java.util.Random;
 
 import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultComboBoxModel;
@@ -39,6 +40,7 @@ import jxl.write.WritableFont;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
+import negocio.PDF;
 
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
@@ -81,10 +83,12 @@ public class Tabla {
 		modelo.addColumn("Conector");
 		modelo.addColumn("Tipo de Forma");
 		modelo.addColumn("Actor Responsable");
+		modelo.addColumn("Comentarios");
 
 		frmProceso = new JFrame();
 		frmProceso.setTitle("Pasos");
-		frmProceso.setBounds(100, 100, 802, 347);
+		frmProceso.setBounds(100, 100, 900, 400);
+		frmProceso.setResizable(false);
 		frmProceso.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmProceso.getContentPane().setLayout(null);
 
@@ -107,54 +111,67 @@ public class Tabla {
 
 		Tabla.setModel(modelo);
 		Tabla.setEnabled(false);
-		Tabla.setBounds(10, 120, 766, 143);
+		Tabla.setBounds(10, 120, 870, 150);
 		Tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		Tabla.doLayout();
 		frmProceso.getContentPane().add(Tabla);
+		try {
+			CrearTabla(paso);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			System.out.println("Si esto falla me doy un tiro");
+		}
 
 		JButton btnInsertar = new JButton("Insertar");
-		
-		btnInsertar.setBounds(217, 274, 89, 23);
+		btnInsertar.setBounds(180, 280, 90, 25);
 		frmProceso.getContentPane().add(btnInsertar);
 
 		JButton btnExportar = new JButton("Exportar");
 		btnExportar.setText("Exportar Tabla");
-		btnExportar.setBounds(38, 274, 140, 23);
+		btnExportar.setBounds(20, 280, 140, 25);
 		frmProceso.getContentPane().add(btnExportar);
 
 		JButton btnImportar = new JButton("Importar");
 		btnImportar.setText("Importar Tabla");
-		btnImportar.setBounds(616, 274, 148, 23);
+		btnImportar.setBounds(560, 280, 140, 25);
 		frmProceso.getContentPane().add(btnImportar);
+		
+		JButton btnPDF = new JButton("Crear PDF");
+		btnPDF.setBounds(290, 280, 140, 25);
+		frmProceso.getContentPane().add(btnPDF);
+		
+		JButton btnComentarios = new JButton("Agregar Comentarios");
+		btnComentarios.setBounds(720, 280, 150, 25);
+		frmProceso.getContentPane().add(btnComentarios);
 
 		texFiltro = new JTextField();
-		texFiltro.setBounds(678, 89, 86, 20);
+		texFiltro.setBounds(770, 89, 90, 25);
 		frmProceso.getContentPane().add(texFiltro);
 		texFiltro.setColumns(10);
 
 		JButton btnActualizar = new JButton("Guardar");
-		btnActualizar.setBounds(474, 274, 89, 23);
+		btnActualizar.setBounds(450, 280, 90, 25);
 		frmProceso.getContentPane().add(btnActualizar);
 
 		JComboBox<?> cbBusqueda = new JComboBox();
 
 		cbBusqueda.setModel(new DefaultComboBoxModel(
 				new String[] {"IDPaso", "Nombre", "Descripcion", "ID Paso Anterior", "Conector", "Tipo de Forma", "Actor resposable" }));
-		cbBusqueda.setBounds(520, 89, 148, 20);
+		cbBusqueda.setBounds(600, 89, 150, 20);
 		frmProceso.getContentPane().add(cbBusqueda);
 		
 		TexForma = new JTextField();
-		TexForma.setBounds(236, 27, 86, 20);
+		TexForma.setBounds(270, 27, 100, 20);
 		frmProceso.getContentPane().add(TexForma);
 		TexForma.setColumns(10);
 		
 		texConector = new JTextField();
-		texConector.setBounds(236, 58, 86, 20);
+		texConector.setBounds(270, 58, 100, 20);
 		frmProceso.getContentPane().add(texConector);
 		texConector.setColumns(10);
 		
 		texResponsable = new JTextField();
-		texResponsable.setBounds(236, 89, 86, 20);
+		texResponsable.setBounds(270, 89, 100, 20);
 		frmProceso.getContentPane().add(texResponsable);
 		texResponsable.setColumns(10);
 		
@@ -171,19 +188,19 @@ public class Tabla {
 		frmProceso.getContentPane().add(lblIdpasoAnterior);
 		
 		JLabel lblTipoDeForma = new JLabel("Tipo de forma");
-		lblTipoDeForma.setBounds(348, 30, 103, 14);
+		lblTipoDeForma.setBounds(400, 30, 103, 14);
 		frmProceso.getContentPane().add(lblTipoDeForma);
 		
 		JLabel lblConector = new JLabel("Conector");
-		lblConector.setBounds(348, 61, 86, 14);
+		lblConector.setBounds(400, 61, 86, 14);
 		frmProceso.getContentPane().add(lblConector);
 		
 		JLabel lblResponsable = new JLabel("Responsable");
-		lblResponsable.setBounds(348, 92, 86, 14);
+		lblResponsable.setBounds(400, 92, 86, 14);
 		frmProceso.getContentPane().add(lblResponsable);
 		
 		JTextArea AreaDescripcion = new JTextArea();
-		AreaDescripcion.setBounds(534, 22, 229, 53);
+		AreaDescripcion.setBounds(600, 22, 250, 53);
 		frmProceso.getContentPane().add(AreaDescripcion);
 		
 		
@@ -214,6 +231,36 @@ public class Tabla {
 
 			}
 		});
+		
+		btnComentarios.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				btnInsertarActionPerformed(evt);
+			}
+
+			private void btnInsertarActionPerformed(ActionEvent evt) {
+				// TODO Auto-generated method stub
+				new Ventana_Comentario("Comentarios", Tabla);
+			}
+		});
+		
+		btnPDF.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				btnPDFActionPerformed(evt);
+			}
+
+			private void btnPDFActionPerformed(ActionEvent evt) {
+				// TODO Auto-generated method stub
+				PDF pdf = new PDF();
+				try {
+					pdf.Generador_PDF(Tabla);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				//TexCodigo.requestFocus();
+
+			}
+		});
 
 		btnImportar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
@@ -226,49 +273,13 @@ public class Tabla {
 
 			private void btnImportarActionPerformed(ActionEvent evt) throws IOException {// GEN-FIRST:event_btnImportarTablaActionPerformed
 				
-				
-				File file =null;
+				File file = null;
 				file = cp.importar();
-				importado =file.getAbsolutePath();
+				//importado = file.getAbsolutePath();
 //				System.out.println(importado);
 				eliminar();
 				CrearTabla(file);
 				Tabla.setEnabled(false);
-			}
-
-			private void CrearTabla(File file) throws IOException {
-				if(importado.endsWith(".xls")){
-					Workbook workbook = null;
-					try {
-						workbook = Workbook.getWorkbook(file);
-						Sheet sheet = workbook.getSheet(0);
-						columna.clear();
-						for (int i = 0; i < sheet.getColumns(); i++) {
-							Cell cell1 = sheet.getCell(i, 0);
-							columna.add(cell1.getContents());
-						}
-						filas.clear();
-						for (int j = 1; j < sheet.getRows(); j++) {
-							Vector d = new Vector();
-							for (int i = 0; i < sheet.getColumns(); i++) {
-								Cell cell = sheet.getCell(i, j);
-									d.add(cell.getContents());
-							}
-							d.add("\n");
-							modelo.addRow(d);
-						}
-					} catch (BiffException e) {
-						e.printStackTrace();
-					}
-				}else if(importado.endsWith(".csv")){
-					Scanner scanner = new Scanner(new File(importado));
-			        while (scanner.hasNext()) {
-			            List<String> line = CSVUtils.parseLine(scanner.nextLine());
-			            //System.out.println("Country [id= " + line.get(0) + ", code= " + line.get(1) + " , name=" + line.get(2) + "]");
-			            modelo.addRow(line.toArray());
-			        }
-			        scanner.close();
-				}
 			}
 			
 			private void eliminar(){
@@ -303,7 +314,7 @@ public class Tabla {
 
 			private void btnActualizarActionPerformed(ActionEvent evt) {
 				if(cp.editar(Tabla,importado) == true) {
-					JOptionPane.showMessageDialog(null, "TABLA ACTUALIZADA CON EXITOS!");
+					JOptionPane.showMessageDialog(null, "TABLA ACTUALIZADA CON EXITO!");
 					Tabla.setEnabled(false);
 				}else {
 					JOptionPane.showMessageDialog(null, "HUBO PROBLEMAS AL ACTUALIZAR!");
@@ -362,4 +373,45 @@ public class Tabla {
 		
 		
 	}
+	/**
+	 * 
+	 *Este codigo tiene que estar fuera del metodo inicializar para que funcione bien
+	 *
+	 **/
+	private void CrearTabla(File file) throws IOException {
+		importado = file.getAbsolutePath();
+		if(importado.endsWith(".xls")){
+			Workbook workbook = null;
+			try {
+				workbook = Workbook.getWorkbook(file);
+				Sheet sheet = workbook.getSheet(0);
+				columna.clear();
+				for (int i = 0; i < sheet.getColumns(); i++) {
+					Cell cell1 = sheet.getCell(i, 0);
+					columna.add(cell1.getContents());
+				}
+				filas.clear();
+				for (int j = 1; j < sheet.getRows(); j++) {
+					Vector d = new Vector();
+					for (int i = 0; i < sheet.getColumns(); i++) {
+						Cell cell = sheet.getCell(i, j);
+							d.add(cell.getContents());
+					}
+					d.add("\n");
+					modelo.addRow(d);
+				}
+			} catch (BiffException e) {
+				e.printStackTrace();
+			}
+		}else if(importado.endsWith(".csv")){
+			Scanner scanner = new Scanner(new File(importado));
+	        while (scanner.hasNext()) {
+	            List<String> line = CSVUtils.parseLine(scanner.nextLine());
+	            //System.out.println("Country [id= " + line.get(0) + ", code= " + line.get(1) + " , name=" + line.get(2) + "]");
+	            modelo.addRow(line.toArray());
+	        }
+	        scanner.close();
+		}
+	}
+	
 }
