@@ -4,15 +4,19 @@ public class Usuario {
 	private String Nombre;
 	private String Apellido;
 	private int Asesor;
+
 	private String Contrasenia;
 	private String Nick;
 	
 	public Usuario(String nombre, String apellido, int asesor2, String contrasenia, String nick) {
+
 		super();
 		Nombre = nombre;
 		Apellido = apellido;
 		Asesor = asesor2;
+
 		Contrasenia = contrasenia;
+
 		Nick = nick;
 	}
 
@@ -40,12 +44,14 @@ public class Usuario {
 		Asesor = asesor;
 	}
 
+
 	public String getContrasenia() {
 		return Contrasenia;
 	}
 
 	public void setContrasenia(String contrasenia) {
 		Contrasenia = contrasenia;
+
 	}
 
 	public String getNick() {

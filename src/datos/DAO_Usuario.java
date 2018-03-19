@@ -14,9 +14,11 @@ import negocio.Usuario;
 public class DAO_Usuario {
 	
 	final String DRIVER_NAME = "com.mysql.jdbc.Driver";
-	final String CONNECTION_URL = "jdbc:mysql://localhost:3306/Ejemplo_Usuario";
-	final String USERNAME = "root";
-	final String PASSWORD = "camara";
+	final String HOSTNAME = "mydb-ealpha.cdtc5pclholt.us-west-1.rds.amazonaws.com";
+	final String DBNAME = "mydb-ealpha";
+	final String CONNECTION_URL = "jdbc:mysql://"+HOSTNAME +":3306/"+DBNAME;
+	final String USERNAME = "masterUser";
+	final String PASSWORD = "equipoalpha";
 	
 
 	public Usuario[] Retrieve() throws SQLException {
@@ -32,7 +34,9 @@ public class DAO_Usuario {
 			ResultSet rs = statement.executeQuery(Todos_usuarios);
 			while (rs.next()) { // Crea una nueva instancia del objeto
 				Usuario usuario = new Usuario(rs.getString("Nombre"), rs.getString("Apellido"), rs.getInt("Asesor"),
-						rs.getString("Contrasenia"),rs.getString("Nick"));
+
+				rs.getString("Contrasenia"),rs.getString("Nick"));
+
 				usuarioTemp.add(usuario);
 			}
 			Usuario usuarioTempArreglo[] = new Usuario[usuarioTemp.size()];
@@ -54,8 +58,10 @@ public class DAO_Usuario {
 
 			// Envia instruccion SQL, nota el DEFAULT es para insertar la llave
 			// autogeneradaraduacion,String adicion
-			statement.execute("INSERT INTO Usuario VALUES ('"+u.getNombre() + "','"
-					+ u.getApellido() + "','" + u.getAsesor() + "','" + u.getContrasenia() + "','" + u.getNick() +"')",
+
+			statement.execute("INSERT INTO Usuario VALUES ('"+u.getNick() + "','"
+					+ u.getContrasenia() + "','" + u.getNombre() + "','" + u.getApellido() + "','" + u.getAsesor() +"')",
+
 					Statement.RETURN_GENERATED_KEYS);
 			return true;
 		} catch (SQLException e) {
@@ -64,6 +70,7 @@ public class DAO_Usuario {
 			return false;
 		}
 	}
+
 public Usuario buscarUsuario(String usuario) throws SQLException {
 		
 		final String bUsuario = ("Select * from Usuario where Nick = "+usuario);
@@ -83,6 +90,7 @@ public Usuario buscarUsuario(String usuario) throws SQLException {
 			return null;
 		}
 	}
+
 
 
 }
