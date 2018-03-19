@@ -55,7 +55,7 @@ public class DAO_Usuario {
 			// Envia instruccion SQL, nota el DEFAULT es para insertar la llave
 			// autogeneradaraduacion,String adicion
 			statement.execute("INSERT INTO Usuario VALUES ('"+u.getNombre() + "','"
-					+ u.getApellido() + "','" + u.getAsesor() + "','" + u.getContraseña() + "','" + u.getNick() +"')",
+					+ u.getApellido() + "','" + u.getAsesor() + "','" + u.getContrasenia() + "','" + u.getNick() +"')",
 					Statement.RETURN_GENERATED_KEYS);
 			return true;
 		} catch (SQLException e) {
