@@ -18,14 +18,14 @@ public class Control_Crear {
 		
 	}
 
-	public void iniciar() {
+	public void iniciar(String usuario) {
 		Ventana_Crear vc= new Ventana_Crear(this);
-		vc.iniciar();
+		vc.iniciar(usuario);
 		
 	}
 
-	public void crear(String[] datos) throws IOException {
-		sc.Crear(datos);
+	public void crear(String[] datos, String usuario) throws IOException {
+		sc.Crear(datos, usuario);
 	}
 
 	public void mostarNueva(File name) {

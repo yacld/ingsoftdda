@@ -84,7 +84,9 @@ public class Primera_Ventana {
 		btnCrear.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				app.Crear();
+				app.Crear(usuario);
+				frmPrincipal.dispose();
+				initialize(usuario);
 			}
 		});
 		/**

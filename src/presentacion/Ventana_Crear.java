@@ -29,15 +29,15 @@ public class Ventana_Crear {
 		this.cc = control_Crear;
 	}
 
-	public void iniciar() {
-		initialize();
+	public void iniciar(String usuario) {
+		initialize(usuario);
 		frmCrearPlantilla.setVisible(true);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(String usuario) {
 		frmCrearPlantilla = new JFrame();
 		frmCrearPlantilla.setTitle("CREAR PLANTILLA");
 		frmCrearPlantilla.setBounds(100, 100, 700, 326);
@@ -84,7 +84,7 @@ public class Ventana_Crear {
 				datos[0] = textField.getText();
 				datos[1] = textField_1.getText();
 				datos[2] = textField_2.getText();try {
-					cc.crear(datos);
+					cc.crear(datos, usuario);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
