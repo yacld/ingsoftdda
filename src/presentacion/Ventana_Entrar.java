@@ -190,7 +190,7 @@ public class Ventana_Entrar extends javax.swing.JFrame {
 		boolean respuesta;
 		respuesta = control_Entrar.inicia(usuario.getText(), contrasenia.getPassword().toString());
 		if (respuesta) {
-			Primera_Ventana vent = new Primera_Ventana();
+			Primera_Ventana vent = new Primera_Ventana(usuario.getText());
 			this.setVisible(false);
 		} else {
 			int tipoErr = control_Entrar.tipoErr;
