@@ -19,7 +19,7 @@ class Control_Crear_UsuarioTest {
 	String nombre = "Aguacate";
 	String apellido = "Cebollin"; 
 	int asesor = 1;
-	String contraseña = "cebollin123mayor"; 
+	String contrasenia = "cebollin123mayor"; 
 	String nick = "cebollalfa";
 	
 	Control_Crear_Usuario cc = new Control_Crear_Usuario(sc2);  
@@ -28,7 +28,7 @@ class Control_Crear_UsuarioTest {
 
 	@Test
 	void testAgregarUsuario() throws SQLException {
-		boolean retorno = cc.agregarUsuario(nombre, apellido, asesor, contraseña, nick);
+		boolean retorno = cc.agregarUsuario(nombre, apellido, asesor, contrasenia, nick);
 		boolean esperado = true;
 		assertEquals(retorno,esperado);
 	}
