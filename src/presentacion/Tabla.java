@@ -63,6 +63,7 @@ public class Tabla {
 	private JTextField texFiltro;
 	private String importado;
 	Control_Paso cp;
+	Control_Diagrama cd;
 	File paso;
 	private JTextField TexForma;
 	private JTextField texConector;
@@ -71,6 +72,7 @@ public class Tabla {
 	public Tabla(Control_Paso control_Pasos, File paso) {
 		cp = control_Pasos;
 		this.paso = paso;
+		cd = new Control_Diagrama();
 		initialize();
 	}
 
