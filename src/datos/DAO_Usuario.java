@@ -72,7 +72,7 @@ public class DAO_Usuario {
 		}
 	}
 
-public Usuario buscarUsuario(String usuario) throws SQLException {
+public Usuario recuperaUsuario(String usuario) throws SQLException {
 		
 		final String bUsuario = ("Select * from Usuario where Nick = "+usuario);
 		Connection connection = DriverManager.getConnection(CONNECTION_URL, USERNAME, PASSWORD);

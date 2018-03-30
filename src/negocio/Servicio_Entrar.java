@@ -14,16 +14,17 @@ public class Servicio_Entrar {
 	}
 
 	public static Usuario entrar(String usuario, String contrasenia) {
+		System.out.println("Estoy en Servicio entrar");
 		Usuario u;
 		try {
-			u = daoU.buscarUsuario(usuario);
+			u = daoU.recuperaUsuario(usuario);
 			if (u == null) {
 				controlE.errorUsuario();
-				return null;
+				return u;
 
 			} else {
 				if (u.getContrasenia().equals(contrasenia)) {
-					return u;
+					return null;
 
 				} else {
 					controlE.errorContrasenia();
@@ -34,8 +35,7 @@ public class Servicio_Entrar {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		return true;
+		return null;
 
 	}
 

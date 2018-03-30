@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import datos.DAO_Crear;
 import negocio.Servicio_Crear;
+import negocio.Usuario;
 
 public class Control_Crear {
 	Servicio_Crear sc;
@@ -18,13 +19,13 @@ public class Control_Crear {
 		
 	}
 
-	public void iniciar(String usuario) {
+	public void iniciar(Usuario usuario) {
 		Ventana_Crear vc= new Ventana_Crear(this);
 		vc.iniciar(usuario);
 		
 	}
 
-	public void crear(String[] datos, String usuario) throws IOException {
+	public void crear(String[] datos, Usuario usuario) throws IOException {
 		sc.Crear(datos, usuario);
 	}
 

@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 
 import datos.DAO_Paso;
 import negocio.Servicio_Paso;
+import negocio.Usuario;
 
 public class Ventana_Crear {
 
@@ -29,7 +30,7 @@ public class Ventana_Crear {
 		this.cc = control_Crear;
 	}
 
-	public void iniciar(String usuario) {
+	public void iniciar(Usuario usuario) {
 		initialize(usuario);
 		frmCrearPlantilla.setVisible(true);
 	}
@@ -37,7 +38,7 @@ public class Ventana_Crear {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize(String usuario) {
+	private void initialize(Usuario usuario) {
 		frmCrearPlantilla = new JFrame();
 		frmCrearPlantilla.setTitle("CREAR PLANTILLA");
 		frmCrearPlantilla.setBounds(100, 100, 700, 326);

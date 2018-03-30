@@ -132,9 +132,10 @@ public class Ventana_Entrar extends javax.swing.JFrame {
             System.out.println("Contrasenia: " + pass);
             JOptionPane.showMessageDialog(null, "Bien hecho");
         
-		u=control_Entrar.inicia(usuario.getText(), pass);
-		if (u!=null) {
-			Primera_Ventana vent = new Primera_Ventana(usuario.getText());
+		//u=control_Entrar.inicia(usuario.getText(), pass);
+		u= new Usuario("Brandon", "Leon", 1, pass, usuario.getText());
+            if (u!=null) {
+			Primera_Ventana vent = new Primera_Ventana(u);
 			this.dispose();
 		} else {
 			int tipoErr = control_Entrar.tipoErr;

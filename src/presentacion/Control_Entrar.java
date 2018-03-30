@@ -27,6 +27,7 @@ tipoErr=1;
 	}
 
 	public Usuario inicia(String usuario, String contrasenia) {
+		System.out.println("Estoy en control entrar");
 		 u = Servicio_Entrar.entrar(usuario, contrasenia);
 		return u;
 		
