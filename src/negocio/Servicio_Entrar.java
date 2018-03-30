@@ -13,21 +13,21 @@ public class Servicio_Entrar {
 		this.daoU = daoc;
 	}
 
-	public static boolean entrar(String usuario, String contrasenia) {
+	public static Usuario entrar(String usuario, String contrasenia) {
 		Usuario u;
 		try {
 			u = daoU.buscarUsuario(usuario);
 			if (u == null) {
 				controlE.errorUsuario();
-				return false;
+				return null;
 
 			} else {
 				if (u.getContrasenia().equals(contrasenia)) {
-					return true;
+					return u;
 
 				} else {
 					controlE.errorContrasenia();
-					return false;
+					return null;
 				}
 			}
 		} catch (SQLException e) {

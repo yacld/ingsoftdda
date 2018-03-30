@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import negocio.Usuario;
+
 public class Ventana_Entrar extends javax.swing.JFrame {
 
     private JFrame frmEntrar;
@@ -27,6 +29,8 @@ public class Ventana_Entrar extends javax.swing.JFrame {
 	Ventana_Principal ventana_Principal;
 	Control_Entrar control_Entrar;
 	private Control_Entrar cE;
+	
+	Usuario u;
 
 
 	public Ventana_Entrar(Control_Entrar control_Entrar) {
@@ -120,17 +124,16 @@ public class Ventana_Entrar extends javax.swing.JFrame {
 	    char[] arrC = contrasenia.getPassword();
         String pass = new String(arrC);
         System.out.println("Usuario: " + usuario.getText());
-        System.out.println("Contrase�a: " + pass);
+        System.out.println("Contrasenia: " + pass);
         if (usuario.getText().isEmpty()||pass.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Faltan campos por llenar");
         } else {
             System.out.println("Usuario: " + usuario.getText());
-            System.out.println("Contrase�a: " + pass);
+            System.out.println("Contrasenia: " + pass);
             JOptionPane.showMessageDialog(null, "Bien hecho");
         
-		boolean respuesta;
-		respuesta = true;
-		if (respuesta) {
+		u=control_Entrar.inicia(usuario.getText(), pass);
+		if (u!=null) {
 			Primera_Ventana vent = new Primera_Ventana(usuario.getText());
 			this.dispose();
 		} else {
