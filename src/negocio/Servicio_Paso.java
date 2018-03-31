@@ -35,9 +35,9 @@ public class Servicio_Paso {
 	
 	public File Importar() throws IOException {
 		File file = null;
-		System.out.println("Gato2");
+//		System.out.println("Gato2");
 		file = daops.importar();
-		System.out.println("Gato3");
+//		System.out.println("Gato3");
 		return file;
 	}
 

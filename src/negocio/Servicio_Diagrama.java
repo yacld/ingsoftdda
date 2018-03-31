@@ -1,5 +1,7 @@
 package negocio;
 
+import javax.swing.JPanel;
+
 import datos.DAO_Diagrama;
 
 public class Servicio_Diagrama {
@@ -11,9 +13,10 @@ public class Servicio_Diagrama {
 		daod = daod2;
 	}
 
-	public void generar() {
+	public JPanel generar() {
 		// TODO Auto-generated method stub
-		daod.generaDiagrama();
+		return daod.generaDiagrama();
+ 
 	}
 
 }

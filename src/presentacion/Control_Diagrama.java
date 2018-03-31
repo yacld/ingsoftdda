@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 
 import datos.DAO_Diagrama;
@@ -24,13 +25,12 @@ public class Control_Diagrama {
 	public void iniciar(File file2) throws IOException {
 		File file;
 		file = file2;
-		Ventana_Diagrama ventana = new Ventana_Diagrama(this, file);
+		JPanel panel = sd.generar();//recibe panel?
+		Ventana_Diagrama ventana = new Ventana_Diagrama(this, panel);//recibe panel que muestra diagrama
 		
 	}
 	
-	public void generar(){
-		sd.generar();
-	}
+	
 	
 	
 }

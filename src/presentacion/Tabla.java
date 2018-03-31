@@ -154,7 +154,25 @@ public class Tabla {
 		JButton btnActualizar = new JButton("Guardar");
 		btnActualizar.setBounds(450, 280, 90, 25);
 		frmProceso.getContentPane().add(btnActualizar);
+		
+		JButton btnGenDiagrama = new JButton("Diagrama");
+		btnGenDiagrama.setBounds(550, 280, 90, 25);
 
+		btnGenDiagrama.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				try {
+					cd.iniciar(paso);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+		});
+		
 		JComboBox<?> cbBusqueda = new JComboBox();
 
 		cbBusqueda.setModel(new DefaultComboBoxModel(

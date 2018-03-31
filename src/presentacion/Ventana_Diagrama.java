@@ -3,13 +3,16 @@ package presentacion;
 import java.io.File;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class Ventana_Diagrama {
 	
 	public JFrame frmDiagrama;
+	public JPanel jpDiagrama;
 	
-	public Ventana_Diagrama(Control_Diagrama cd, File file) {
+	public Ventana_Diagrama(Control_Diagrama cd, JPanel panel) {
 		// TODO Auto-generated constructor stub
+		jpDiagrama = panel;
 		inicia();
 	}
 	
