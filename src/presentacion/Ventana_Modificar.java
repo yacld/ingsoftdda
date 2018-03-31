@@ -18,13 +18,14 @@ import negocio.Usuario;
 
 public class Ventana_Modificar {
 	// Declaracion de variables
-	private JFrame frmNuevoUsuario;
+	private JFrame frmModificar;
 	private JTextField textNombre;
 	private JTextField textApellido;
 	private JTextField textContra1;
 	private JTextField textContra2;
 	private JTextField textNick;
 	private Control_Modificar cm;
+	boolean modificar=false;
 	Usuario usuario;
 
 	/**
@@ -40,7 +41,7 @@ public class Ventana_Modificar {
 	public void iniciar(Usuario u) {
 		this.usuario = u;
 		initialize();
-		frmNuevoUsuario.setVisible(true);
+		frmModificar.setVisible(true);
 	}
 
 	/**
@@ -48,93 +49,157 @@ public class Ventana_Modificar {
 	 * los componentes, las funcionalidades de los metodos y demas cosas
 	 */
 	private void initialize() {
-		frmNuevoUsuario = new JFrame();
-		frmNuevoUsuario.setFont(new Font("AkrutiTml2", Font.BOLD, 15));
-		frmNuevoUsuario.setTitle("Nuevo Usuario");
-		frmNuevoUsuario.setBounds(100, 100, 710, 404);
-		frmNuevoUsuario.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmNuevoUsuario.getContentPane().setLayout(null);
+		frmModificar = new JFrame();
+		frmModificar.setFont(new Font("AkrutiTml2", Font.BOLD, 15));
+		frmModificar.setTitle("Nuevo Usuario");
+		frmModificar.setBounds(100, 100, 710, 404);
+		frmModificar.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmModificar.getContentPane().setLayout(null);
 
 		JLabel lblNombre = new JLabel("Nombre");
 		lblNombre.setBounds(32, 31, 66, 15);
-		frmNuevoUsuario.getContentPane().add(lblNombre);
+		frmModificar.getContentPane().add(lblNombre);
 
 		textNombre = new JTextField(usuario.getNombre());
 		textNombre.setBounds(116, 29, 124, 19);
-		frmNuevoUsuario.getContentPane().add(textNombre);
+		frmModificar.getContentPane().add(textNombre);
 		textNombre.setColumns(10);
+		textNombre.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				modificar=true;
+
+			}
+		});
+		
 
 		JLabel lblApellido = new JLabel("Apellido");
 		lblApellido.setBounds(32, 71, 66, 15);
-		frmNuevoUsuario.getContentPane().add(lblApellido);
+		frmModificar.getContentPane().add(lblApellido);
 
 		textApellido = new JTextField(usuario.getApellido());
 		textApellido.setBounds(116, 69, 124, 19);
-		frmNuevoUsuario.getContentPane().add(textApellido);
+		frmModificar.getContentPane().add(textApellido);
 		textApellido.setColumns(10);
+		textApellido.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				modificar=true;
+
+			}
+		});
 
 		JLabel lblAsesor = new JLabel("Asesor");
 		lblAsesor.setBounds(32, 122, 66, 15);
-		frmNuevoUsuario.getContentPane().add(lblAsesor);
+		frmModificar.getContentPane().add(lblAsesor);
 
 		JComboBox<Object> cbTipo = new JComboBox<Object>();
-		cbTipo.setModel(new DefaultComboBoxModel<Object>(new String[] {"", "SI", "NO"}));
+
+		if (usuario.getAsesor() == 0) {
+			cbTipo.setModel(new DefaultComboBoxModel<Object>(new String[] { "SI", "NO" }));
+		} else {
+			cbTipo.setModel(new DefaultComboBoxModel<Object>(new String[] { "NO", "SI" }));
+		}
+
 		cbTipo.setBounds(133, 116, 82, 24);
-		frmNuevoUsuario.getContentPane().add(cbTipo);
+		frmModificar.getContentPane().add(cbTipo);
+		cbTipo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				modificar=true;
+
+			}
+		});
 
 		JLabel lblContra1 = new JLabel("Contrasenia");
 		lblContra1.setBounds(42, 170, 230, 42);
-		frmNuevoUsuario.getContentPane().add(lblContra1);
+		frmModificar.getContentPane().add(lblContra1);
 
 		textContra1 = new JTextField(usuario.getContrasenia());
 		textContra1.setBounds(32, 224, 240, 26);
-		frmNuevoUsuario.getContentPane().add(textContra1);
+		frmModificar.getContentPane().add(textContra1);
 		textContra1.setColumns(10);
+		textContra1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				modificar=true;
+
+			}
+		});
 
 		JLabel lblContra2 = new JLabel("Verificar contrasenia");
 		lblContra2.setBounds(32, 282, 224, 15);
-		frmNuevoUsuario.getContentPane().add(lblContra2);
+		frmModificar.getContentPane().add(lblContra2);
 
 		textContra2 = new JTextField(usuario.getContrasenia());
 		textContra2.setBounds(32, 309, 240, 26);
-		frmNuevoUsuario.getContentPane().add(textContra2);
+		frmModificar.getContentPane().add(textContra2);
 		textContra2.setColumns(10);
+		textContra2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				modificar=true;
+
+			}
+		});
 
 		JLabel lblNick = new JLabel("Nombre de usuario(Nickname)");
 		lblNick.setBounds(344, 43, 224, 31);
-		frmNuevoUsuario.getContentPane().add(lblNick);
+		frmModificar.getContentPane().add(lblNick);
 
 		textNick = new JTextField(usuario.getNick());
 		textNick.setBounds(344, 86, 224, 37);
-		frmNuevoUsuario.getContentPane().add(textNick);
+		frmModificar.getContentPane().add(textNick);
 		textNick.setColumns(10);
+		textNick.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				modificar=true;
+
+			}
+		});
 
 		JButton btnModificar = new JButton("Modificar");
 		btnModificar.setBounds(510, 309, 145, 25);
-		frmNuevoUsuario.getContentPane().add(btnModificar);
+		frmModificar.getContentPane().add(btnModificar);
+		btnModificar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				if(modificar) {
+
+					JOptionPane.showMessageDialog(null, "°Bien!\nYa se han modificado campos");
+					modificar=false;
+					int asesor=1;
+					if(cbTipo.getSelectedItem() == "SI")asesor =0;
+					Usuario nuevoUsuario = new Usuario (textNombre.getText(),textApellido.getText(),asesor,textContra2.getText(),textNick.getText());
+					System.out.println("Usuario "+textNombre.getText()+textApellido.getText()+asesor+textContra2.getText()+textNick.getText());
+					usuario = nuevoUsuario;
+					System.out.println("Usuario: "+usuario.getNombre()+usuario.getApellido()+usuario.getAsesor()+usuario.getContrasenia()+usuario.getNick());
+					
+					boolean modifica=cm.modificar(usuario);
+					System.out.println("modifica "+modifica);
+					if(modifica) {
+
+						JOptionPane.showMessageDialog(null, "Modificacion exitosa");
+					}else {
+
+						JOptionPane.showMessageDialog(null, "Hubo un error en la modificacion");
+					}
+					
+					
+				}else {
+
+					JOptionPane.showMessageDialog(null, "No se han hecho nuevas modificaciones\nRecuerda presionar Enter despues de cualquier modificacion");
+				}
+
+			}
+		});
 
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBounds(328, 309, 114, 25);
-		frmNuevoUsuario.getContentPane().add(btnCancelar);
+		frmModificar.getContentPane().add(btnCancelar);
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
-				frmNuevoUsuario.dispose();
+				frmModificar.dispose();
 				Ventana_Principal v = new Ventana_Principal();
 
 			}
 		});
-		/**
-		 * Se agrega funcionalidad al boton agregar, lo que se hace es capturar los
-		 * datos que ingreso el usuario y se le pasa al control para que agrague al
-		 * usuario Se verifica que todos los campos esten llenos y que la verificacion
-		 * de la contrase√±a sea la misma.
-		 * 
-		 */
-		btnModificar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
 
-			}
-		});
+		
 	}
 
 }

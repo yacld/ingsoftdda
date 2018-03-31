@@ -92,6 +92,29 @@ public Usuario recuperaUsuario(String usuario) throws SQLException {
 		}
 	}
 
+public boolean actualizar(Usuario usuario) throws SQLException {
+	boolean actualizar=false;
+	final String aUsuario="UPDATE USUARIO SET nombre='"+usuario.getNombre()+"', apellido='"+usuario.getApellido()+
+						"', asesor='"+usuario.getAsesor()+"', contrasenia='"+usuario.getContrasenia()+"', nick='"+usuario.getNick()+"'"
+						+" WHERE nick="+usuario.getNick();
+
+	Connection connection = DriverManager.getConnection(CONNECTION_URL, USERNAME, PASSWORD);
+	
+	try {
+
+		Statement stm=connection.createStatement();
+		stm.execute(aUsuario);
+		actualizar=true;
+
+		return actualizar;
+	} catch (SQLException e) {
+		System.out.println("Error: método actualizar");
+		e.printStackTrace();
+
+		return actualizar;
+	}		
+}
+
 
 
 }

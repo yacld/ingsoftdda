@@ -27,7 +27,6 @@ public class Ventana_Entrar extends javax.swing.JFrame {
     private JTextField usuario;
 
 	Ventana_Principal ventana_Principal;
-	Control_Entrar control_Entrar;
 	private Control_Entrar cE;
 	
 	Usuario u;
@@ -132,13 +131,13 @@ public class Ventana_Entrar extends javax.swing.JFrame {
             System.out.println("Contrasenia: " + pass);
             JOptionPane.showMessageDialog(null, "Bien hecho");
         
-		//u=control_Entrar.inicia(usuario.getText(), pass);
-		u= new Usuario("Brandon", "Leon", 1, pass, usuario.getText());
+		u=cE.inicia(usuario.getText(), pass);
+		//u= new Usuario("Brandon", "Leon", 0, pass, usuario.getText());
             if (u!=null) {
 			Primera_Ventana vent = new Primera_Ventana(u);
 			this.dispose();
 		} else {
-			int tipoErr = control_Entrar.tipoErr;
+			int tipoErr = cE.tipoErr;
 			switch (tipoErr) {
 			case 1:
 				JOptionPane.showMessageDialog(null, "No se encontro nombre de usuario");
