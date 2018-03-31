@@ -92,6 +92,9 @@ public Usuario recuperaUsuario(String usuario) throws SQLException {
 		}
 	}
 
+
+// Metodo encarfgado de la actualizacion directa con la base de datos,
+//en este caso por medio del nick que seria la llave primaria
 public boolean actualizar(Usuario usuario) throws SQLException {
 	boolean actualizar=false;
 	final String aUsuario="UPDATE USUARIO SET nombre='"+usuario.getNombre()+"', apellido='"+usuario.getApellido()+

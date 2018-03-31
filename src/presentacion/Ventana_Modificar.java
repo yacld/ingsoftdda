@@ -1,10 +1,8 @@
 package presentacion;
 
 import java.awt.Font;
-import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -15,6 +13,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import negocio.Usuario;
+
+/** Clase ventana contiene todo en contenido 
+ * de la parte grafica y llamadas a controles 
+ * sobre el caso de uso asociado que es el de modificar 
+ * datos sobre la cuenta de usuario
+ */
 
 public class Ventana_Modificar {
 	// Declaracion de variables
@@ -92,7 +96,7 @@ public class Ventana_Modificar {
 		frmModificar.getContentPane().add(lblAsesor);
 
 		JComboBox<Object> cbTipo = new JComboBox<Object>();
-
+		// Si es cero quiere deasesor entonces se muestra asesor como primer valor por defalut
 		if (usuario.getAsesor() == 0) {
 			cbTipo.setModel(new DefaultComboBoxModel<Object>(new String[] { "SI", "NO" }));
 		} else {
@@ -146,19 +150,15 @@ public class Ventana_Modificar {
 		textNick.setBounds(344, 86, 224, 37);
 		frmModificar.getContentPane().add(textNick);
 		textNick.setColumns(10);
-		textNick.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
-				modificar=true;
-
-			}
-		});
+		textNick.setEnabled(false);// No se puede modificar
 
 		JButton btnModificar = new JButton("Modificar");
 		btnModificar.setBounds(510, 309, 145, 25);
 		frmModificar.getContentPane().add(btnModificar);
 		btnModificar.addActionListener(new ActionListener() {
+			// Metodo interno para la accion del boton modificar 
 			public void actionPerformed(ActionEvent evt) {
-				if(modificar) {
+				if(modificar) {// se actualiza anteriormente si se modifica algun campo si no no tiene caso llamar al contro
 
 					JOptionPane.showMessageDialog(null, "¡Bien!\nYa se han modificado campos");
 					modificar=false;
@@ -172,7 +172,6 @@ public class Ventana_Modificar {
 					boolean modifica=cm.modificar(usuario);
 					System.out.println("modifica "+modifica);
 					if(modifica) {
-
 						JOptionPane.showMessageDialog(null, "Modificacion exitosa");
 					}else {
 
@@ -194,6 +193,7 @@ public class Ventana_Modificar {
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				frmModificar.dispose();
+				@SuppressWarnings("unused")
 				Ventana_Principal v = new Ventana_Principal();
 
 			}
