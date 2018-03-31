@@ -13,23 +13,25 @@ import negocio.Usuario;
 
 public class DAO_Usuario {
 	
-	final String DRIVER_NAME = "com.mysql.jdbc.Driver";
-	final String HOSTNAME = "localhost";
-	final String DBNAME = "Generador";
-	final String CONNECTION_URL = "jdbc:mysql://"+HOSTNAME +":3306/"+DBNAME;
-	final String USERNAME = "root";
-	final String PASSWORD = "";
-	
+//	final String DRIVER_NAME = "com.mysql.jdbc.Driver";
+//	final String HOSTNAME = "localhost";
+//	final String DBNAME = "Generador";
+//	final String CONNECTION_URL = "jdbc:mysql://"+HOSTNAME +":3306/"+DBNAME;
+//	final String USERNAME = "root";
+//	final String PASSWORD = "";
+//	
+	Conexion con;
 
 	public Usuario[] Retrieve() throws SQLException {
 		
 		final String Todos_usuarios = "Select * from Usuario";
-		Connection connection = DriverManager.getConnection(CONNECTION_URL, USERNAME, PASSWORD);
+		con = new Conexion();
+//		Connection connection = DriverManager.getConnection(CONNECTION_URL, USERNAME, PASSWORD);
 		
 		
 		ArrayList<Usuario> usuarioTemp = new ArrayList<Usuario>();
 		try { // Crea el statement
-			Statement statement = connection.createStatement();
+			Statement statement = con.connection.createStatement();
 			// Recibe los resutados
 			ResultSet rs = statement.executeQuery(Todos_usuarios);
 			while (rs.next()) { // Crea una nueva instancia del objeto
@@ -51,10 +53,10 @@ public class DAO_Usuario {
 
 	public boolean crear(Usuario u) throws SQLException {
 		
-		Connection connection = DriverManager.getConnection(CONNECTION_URL, USERNAME, PASSWORD);
+		con = new Conexion();
 		try {
 			// Crea el statement
-			Statement statement = connection.createStatement();
+			Statement statement = con.connection.createStatement();
 
 			// Envia instruccion SQL, nota el DEFAULT es para insertar la llave
 			// autogeneradaraduacion,String adicion
@@ -75,11 +77,11 @@ public class DAO_Usuario {
 public Usuario buscarUsuario(String usuario) throws SQLException {
 		
 		final String bUsuario = ("Select * from Usuario where Nick = "+usuario);
-		Connection connection = DriverManager.getConnection(CONNECTION_URL, USERNAME, PASSWORD);
+		con = new Conexion();
 		
 		
 		try { // Crea el statement
-			Statement statement = connection.createStatement();
+			Statement statement = con.connection.createStatement();
 			// Recibe los resutados
 			ResultSet rs = statement.executeQuery(bUsuario);
 				Usuario us = new Usuario(rs.getString("Nombre"), rs.getString("Apellido"), rs.getInt("Asesor"),

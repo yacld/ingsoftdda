@@ -27,7 +27,6 @@ public class Control_Diagrama {
 		file = file2;
 		JPanel panel = sd.generar();//recibe panel?
 		Ventana_Diagrama ventana = new Ventana_Diagrama(this, panel);//recibe panel que muestra diagrama
-		
 	}
 	
 	

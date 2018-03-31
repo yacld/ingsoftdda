@@ -28,12 +28,13 @@ import negocio.Usuario;
 public class DAO_Plantillas {
 
 	final String DRIVER_NAME = "com.mysql.jdbc.Driver";
-	final String HOSTNAME = "localhost";
-	final String DBNAME = "Generador";
-	final String CONNECTION_URL = "jdbc:mysql://"+HOSTNAME +":3306/"+DBNAME;
-	final String USERNAME = "root";
-	final String PASSWORD = "";
-	
+	final static String HOSTNAME = "mydb-ealpha.cdtc5pclholt.us-west-1.rds.amazonaws.com";
+	final static String DBNAME = "dbeadda";
+	final static String CONNECTION_URL = "jdbc:mysql://"+HOSTNAME +":3306/"+DBNAME;
+	final static String USERNAME = "masterUser";
+	final static String PASSWORD = "equipoalpha";
+//	public Connection connection;
+
 	/**
 	 * Funcion que llena el modelo del Jlist en primer ventana
 	 * @param usuario
@@ -43,7 +44,7 @@ public class DAO_Plantillas {
 	 */
 	public boolean Obten_Plantillas(String usuario, DefaultListModel<File> listModel) throws SQLException {
 		
-		final String todas_plantillas = "Select * from Plantila where Usuario = '" +usuario+ "'";
+		final String todas_plantillas = "Select * from Plantilla where Usuario = '" +usuario+ "'";
 //		Connection connection = DriverManager.getConnection(CONNECTION_URL, USERNAME, PASSWORD);
 					
 	     ResultSet rs = null;
