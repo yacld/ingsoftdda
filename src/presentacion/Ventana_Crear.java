@@ -10,11 +10,13 @@ import javax.swing.JOptionPane;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 
 import datos.DAO_Paso;
 import negocio.Servicio_Paso;
+import negocio.Usuario;
 
 public class Ventana_Crear {
 
@@ -87,7 +89,9 @@ public class Ventana_Crear {
 					cc.crear(datos, usuario);
 					frmCrearPlantilla.dispose();
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+
 					e1.printStackTrace();
 				}
 				}	

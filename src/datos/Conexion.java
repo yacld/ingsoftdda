@@ -8,13 +8,17 @@ import negocio.Usuario;
 
 public class Conexion {
 	
-	final String DRIVER_NAME = "com.mysql.jdbc.Driver";
+	/*final String DRIVER_NAME = "com.mysql.jdbc.Driver";
 	final static String HOSTNAME = "mydb-ealpha.cdtc5pclholt.us-west-1.rds.amazonaws.com";
 	final static String DBNAME = "dbeadda";
 	final static String CONNECTION_URL = "jdbc:mysql://"+HOSTNAME +":3306/"+DBNAME;
 	final static String USERNAME = "masterUser";
 	final static String PASSWORD = "equipoalpha";
-	
+	*/
+	final static String DRIVER_NAME = "com.mysql.jdbc.Driver";
+	final static String CONNECTION_URL = "jdbc:mysql://localhost:3306/Generador";
+	final static String USERNAME = "root";
+	final static String PASSWORD = "camara";
 
 	public static void main(String[] args){
 		

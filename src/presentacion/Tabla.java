@@ -26,6 +26,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 import datos.CSVUtils;
@@ -46,10 +47,10 @@ import javax.swing.JLabel;
 import javax.swing.JTextArea;
 
 public class Tabla {
-	private TableRowSorter trsFiltro;
+	private TableRowSorter<TableModel> trsFiltro;
 
 	// para exportar
-	private JFileChooser FileChooser = new JFileChooser();
+	//private JFileChooser FileChooser = new JFileChooser();
 	private Vector columna = new Vector();
 	private Vector filas = new Vector();
 	private static int tabla_ancho = 0;
@@ -238,25 +239,32 @@ public class Tabla {
 			}
 
 			private void btnInsertarActionPerformed(ActionEvent evt) {
-				// TODO Auto-generated method stub
-				new Ventana_Comentario("Comentarios", Tabla);
+				cp.agregarComentario("Comentario",Tabla);
+				//new Ventana_Comentario("Comentarios", Tabla);
 			}
 		});
 		
 		btnPDF.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				btnPDFActionPerformed(evt);
+				try {
+					btnPDFActionPerformed(evt);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 
-			private void btnPDFActionPerformed(ActionEvent evt) {
+			private void btnPDFActionPerformed(ActionEvent evt) throws IOException {
 				// TODO Auto-generated method stub
-				PDF pdf = new PDF();
+				cp.generador_PDF(Tabla);
+				
+				/*PDF pdf = new PDF();
 				try {
 					pdf.Generador_PDF(Tabla);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
+				}*/
 				//TexCodigo.requestFocus();
 
 			}

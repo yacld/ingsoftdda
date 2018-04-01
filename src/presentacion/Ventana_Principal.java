@@ -18,11 +18,11 @@ public class Ventana_Principal extends javax.swing.JFrame {
 
 		initComponents();
 		cP = new Control_Principal();
-		ImageIcon imagen = new ImageIcon("C:\\Users\\acer\\git\\ingsoftdda\\target\\SOS_Consulting.png");
+		/*ImageIcon imagen = new ImageIcon("C:\\Users\\acer\\git\\ingsoftdda\\target\\SOS_Consulting.png");
 		Icon icono = new ImageIcon(
 				imagen.getImage().getScaledInstance(labelSOS.getWidth(), labelSOS.getHeight(), Image.SCALE_DEFAULT));
 		labelSOS.setIcon(icono);
-		this.repaint();
+		this.repaint();*/
 	}
 
 	private void initComponents() {

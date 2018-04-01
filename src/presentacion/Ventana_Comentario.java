@@ -84,7 +84,6 @@ public class Ventana_Comentario extends JFrame implements ActionListener, ItemLi
 
 	@Override
 	public void itemStateChanged(ItemEvent arg0) {
-		// TODO Auto-generated method stub
 		
 	}
 

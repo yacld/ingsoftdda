@@ -12,6 +12,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import negocio.PDF;
+
 public class DAO_Paso {
 	
 	private JFileChooser FileChooser = new JFileChooser();
@@ -81,6 +83,12 @@ public class DAO_Paso {
 			return file;
 		}
 		return null;
+	}
+
+	public void generador_PDF(JTable tabla) throws IOException {
+		PDF pdf = new PDF();
+		pdf.Generador_PDF(tabla);
+		
 	}
 
 

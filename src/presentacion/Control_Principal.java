@@ -11,7 +11,7 @@ public class Control_Principal {
 	Control_Crear_Usuario cC;
 	Control_Entrar cE;
 
-	DAO_Usuario daoc;
+	DAO_Usuario daoc = new DAO_Usuario();
 
 	public Control_Principal() {
 

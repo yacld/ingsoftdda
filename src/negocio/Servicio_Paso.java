@@ -47,4 +47,9 @@ public class Servicio_Paso {
 		return file;
 	}
 
+	public void generador_PDF(JTable tabla) throws IOException {
+		daops.generador_PDF(tabla);
+		
+	}
+
 }

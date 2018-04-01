@@ -48,5 +48,15 @@ public class Control_Paso {
 //		System.out.println("Gato5");
 		return file;
 	}
+
+	public void agregarComentario(String string, JTable tabla) {
+		new Ventana_Comentario(string, tabla);
+	}
+
+	public void generador_PDF(JTable tabla) throws IOException {
+		sp.generador_PDF(tabla);
+
+		
+	}
 	
 }

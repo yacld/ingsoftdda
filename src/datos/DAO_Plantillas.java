@@ -27,12 +27,19 @@ import negocio.Usuario;
  */
 public class DAO_Plantillas {
 
-	final String DRIVER_NAME = "com.mysql.jdbc.Driver";
+	/*final String DRIVER_NAME = "com.mysql.jdbc.Driver";
 	final String HOSTNAME = "localhost";
 	final String DBNAME = "Generador";
 	final String CONNECTION_URL = "jdbc:mysql://"+HOSTNAME +":3306/"+DBNAME;
 	final String USERNAME = "root";
-	final String PASSWORD = "";
+	final String PASSWORD = "camara";
+	*/
+	final String DRIVER_NAME = "com.mysql.jdbc.Driver";
+	//final String HOSTNAME = "localhost";
+	//final String DBNAME = "Generador";
+	final String CONNECTION_URL = "jdbc:mysql://localhost:3306/Generador";
+	final String USERNAME = "root";
+	final String PASSWORD = "camara";
 	
 	/**
 	 * Funcion que llena el modelo del Jlist en primer ventana

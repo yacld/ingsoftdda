@@ -5,8 +5,6 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;

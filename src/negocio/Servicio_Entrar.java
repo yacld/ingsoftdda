@@ -31,12 +31,38 @@ public class Servicio_Entrar {
 				}
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		return true;
 
+	}
+public boolean valida(String nombre2, String contrasenia2) throws SQLException {
+		
+		Usuario[] usu = daoU.Retrieve();
+		String nom;
+		String cont;
+
+		for (int i = 0; i < usu.length; i++) {
+			
+			nom = usu[i].getNombre();
+			cont =usu[i].getContrasenia();
+			if (nom.contains(nombre2) && cont.contains(contrasenia2)) {
+				System.out.println("El usuario existe");
+				return false;
+			}
+		}
+		System.out.println("El usuario no existe");
+		return true;
+	}
+
+	public boolean mostrar(String nombre, String contra) throws SQLException {
+		if(valida(nombre,contra)== true) {
+			System.out.println("Fue false");
+			return false;
+		}
+		System.out.println("Fue true");
+		return true;
 	}
 
 }
