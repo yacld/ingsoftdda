@@ -22,10 +22,9 @@ public class Control_Diagrama {
 		sd = new Servicio_Diagrama(daod);
 	}
 
-	public void iniciar(File file2) throws IOException {
-		File file;
-		file = file2;
-		JPanel panel = sd.generar();//recibe panel?
+	public void iniciar(JTable tabla) throws IOException {
+		
+		JPanel panel = sd.generar(tabla);//recibe panel?
 		Ventana_Diagrama ventana = new Ventana_Diagrama(this, panel);//recibe panel que muestra diagrama
 	}
 	

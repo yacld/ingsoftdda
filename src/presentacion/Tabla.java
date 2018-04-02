@@ -306,7 +306,7 @@ public class Tabla {
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 				try {
-					cd.iniciar(paso);
+					cd.iniciar(Tabla);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
