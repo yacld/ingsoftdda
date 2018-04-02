@@ -86,7 +86,7 @@ public class Ventana_Entrar extends javax.swing.JFrame {
 		frmEntrar.getContentPane().add(contrasenia);
 
 		btnEntrar.setText("Entrar");
-		btnEntrar.setBounds(50, 120, 80, 25);
+		btnEntrar.setBounds(50, 120, 100, 25);
 		frmEntrar.getContentPane().add(btnEntrar);
 
 		btnEntrar.addActionListener(new java.awt.event.ActionListener() {
@@ -100,7 +100,7 @@ public class Ventana_Entrar extends javax.swing.JFrame {
 		});
 
 		btnCancelar.setText("Cancelar");
-		btnCancelar.setBounds(160, 120, 90, 25);
+		btnCancelar.setBounds(160, 120, 100, 25);
 		frmEntrar.getContentPane().add(btnCancelar);
 		btnCancelar.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,7 +109,7 @@ public class Ventana_Entrar extends javax.swing.JFrame {
 		});
 
 		btnRegresar.setText("Regresar");
-		btnRegresar.setBounds(110, 160, 90, 25);
+		btnRegresar.setBounds(110, 160, 100, 25);
 		frmEntrar.getContentPane().add(btnRegresar);
 
 		btnRegresar.addActionListener(new java.awt.event.ActionListener() {

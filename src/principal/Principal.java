@@ -8,6 +8,7 @@ import negocio.Servicio_Paso;
 import negocio.Usuario;
 import presentacion.Control_Crear;
 import presentacion.Control_Paso;
+import presentacion.Ventana_Inicio;
 //import presentacion.Primera_Ventana;
 import presentacion.Ventana_Principal;
 
@@ -23,8 +24,8 @@ public class Principal {
 	}
 	
 	public void inicia() {
-		Ventana_Principal ventana = new Ventana_Principal();
-		ventana.setVisible(true);
+		Ventana_Inicio ventana = new Ventana_Inicio();
+		ventana.frame.setVisible(true);
 	}
 	
 	
