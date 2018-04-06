@@ -11,7 +11,7 @@ public class DAO_Diagrama {
 
 	public JPanel generaDiagrama(JTable tabla) {
 		// TODO Auto-generated method stub
-		String [] pasoaux  = {"", "Inicio", "","","Ovalo"};
+		String [] pasoaux  = {"0", "Inicio", "0","","Ovalo"};
 		Diagrama jpDiagrama = new Diagrama(pasoaux);
 		
 		
@@ -27,7 +27,14 @@ public class DAO_Diagrama {
                 String [] paso  = {id, nombre, idant,conector,forma};
                 
                 jpDiagrama.agregapaso(paso);
-                jpDiagrama.agregapos();
+                if (conector.equals("Condicion SI")){
+                	jpDiagrama.agregaposcond(60, 25);
+                }else if(conector.equals("Condicion NO")){
+                	jpDiagrama.agregaposcond(-60, 0);
+                }else{
+                    jpDiagrama.agregapos();
+                }
+           
                 
                
                                               

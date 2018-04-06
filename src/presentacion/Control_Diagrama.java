@@ -22,13 +22,17 @@ public class Control_Diagrama {
 		sd = new Servicio_Diagrama(daod);
 	}
 
-	public void iniciar(JTable tabla) throws IOException {
+	public boolean iniciar(JTable tabla) throws IOException {
+		try{
+			JPanel panel = sd.generar(tabla);//recibe panel?
+			Ventana_Diagrama ventana = new Ventana_Diagrama(this, panel);//recibe panel que muestra diagrama
 		
-		JPanel panel = sd.generar(tabla);//recibe panel?
-		Ventana_Diagrama ventana = new Ventana_Diagrama(this, panel);//recibe panel que muestra diagrama
+			return true;
+		}catch(Exception e){
+			return false;
+		}
+	
 	}
-	
-	
 	
 	
 }

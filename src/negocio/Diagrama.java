@@ -17,7 +17,7 @@ public class Diagrama extends JPanel{
 	int y;
 	
 	public Diagrama(String[] paso){
-		this.x= 10;
+		this.x= 180;
 		this.y=10;
 		this.posiciones = new LinkedList<int[]>();
 		this.pasos = new LinkedList<String[]>();
@@ -30,36 +30,56 @@ public class Diagrama extends JPanel{
 	@Override
 	public void paint(Graphics g){//dibuja
 		
-		
-//		int[] aux ={this.x,this.y};
-//		this.posiciones.addLast(aux);
 		for(int i = 0; i< this.pasos.size(); i++){
 		
 			String[] paso = this.pasos.get(i);
-			int[] pos  = this.posiciones.get(i);
+			int[] pos  = this.posiciones.get(Integer.parseInt(paso[0]));
+			int[] posant  = this.posiciones.get(Integer.parseInt(paso[2]));
 			int x = pos[0];
 			int y = pos[1];
 			//dibuja la figura
 			switch(paso[4]){
-			default: 
-				g.drawOval(x, y, 50, 18);
-				g.drawString(paso[1], x+5, y+4);
+			default: //hara el ovalo
+				g.drawOval(x, y, 100, 30);
+				g.drawString(paso[1], x+30, y+20);
 				break;
 			case "Rombo":
-				int[] x2 = {x+25,x+50,x+25,x};
-				int[] y2  ={y,y+9,y+18, y+9};
+				int[] x2 = {x+50,x+100,x+50,x};
+				int[] y2  ={y,y+15,y+30, y+15};
 				g.drawPolygon(x2,y2 , 4);
-				g.drawString(paso[1], this.x+5, this.y+4);
+				g.drawString(paso[1], x+30, y+20);
 				break;
 			case "Rectangulo":
-				g.drawOval(x, y, 50, 10);
-				g.drawString(paso[1], x+5, y+4);
+				g.drawOval(x, y, 100, 30);
+				g.drawString(paso[1], x+30, y+20);
 				break;
 			case "Ovalo":
-				g.drawOval(x, y, 50, 10);
-				g.drawString(paso[1], x+5, y+4);
+				g.drawOval(x, y, 100, 30);
+				g.drawString(paso[1], x+30, y+20);
 				break;
 			}
+			int x1 = pos[0]+50;
+			int y1 = pos[1];
+			int x2 = posant[0]+50;
+			int y2  =posant[1]+30;
+			
+			switch(paso[3]){
+			default: //hara el simple
+//				g.drawLine(x1, y1, x2, y2);
+				break;
+			case "Simple":
+				g.drawLine(x1, y1, x2, y2);
+				break;
+			case "Condicion SI":
+				g.drawLine(x1, y1, x2, y2);
+				g.drawString("SI", (x1+x2)/2, (y1+y2)/2);
+				break;
+			case "Condicion NO":
+				g.drawLine(x1, y1, x2, y2);
+				g.drawString("NO", (x1+x2)/2, (y1+y2)/2);
+				break;
+			}
+			
 		}
 		
 		
@@ -68,17 +88,26 @@ public class Diagrama extends JPanel{
 	
 	
 	public void agregapaso(String[] paso){
+		if(paso[2].equals("")){
+			paso[2]=(Integer.parseInt(paso[0])-1) +"";
+		}
 		this.pasos.addLast(paso);
 	}
 	
 	public void agregapos(){
-		this.y+=25;
-		if(this.y>=370){
-			this.y =10;
-			this.x = 60;
-		}
+		String[] aux = this.pasos.getLast();
+		this.y+=50;
 		int[] pos = {this.x, this.y};
 		this.posiciones.addLast(pos);
 	}
+	
+	public void agregaposcond(int aux, int aux2){
+		
+		this.y+=25;
+		int[] pos = {this.x+aux, this.y+aux2};
+		this.posiciones.addLast(pos);
+	}
+	
+	
 	
 }
