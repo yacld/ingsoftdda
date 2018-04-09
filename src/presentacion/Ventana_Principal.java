@@ -1,3 +1,4 @@
+
 package presentacion;
 
 import java.awt.Color;
@@ -99,3 +100,4 @@ public class Ventana_Principal extends JFrame {
 	private javax.swing.JLabel labelSOS;
 	// End of variables declaration
 }
+

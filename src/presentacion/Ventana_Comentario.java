@@ -1,3 +1,4 @@
+
 package presentacion;
 
 import java.awt.Color;
@@ -108,3 +109,4 @@ public class Ventana_Comentario extends JFrame implements ActionListener, ItemLi
 	}
 
 }
+

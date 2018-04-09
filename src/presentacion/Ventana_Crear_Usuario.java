@@ -161,9 +161,11 @@ public class Ventana_Crear_Usuario {
 						}
 						try {
 							if(cc.agregarUsuario(nombre, apellido, asesor, contra1, nick)) {
-								JOptionPane.showMessageDialog(null, "¡¡ El usuario nueo ha sido agregado con exito!!");
+								JOptionPane.showMessageDialog(null, "USUARIO CREADO CON EXITO!!");
+								frmNuevoUsuario.dispose();
 							}else {
 								JOptionPane.showMessageDialog(null, "¡¡ Ha ocurrido un error interno y no se pudo agregar el usuario!!");
+								frmNuevoUsuario.dispose();
 							}
 						} catch (HeadlessException | SQLException e) {
 							// TODO Auto-generated catch block

@@ -21,7 +21,9 @@ public class Conexion {
 	final static String CONNECTION_URL = "jdbc:mysql://"+HOSTNAME +":3306/"+DBNAME;
 	final static String USERNAME = "masterUser";
 	final static String PASSWORD = "equipoalpha";
+
 	public Connection connection;
+
 
 	Conexion(){
 		try {

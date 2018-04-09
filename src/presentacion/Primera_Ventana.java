@@ -18,10 +18,13 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import datos.DAO_Crear;
+
 import datos.DAO_Paso;
 import datos.DAO_Plantillas;
+import datos.DAO_Usuario;
 import negocio.Servicio_Crear;
 import negocio.Servicio_Paso;
+
 import negocio.Usuario;
 import principal.Principal;
 
@@ -29,24 +32,29 @@ import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 
 public class Primera_Ventana {
-	
+
 	private JFrame frmPrincipal;
-	private Principal app= new Principal();
+	private Principal app = new Principal();
 	private JList<File> lista_p;
 	static Usuario u ;
-	 
-	public Primera_Ventana(Usuario usuario){
-		u=usuario;
-		initialize(usuario);
+	private Control_Crear cc;
+
+	public Primera_Ventana(Control_Crear cc2, String u2) throws SQLException {
+		this.cc = cc2;
+		DAO_Usuario daou = new DAO_Usuario();
+		u=daou.recuperaUsuario(u2);
+		initialize(u2);
 	}
-	
-	
+
 	/**
-	 * Initialize the contents of the frame.
-	 * Crea una Jlist que muestra las plantillas de usuario
-	 * @param usuario
+	 * Initialize the contents of the frame. Crea una Jlist que muestra las
+	 * plantillas de usuario
+	 * 
+	 * @param
+	 * @throws SQLException
 	 */
-	private void initialize(Usuario usuario) {
+	private void initialize(String u2) throws SQLException {
+
 		frmPrincipal = new JFrame();
 		frmPrincipal.setTitle("PRINCIPAL");
 		frmPrincipal.setBounds(100, 100, 450, 450);
@@ -54,10 +62,11 @@ public class Primera_Ventana {
 		frmPrincipal.getContentPane().setLayout(null);
 		frmPrincipal.setVisible(true);
 		DefaultListModel<File> listModel = new DefaultListModel<>();
+
 		
 		DAO_Plantillas daop  =new DAO_Plantillas();
 		try {
-			daop.Obten_Plantillas(usuario.getNick(), listModel);
+			daop.Obten_Plantillas(u2, listModel);
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -70,52 +79,60 @@ public class Primera_Ventana {
         jsp_l.setBounds(68, 10, 300, 250);
         lista_p.addListSelectionListener(new ListSelectionListener() {
             
+
 			@Override
 			public void valueChanged(ListSelectionEvent arg0) {
 				// TODO Auto-generated method stub
 				if (!arg0.getValueIsAdjusting()) {
-                    final File selectedValue = lista_p.getSelectedValue();
-                    System.out.println(selectedValue.getName());
-                }
+					final File selectedValue = lista_p.getSelectedValue();
+					System.out.println(selectedValue.getName());
+				}
 			}
-        });	
-		
+
+		});
+
 		JButton btnCrear = new JButton("CREAR");
 		btnCrear.setBounds(63, 270, 150, 25);
 		btnCrear.setBackground(Color.WHITE);
 		frmPrincipal.getContentPane().add(btnCrear);
-		
+
 		btnCrear.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				app.Crear(usuario);
+				app.Crear(u2);
 				frmPrincipal.dispose();
-				//initialize(usuario);
+				// initialize(usuario);
 			}
 		});
 		/**
-		 * Boton abrir, al seleccionarlo activa
-		 * Evento que abrira la plantilla
-		 * anteriormente hacia lo de importar
-		 * ahora abre la plantilla seleccionada de la lista
-		 * @param file seleccionado
+		 * Boton abrir, al seleccionarlo activa Evento que abrira la plantilla
+		 * anteriormente hacia lo de importar ahora abre la plantilla seleccionada de la
+		 * lista
+		 * 
+		 * @param file
+		 *            seleccionado
 		 */
 		JButton btnAbrir = new JButton("ABRIR");
 		btnAbrir.setBounds(224, 270, 150, 25);
 		btnAbrir.setBackground(Color.WHITE);
 		frmPrincipal.getContentPane().add(btnAbrir);
-		
+
 		btnAbrir.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					app.paso(lista_p.getSelectedValue(), usuario.getNick());
+
+					//System.out.println(lista_p.getSelectedValue().getName());
+					app.paso(lista_p.getSelectedValue(),lista_p.getSelectedValue().getName());
+
+
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 		});
+
 		
 		JButton btnImportar = new JButton("IMPORTAR");
 		btnImportar.setBounds(63, 310, 150, 25);
@@ -142,10 +159,15 @@ public class Primera_Ventana {
 				DAO_Crear daoc = new DAO_Crear();
 				
 				
-				if(daoc.importar(file,datos, usuario.getNick())){
+				if(daoc.importar(file,datos, u2)){
 					JOptionPane.showMessageDialog(null, "Importado Exitoso");
 					frmPrincipal.dispose();
-					Primera_Ventana p  =new Primera_Ventana(usuario);
+					try {
+						Primera_Ventana p  =new Primera_Ventana(cc, u2);
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}else{
 					JOptionPane.showMessageDialog(null, "NO SE HA PODIDO IMPORTAR");
 				}
@@ -182,4 +204,5 @@ public class Primera_Ventana {
 //	public static void main(String[] args){
 //		Primera_Ventana pv = new Primera_Ventana(new Usuario("leon","leon",2,"leon","leon"));
 //	}
+
 }

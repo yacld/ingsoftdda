@@ -63,7 +63,7 @@ public boolean valida(String nombre2, String nick2, String contrasenia2) throws 
  * @param nombre
  * @param apellido
  * @param asesor
- * @param contraseña
+ * @param contrasenia
  * @param nick
  * @return
  * @throws SQLException

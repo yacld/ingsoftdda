@@ -27,6 +27,8 @@ import negocio.Usuario;
  */
 public class DAO_Plantillas {
 
+
+
 	final String DRIVER_NAME = "com.mysql.jdbc.Driver";
 	final static String HOSTNAME = "mydb-ealpha.cdtc5pclholt.us-west-1.rds.amazonaws.com";
 	final static String DBNAME = "dbeadda";
