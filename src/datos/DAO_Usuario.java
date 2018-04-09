@@ -37,7 +37,7 @@ public class DAO_Usuario {
 			while (rs.next()) { // Crea una nueva instancia del objeto
 				Usuario usuario = new Usuario(rs.getString("Nombre"), rs.getString("Apellido"), rs.getInt("Asesor"),
 
-				rs.getString("Contrasenia"),rs.getString("Nick"));
+				rs.getString("Contraseña"),rs.getString("Nick"));
 
 				usuarioTemp.add(usuario);
 			}

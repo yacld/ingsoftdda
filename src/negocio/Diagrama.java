@@ -1,5 +1,6 @@
 package negocio;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.LinkedList;
 
@@ -7,7 +8,12 @@ import java.util.LinkedList;
 import javax.swing.JPanel;
 
 import jxl.write.Font;
-
+/**
+ * 
+ * @author Yaeld
+ *	Clase diagrama, extiende de JPanel (es un panel)
+ *  contiene el metodo paint el cual dibuja en el panel
+ */
 public class Diagrama extends JPanel{
 	
 //	String[] paso;
@@ -15,7 +21,12 @@ public class Diagrama extends JPanel{
 	LinkedList<String[]> pasos;
 	int x;
 	int y;
-	
+	/**
+	 * constructor de la clase
+	 * recibe un array con el primer paso a dibujar, este es el INICIO
+	 * crea las listas que tendran los pasos y posiciones de la tabla
+	 * @param paso
+	 */
 	public Diagrama(String[] paso){
 		this.x= 180;
 		this.y=10;
@@ -25,11 +36,14 @@ public class Diagrama extends JPanel{
 		this.posiciones.addLast(aux);
 //		this.paso = paso;
 		this.pasos.addLast(paso);
+		this.setBackground(Color.white);
 	}
-	
+	/**
+	 * Metodo paint aqui se dibujan los pasos que estan en la lista
+	 */
 	@Override
 	public void paint(Graphics g){//dibuja
-		
+		super.paint(g);
 		for(int i = 0; i< this.pasos.size(); i++){
 		
 			String[] paso = this.pasos.get(i);
@@ -86,6 +100,10 @@ public class Diagrama extends JPanel{
 		
 	}
 	
+	/**
+	 * metodo que agrega los pasos a la lista
+	 * @param paso
+	 */
 	
 	public void agregapaso(String[] paso){
 		if(paso[2].equals("")){
@@ -94,13 +112,21 @@ public class Diagrama extends JPanel{
 		this.pasos.addLast(paso);
 	}
 	
+	/**
+	 * metodo que agrega la posicion de los pasos a la lista 
+	 */
 	public void agregapos(){
-		String[] aux = this.pasos.getLast();
+//		String[] aux = this.pasos.getLast();
 		this.y+=50;
 		int[] pos = {this.x, this.y};
 		this.posiciones.addLast(pos);
 	}
-	
+	/**
+	 * metodo que agrega la posicion de los pasos que siguen un paso con una condicion a la lista 
+	 * reciben un pequeño desvio de su posicion para la bifurcacion
+	 * @param aux
+	 * @param aux2
+	 */
 	public void agregaposcond(int aux, int aux2){
 		
 		this.y+=25;

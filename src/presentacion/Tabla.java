@@ -424,7 +424,6 @@ public class Tabla {
 			Scanner scanner = new Scanner(new File(importado));
 	        while (scanner.hasNext()) {
 	            List<String> line = CSVUtils.parseLine(scanner.nextLine());
-	            //System.out.println("Country [id= " + line.get(0) + ", code= " + line.get(1) + " , name=" + line.get(2) + "]");
 	            modelo.addRow(line.toArray());
 	        }
 	        scanner.close();

@@ -6,12 +6,25 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 
 import negocio.Diagrama;
-
+/**
+ * 
+ * @author Yaeld
+ * Clase que realiza la generacion del diagrama
+ * Se apoya de la clase diagrama
+ */
 public class DAO_Diagrama {
-
+	/**
+	 * metodo que genera el diagrama
+	 * recibe la tabla con los elementos para generar el diagrama
+	 * regresa el panel creado
+	 * recorre las filas de la tabla y los agrega a una lista en la clase diagrama, esto para la generacion del diagrama
+	 * llama al metodo repaint de la clase diagrama para dibujar el diagrama en el panel a regresar
+	 * @param tabla
+	 * @return
+	 */
 	public JPanel generaDiagrama(JTable tabla) {
 		// TODO Auto-generated method stub
-		String [] pasoaux  = {"0", "Inicio", "0","","Ovalo"};
+		String [] pasoaux  = {"0", "INICIO", "0","","Ovalo"};
 		Diagrama jpDiagrama = new Diagrama(pasoaux);
 		
 		
@@ -37,6 +50,10 @@ public class DAO_Diagrama {
                                               
             //}
         }
+		
+		String [] pasoaux2 = {tabla.getRowCount()+1+"", "FIN", tabla.getRowCount()+"","Simple","Ovalo"};
+		jpDiagrama.agregapaso(pasoaux2);
+		jpDiagrama.agregapos();
 		jpDiagrama.repaint();
 		
 		return jpDiagrama;
