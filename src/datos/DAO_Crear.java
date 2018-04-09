@@ -23,10 +23,21 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import jxl.Workbook;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
+import negocio.Usuario;
 
 public class DAO_Crear {
+
+
+	final String DRIVER_NAME = "com.mysql.jdbc.Driver";
+	//final String HOSTNAME = "localhost";
+	//final String DBNAME = "Generador";
+	final String CONNECTION_URL = "jdbc:mysql://localhost:3306/Generador";
+	final String USERNAME = "root";
+	final String PASSWORD = "camara";
+
+
 	
-	public File crear(String[] datos, String usuario) throws IOException {
+	public File crear(String[] datos, String string) throws IOException {
 //		
 		File name = new File(datos[0] +".xls");
 		FileInputStream input = null; 
@@ -54,9 +65,11 @@ public class DAO_Crear {
 		try {
 			// Crea el statement
 //			Statement statement = connection.createStatement();
-			String sql = "INSERT INTO Plantilla VALUES ('"+name.getName() + "',?"
-					/*+ input*/ + "," + Long.parseLong(datos[1]) + ",'" + usuario + "','" + datos[2] +"')";
-			PreparedStatement pstmt = con.connection.prepareStatement(sql);
+
+			String sql = "INSERT INTO Plantila VALUES ('"+name.getName() + "',?"
+					/*+ input*/ + "," + Long.parseLong(datos[1]) + ",'" + string + "','" + datos[2] +"')";
+			PreparedStatement pstmt = connection.prepareStatement(sql);
+
 			pstmt.setBinaryStream(1, input);
 			// Envia instruccion SQL, nota el DEFAULT es para insertar la llave
 			// autogeneradaraduacion,String adicion

@@ -1,43 +1,57 @@
 package presentacion;
 
+import java.sql.SQLException;
+
+import datos.DAO_Crear;
 import datos.DAO_Usuario;
+import negocio.Servicio_Crear;
 import negocio.Servicio_Entrar;
 import negocio.Usuario;
 
 public class Control_Entrar {
-	Servicio_Entrar sE;
-	Usuario u;
+
+	Servicio_Entrar se;
+	Control_Crear cc;
+
 	DAO_Usuario daou = new DAO_Usuario();
 	int tipoErr;
 
-	public Control_Entrar(Servicio_Entrar sE2) {
-		this.sE=sE2;
-		sE = new Servicio_Entrar(daou); 
-		
-	
+	public Control_Entrar(Servicio_Entrar se2) {
+		this.se = se2;
+		se = new Servicio_Entrar(daou);
 
-}/*
+	}
 
 	public void errorContrasenia() {
-		System.out.println("Error en contraseña");
-		tipoErr=1;		
+		tipoErr = 1;
 	}
 
 	public void errorUsuario() {
-
-		System.out.println("Error en usuario");
-		tipoErr=2;
+		tipoErr = 2;
 	}
-*/
-	public Usuario inicia(String usuario, String contrasenia) {
-		System.out.println("Estoy en control entrar");
-		 u = Servicio_Entrar.entrar(usuario, contrasenia);
-		 if(u==null) {
-			 tipoErr=Servicio_Entrar.getTipoErr();
-		 }
-		 
-		return u;
-		
+
+	public boolean inicia(String usuario, String contrasenia) {
+		boolean respuesta = false;
+		if(Servicio_Entrar.entrar(usuario, contrasenia) == true) {
+			return true;
+		}
+		return false;
+
+	}
+
+	public void abrir(String u) throws SQLException {
+		cc = new Control_Crear(new Servicio_Crear(new DAO_Crear()));
+		cc.mostrarPrincipal(cc, u);
+	}
+
+	public boolean mostrar(String usuario, String contra) throws SQLException {
+		if (se.mostrar(usuario, contra)) {
+			//System.out.println("Fue true");
+			return true;
+		}
+		//System.out.println("Fue false");
+			return false;
+
 	}
 
 }

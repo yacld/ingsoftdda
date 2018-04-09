@@ -1,8 +1,9 @@
 package presentacion;
 
 
-import java.awt.Component;
-import java.awt.Rectangle;
+
+import java.awt.HeadlessException;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -10,6 +11,7 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Scanner;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -30,6 +32,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 import datos.CSVUtils;
@@ -50,9 +53,10 @@ import javax.swing.JLabel;
 import javax.swing.JTextArea;
 
 public class Tabla {
-	private TableRowSorter trsFiltro;
+	private TableRowSorter<TableModel> trsFiltro;
+
 	// para exportar
-	private JFileChooser FileChooser = new JFileChooser();
+	//private JFileChooser FileChooser = new JFileChooser();
 	private Vector columna = new Vector();
 	private Vector filas = new Vector();
 	private static int tabla_ancho = 0;
@@ -65,17 +69,20 @@ public class Tabla {
 	private static DefaultTableModel modelo;
 	private JTextField texFiltro;
 	private String importado;
+	private String nombre;
 	Control_Paso cp;
 	Control_Diagrama cd;
 	File paso;
-	private JTextField TexForma;
-	private JTextField texConector;
 	private JTextField texResponsable;
 
-	public Tabla(Control_Paso control_Pasos, File paso) {
+	public Tabla(Control_Paso control_Pasos, File paso, String nombre2) {
 		cp = control_Pasos;
 		this.paso = paso;
+
+		this.nombre = nombre2;
+
 		cd = new Control_Diagrama();
+
 		initialize();
 	}
 
@@ -159,7 +166,11 @@ public class Tabla {
 		texFiltro.setBounds(770, 89, 80, 25);
 		frmProceso.getContentPane().add(texFiltro);
 		texFiltro.setColumns(10);
-				
+
+
+		JButton btnGuardar = new JButton("Guardar");
+		btnGuardar.setBounds(450, 280, 90, 25);
+		frmProceso.getContentPane().add(btnGuardar);
 		JComboBox<?> cbBusqueda = new JComboBox();
 
 		cbBusqueda.setModel(new DefaultComboBoxModel(
@@ -167,31 +178,21 @@ public class Tabla {
 		cbBusqueda.setBounds(600, 89, 150, 20);
 		frmProceso.getContentPane().add(cbBusqueda);
 		
-		TexForma = new JTextField();
-		TexForma.setBounds(270, 27, 100, 20);
-		frmProceso.getContentPane().add(TexForma);
-		TexForma.setColumns(10);
-		
-		texConector = new JTextField();
-		texConector.setBounds(270, 58, 100, 20);
-		frmProceso.getContentPane().add(texConector);
-		texConector.setColumns(10);
-		
 		texResponsable = new JTextField();
 		texResponsable.setBounds(270, 89, 100, 20);
 		frmProceso.getContentPane().add(texResponsable);
 		texResponsable.setColumns(10);
 		
 		JLabel lblIdpaso = new JLabel("idPaso");
-		lblIdpaso.setBounds(117, 30, 46, 14);
+		lblIdpaso.setBounds(117, 30, 75, 14);
 		frmProceso.getContentPane().add(lblIdpaso);
 		
 		JLabel lblNombre = new JLabel("Nombre");
-		lblNombre.setBounds(117, 61, 46, 14);
+		lblNombre.setBounds(117, 61, 75, 14);
 		frmProceso.getContentPane().add(lblNombre);
 		
 		JLabel lblIdpasoAnterior = new JLabel("idPaso anterior");
-		lblIdpasoAnterior.setBounds(117, 92, 86, 14);
+		lblIdpasoAnterior.setBounds(117, 92, 124, 14);
 		frmProceso.getContentPane().add(lblIdpasoAnterior);
 		
 		JLabel lblTipoDeForma = new JLabel("Tipo de forma");
@@ -203,12 +204,27 @@ public class Tabla {
 		frmProceso.getContentPane().add(lblConector);
 		
 		JLabel lblResponsable = new JLabel("Responsable");
-		lblResponsable.setBounds(400, 92, 86, 14);
+		lblResponsable.setBounds(400, 92, 124, 14);
 		frmProceso.getContentPane().add(lblResponsable);
 		
 		JTextArea AreaDescripcion = new JTextArea();
 		AreaDescripcion.setBounds(600, 22, 250, 53);
 		frmProceso.getContentPane().add(AreaDescripcion);
+		
+		JComboBox<String>cBoxConector = new JComboBox<String>();
+		cBoxConector.setModel(new DefaultComboBoxModel<String>(new String[] {"","Entonces", "pues ", "así pues", "por tanto", "por consiguiente", 
+				"en consecuencia", "de ahí que", "así", "por eso", "por ello", "a causa de esto", "por lo cual", 
+				"por el contrario", "no obstante", "aun así", "ahora bien", "ahora", "sin embargo", 
+				"más aún", "todavía más", "incluso", "aparte", "asimismo", "para empezar", "después", 
+				"por otra parte", "finalmente", "en resumen", "en suma", "ante todo", "para comenzar", "en principio", 
+				"en primer lugar", "ya que", "por lo que", "porque", "debido a que", "así que", "puesto que", }));
+		cBoxConector.setBounds(270, 55, 124, 24);
+		frmProceso.getContentPane().add(cBoxConector);
+		
+		JComboBox<String> cBoxForma = new JComboBox<String>();
+		cBoxForma.setModel(new DefaultComboBoxModel<String>(new String[] {"","Elipse", "Rombo", "Rectangulo", "Romboide"}));
+		cBoxForma.setBounds(270, 24, 124, 24);
+		frmProceso.getContentPane().add(cBoxForma);
 		
 		
 		btnInsertar.addActionListener(new java.awt.event.ActionListener() {
@@ -223,16 +239,16 @@ public class Tabla {
 				datos[1] = texNombre.getText();
 				datos[2] = AreaDescripcion.getText();
 				datos[3] = TexidPasoAnt.getText();
-				datos[4] = texConector.getText();
-				datos[5] = TexForma.getText();
+				datos[4] = String.valueOf(cBoxConector.getSelectedItem());
+				datos[5] = String.valueOf(cBoxForma.getSelectedItem());
 				datos[6] = texResponsable.getText();
 				modelo.addRow(datos);
 				TexidPaso.setText("");
 				texNombre.setText("");
 				AreaDescripcion.setText("");
 				TexidPasoAnt.setText("");
-				texConector.setText("");
-				TexForma.setText("");
+				cBoxConector.setSelectedIndex(0);
+				cBoxForma.setSelectedIndex(0);
 				texResponsable.setText("");
 				//TexCodigo.requestFocus();
 
@@ -245,20 +261,29 @@ public class Tabla {
 			}
 
 			private void btnInsertarActionPerformed(ActionEvent evt) {
-				// TODO Auto-generated method stub
-				new Ventana_Comentario("Comentarios", Tabla);
+				cp.agregarComentario("Comentario",Tabla);
+				//new Ventana_Comentario("Comentarios", Tabla);
 			}
 		});
 		
 		btnPDF.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				btnPDFActionPerformed(evt);
+				try {
+					btnPDFActionPerformed(evt);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 
-			private void btnPDFActionPerformed(ActionEvent evt) {
+			private void btnPDFActionPerformed(ActionEvent evt) throws IOException {
 				// TODO Auto-generated method stub
+
+			//	cp.generador_PDF(Tabla);
+
 				PDF pdf = new PDF(Tabla, cp.us, paso);
 				pdf.Generador_PDF();
+
 			}
 		});
 
@@ -279,7 +304,7 @@ public class Tabla {
 //				System.out.println(importado);
 				eliminar();
 				CrearTabla(file);
-				Tabla.setEnabled(false);
+				//Tabla.setEnabled(false);
 			}
 			
 			private void eliminar(){
@@ -318,23 +343,46 @@ public class Tabla {
 			
 			private void btnExportarActionPerformed(ActionEvent evt) {
 				cp.exportar(frmProceso, Tabla);
-				Tabla.setEnabled(false);
+				//Tabla.setEnabled(false);
 			}
 		});
 		
 		
-		btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+		btnGuardar.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
-				btnActualizarActionPerformed(evt);
+				try {
+					btnGuardarActionPerformed(evt);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 
-			private void btnActualizarActionPerformed(ActionEvent evt) {
-				if(cp.editar(Tabla,importado) == true) {
-					JOptionPane.showMessageDialog(null, "TABLA ACTUALIZADA CON EXITO!");
-					Tabla.setEnabled(false);
-				}else {
-					JOptionPane.showMessageDialog(null, "HUBO PROBLEMAS AL ACTUALIZAR!");
-					Tabla.setEnabled(false);
+			private void btnGuardarActionPerformed(ActionEvent evt) throws Exception {
+				try {
+					if(cp.existe(nombre)){
+					if(cp.editar1(Tabla,nombre) == true) {
+						JOptionPane.showMessageDialog(null, "TABLA ACTUALIZADA CON EXITO!");
+						//Tabla.setEnabled(false);
+					}else {
+						JOptionPane.showMessageDialog(null, "HUBO PROBLEMAS AL ACTUALIZAR!");
+						//Tabla.setEnabled(false);
+					}
+					}else {
+						if(cp.editar(Tabla,importado) == true) {
+							JOptionPane.showMessageDialog(null, "TABLA ACTUALIZADA CON EXITO!");
+							//Tabla.setEnabled(false);
+						}else {
+							JOptionPane.showMessageDialog(null, "HUBO PROBLEMAS AL ACTUALIZAR!");
+							//Tabla.setEnabled(false);
+						}
+					}
+				} catch (HeadlessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 				
 			}
@@ -428,5 +476,4 @@ public class Tabla {
 	        scanner.close();
 		}
 	}
-	
 }
