@@ -34,7 +34,7 @@ public class Ventana_Comentario extends JFrame implements ActionListener, ItemLi
 	public Ventana_Comentario(String arg0, JTable tabla) throws HeadlessException {
 		super(arg0);
 		this.tabla = tabla;
-		setSize(500, 500);
+		setSize(450, 450);
 		setLocationRelativeTo(null);
 		setResizable(false);
 		
@@ -47,16 +47,16 @@ public class Ventana_Comentario extends JFrame implements ActionListener, ItemLi
 		}
 		
 		texto2 = new JLabel("Numero de paso");
-		texto2.setBounds(150, 20, 50, 20);
+		texto2.setBounds(40, 20, 250, 20);
 		panel.add(texto2);
 		
 		paso = new JComboBox<>(num_pasos);
-		paso.setBounds(250, 20, 50, 20);
+		paso.setBounds(200, 20, 50, 20);
 		paso.addActionListener(this);
 		panel.add(paso);
 		
 		texto1 = new JLabel((String) tabla.getModel().getValueAt(0, 1));
-		texto1.setBounds(100, 60, 300, 20);
+		texto1.setBounds(25, 60, 390, 20);
 		texto1.setBorder(LineBorder.createBlackLineBorder());
 		texto1.setBackground(Color.WHITE);
 		panel.add(texto1);
@@ -64,16 +64,18 @@ public class Ventana_Comentario extends JFrame implements ActionListener, ItemLi
 		comentario = new JTextArea((String) tabla.getModel().getValueAt(0, 7));
 		comentario.setLineWrap(true);
 		comentario.setWrapStyleWord(true);
-		comentario.setBounds(50, 150, 400, 200);
+		comentario.setBounds(25, 140, 390, 200);
 		panel.add(comentario);
 		
-		Guardar = new JButton("Guardar");
-		Guardar.setBounds(100, 380, 100, 50);
+		Guardar = new JButton("GUARDAR");
+		Guardar.setBounds(70, 370, 100, 25);
+		Guardar.setBackground(Color.WHITE);
 		Guardar.addActionListener(this);
 		panel.add(Guardar);
 		
-		Cancelar = new JButton("Cancelar");
-		Cancelar.setBounds(300, 380, 100, 50);
+		Cancelar = new JButton("REGRESAR");
+		Cancelar.setBounds(250, 370, 100, 25);
+		Cancelar.setBackground(Color.WHITE);
 		Cancelar.addActionListener(this);
 		panel.add(Cancelar);
 		

@@ -35,19 +35,19 @@ public class Ventana_Diagrama {
 	 */
 	 public void inicia(){
 		frmDiagrama = new JFrame("Diagrama");
-		frmDiagrama.setBounds(20, 20, 500, 500);
+		frmDiagrama.setBounds(20, 20, 450, 450);
 		frmDiagrama.setVisible(true);
 		frmDiagrama.setResizable(false);
 		frmDiagrama.setLayout(null);
 		frmDiagrama.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		frmDiagrama.add(jpDiagrama);
-		jpDiagrama.setBounds(20, 20, 450, 400);
+		jpDiagrama.setBounds(21, 20, 400, 350);
 		
 		
 		
-		JButton jbregresa = new JButton("Regresa");
-		jbregresa.setBounds(200, 440, 100, 25);
+		JButton jbregresa = new JButton("REGRESAR");
+		jbregresa.setBounds(170, 385, 100, 25);
 		frmDiagrama.add(jbregresa);
 		jbregresa.setBackground(Color.WHITE);
 		

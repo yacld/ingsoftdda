@@ -1,5 +1,6 @@
 package presentacion;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -55,17 +56,17 @@ public class Ventana_Modificar {
 	private void initialize() {
 		frmModificar = new JFrame();
 		frmModificar.setFont(new Font("AkrutiTml2", Font.BOLD, 15));
-		frmModificar.setTitle("Nuevo Usuario");
-		frmModificar.setBounds(100, 100, 710, 404);
+		frmModificar.setTitle("ACTUALIZAR CUENTA");
+		frmModificar.setBounds(100, 100, 450, 450);
 		frmModificar.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmModificar.getContentPane().setLayout(null);
 
-		JLabel lblNombre = new JLabel("Nombre");
-		lblNombre.setBounds(32, 31, 66, 15);
+		JLabel lblNombre = new JLabel("NOMBRE");
+		lblNombre.setBounds(35, 30, 66, 15);
 		frmModificar.getContentPane().add(lblNombre);
 
 		textNombre = new JTextField(usuario.getNombre());
-		textNombre.setBounds(116, 29, 124, 19);
+		textNombre.setBounds(120, 30, 224, 20);
 		frmModificar.getContentPane().add(textNombre);
 		textNombre.setColumns(10);
 		textNombre.addActionListener(new ActionListener() {
@@ -76,12 +77,12 @@ public class Ventana_Modificar {
 		});
 		
 
-		JLabel lblApellido = new JLabel("Apellido");
-		lblApellido.setBounds(32, 71, 66, 15);
+		JLabel lblApellido = new JLabel("APELLIDO");
+		lblApellido.setBounds(35, 70, 66, 15);
 		frmModificar.getContentPane().add(lblApellido);
 
 		textApellido = new JTextField(usuario.getApellido());
-		textApellido.setBounds(116, 69, 124, 19);
+		textApellido.setBounds(120, 70, 224, 20);
 		frmModificar.getContentPane().add(textApellido);
 		textApellido.setColumns(10);
 		textApellido.addActionListener(new ActionListener() {
@@ -91,8 +92,8 @@ public class Ventana_Modificar {
 			}
 		});
 
-		JLabel lblAsesor = new JLabel("Asesor");
-		lblAsesor.setBounds(32, 122, 66, 15);
+		JLabel lblAsesor = new JLabel("ASESOR");
+		lblAsesor.setBounds(35, 150, 66, 15);
 		frmModificar.getContentPane().add(lblAsesor);
 
 		JComboBox<Object> cbTipo = new JComboBox<Object>();
@@ -103,7 +104,7 @@ public class Ventana_Modificar {
 			cbTipo.setModel(new DefaultComboBoxModel<Object>(new String[] { "NO", "SI" }));
 		}
 
-		cbTipo.setBounds(133, 116, 82, 24);
+		cbTipo.setBounds(120, 150, 82, 20);
 		frmModificar.getContentPane().add(cbTipo);
 		cbTipo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
@@ -112,12 +113,12 @@ public class Ventana_Modificar {
 			}
 		});
 
-		JLabel lblContra1 = new JLabel("Contrasenia");
-		lblContra1.setBounds(42, 170, 230, 42);
+		JLabel lblContra1 = new JLabel("CONTRASEÑA");
+		lblContra1.setBounds(35, 200, 230, 15);
 		frmModificar.getContentPane().add(lblContra1);
 
 		textContra1 = new JTextField(usuario.getContrasenia());
-		textContra1.setBounds(32, 224, 240, 26);
+		textContra1.setBounds(35, 230, 240, 20);
 		frmModificar.getContentPane().add(textContra1);
 		textContra1.setColumns(10);
 		textContra1.addActionListener(new ActionListener() {
@@ -127,12 +128,12 @@ public class Ventana_Modificar {
 			}
 		});
 
-		JLabel lblContra2 = new JLabel("Verificar contrasenia");
-		lblContra2.setBounds(32, 282, 224, 15);
+		JLabel lblContra2 = new JLabel("VERIFICAR CONTRASEÑA");
+		lblContra2.setBounds(35, 280, 224, 15);
 		frmModificar.getContentPane().add(lblContra2);
 
 		textContra2 = new JTextField(usuario.getContrasenia());
-		textContra2.setBounds(32, 309, 240, 26);
+		textContra2.setBounds(32, 310, 240, 20);
 		frmModificar.getContentPane().add(textContra2);
 		textContra2.setColumns(10);
 		textContra2.addActionListener(new ActionListener() {
@@ -142,18 +143,19 @@ public class Ventana_Modificar {
 			}
 		});
 
-		JLabel lblNick = new JLabel("Nombre de usuario(Nickname)");
-		lblNick.setBounds(344, 43, 224, 31);
+		JLabel lblNick = new JLabel("NICKNAME");
+		lblNick.setBounds(35, 110, 100, 15);
 		frmModificar.getContentPane().add(lblNick);
 
 		textNick = new JTextField(usuario.getNick());
-		textNick.setBounds(344, 86, 224, 37);
+		textNick.setBounds(120, 110, 224, 20);
 		frmModificar.getContentPane().add(textNick);
 		textNick.setColumns(10);
 		textNick.setEnabled(false);// No se puede modificar
 
-		JButton btnModificar = new JButton("Modificar");
-		btnModificar.setBounds(510, 309, 145, 25);
+		JButton btnModificar = new JButton("MODIFICAR");
+		btnModificar.setBounds(180, 350, 150, 25);
+		btnModificar.setBackground(Color.WHITE);
 		frmModificar.getContentPane().add(btnModificar);
 		btnModificar.addActionListener(new ActionListener() {
 			// Metodo interno para la accion del boton modificar 
@@ -189,8 +191,9 @@ public class Ventana_Modificar {
 			}
 		});
 
-		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(328, 309, 114, 25);
+		JButton btnCancelar = new JButton("REGRESAR");
+		btnCancelar.setBounds(35, 350, 100, 25);
+		btnCancelar.setBackground(Color.WHITE);
 		frmModificar.getContentPane().add(btnCancelar);
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {

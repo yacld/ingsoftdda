@@ -28,7 +28,7 @@ public class Diagrama extends JPanel{
 	 * @param paso
 	 */
 	public Diagrama(String[] paso){
-		this.x= 180;
+		this.x= 150;
 		this.y=10;
 		this.posiciones = new LinkedList<int[]>();
 		this.pasos = new LinkedList<String[]>();
