@@ -69,9 +69,9 @@ public boolean valida(String nombre2, String nick2, String contrasenia2) throws 
  * @throws SQLException
  */
 
-	public boolean agregarUsuario(String nombre, String apellido, int asesor, String contraseña, String nick) throws SQLException {
-		if (valida(nombre, nick, contraseña) == true) {
-			Usuario u = new Usuario(nombre, apellido, asesor, contraseña, nick);
+	public boolean agregarUsuario(String nombre, String apellido, int asesor, String contrasenia, String nick) throws SQLException {
+		if (valida(nombre, nick, contrasenia) == true) {
+			Usuario u = new Usuario(nombre, apellido, asesor, contrasenia, nick);
 			if (daou.crear(u) == true) {
 				return true;
 			} else {

@@ -14,6 +14,7 @@ public class Control_Paso {
 
 	Servicio_Paso sp;
 	DAO_Paso daops = new DAO_Paso();
+	String us;
 	
 	public Control_Paso(Servicio_Paso sp2) {
 		// TODO Auto-generated constructor stub
@@ -21,9 +22,10 @@ public class Control_Paso {
 		sp = new Servicio_Paso(daops);
 	}
 
-	public void iniciar(File file2) throws IOException {
+	public void iniciar(File file2, String usuario) throws IOException {
 		File file;
 		file = file2;
+		us = usuario;
 		Tabla ventana = new Tabla(this, file);
 		ventana.frmProceso.setVisible(true);
 		
