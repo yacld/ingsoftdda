@@ -9,7 +9,7 @@ public class CrearPlantilla {
 	private JFrame frame;
 
 	/**
-	 * Launch the application.
+	 * lanza la 
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {

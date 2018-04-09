@@ -1,4 +1,8 @@
 package datos;
+/**
+ * Aqui esta todo lo relacionado al manejo en la base de datos sobre los pasos de plantilla
+ * ES la parte logica del manejo de los pasos
+ */
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -38,6 +42,13 @@ public class DAO_Paso {
 	
 	private JFileChooser FileChooser = new JFileChooser();
 
+	/**
+	 * Aqui uelve a crear otro archivo con el mismo nombre y ubicacion de el importado y lo reemplaza asi se actializa
+	 * en el equipo
+	 * @param: Tabla: daots nuevos
+	 * @param: importado:ubucaion y nombre del archivo
+	 * @return: true si se pudo actualizar, false si no fue asi
+	 */
 	public boolean editar(JTable Tabla, String importado) {
 		try {
 			List<JTable> tb = new ArrayList<JTable>();
@@ -55,6 +66,12 @@ public class DAO_Paso {
 		return false;
 	}
 	
+	/**
+	 * Genera un archivo excel con los datos de la tabla y lo guardamos donde queramos
+	 * @param frmProceso
+	 * @param Tabla: datos de la tabla
+	 * @return: true si se pudo actualizar, false si no fue asi
+	 */
 	public boolean exportar(JFrame frmProceso, JTable Tabla) {
 		JFileChooser dialog = new JFileChooser();
 		FileNameExtensionFilter filter = new FileNameExtensionFilter(
@@ -86,6 +103,12 @@ public class DAO_Paso {
 		return false;
 	}
 
+	/**
+	 * Busca un archivo tipo excel y obtiene los datos que contenga,(obvio se recomienda que los
+	 * parametros de la tabla coincidan con los del archivo)
+	 * @return: retorna los datos del archivo
+	 * @throws IOException
+	 */
 	public File importar() throws IOException {
 //		System.out.println("Perro");
 		FileChooser.showDialog(null, "Importar Plantilla ");
@@ -111,6 +134,14 @@ public class DAO_Paso {
 		
 	}
 
+	/**
+	 * edita los datos en la base de datos haciendo un UPDATE,primero transforma los datos a 
+	 * un archivo tipo excel y luego los guarda en la base
+	 * @param tabla:datos de los pasos
+	 * @param nombre: nombre de la plantilla a modificar
+	 * @return: true si se pudo actualizar, false si no fue asi
+	 * @throws Exception
+	 */
 	public boolean editar1(JTable tabla, String nombre) throws Exception {
 		System.out.println("Soy el nomber"+nombre);
 		List<JTable> tb = new ArrayList<JTable>();
@@ -135,6 +166,12 @@ public class DAO_Paso {
 		}
 	}
 
+	/**
+	 * revisa si la plantilla exixte en la base de datos
+	 * @param nombre: nombre de la plantilla
+	 * @return: true si se pudo actualizar, false si no fue asi
+	 * @throws SQLException
+	 */
 	public boolean existe(String nombre) throws SQLException {
 		
 		final String existe = "SELECT Nombre FROM Plantila WHERE Nombre = '"+ nombre+"'";
@@ -148,7 +185,6 @@ public class DAO_Paso {
 				return true;
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
 		}

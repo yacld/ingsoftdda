@@ -1,4 +1,8 @@
 package presentacion;
+/**
+ * COntrol que redirige a un registro de unevo usuario o a un login
+ * para un usario existente
+ */
 
 import datos.DAO_Usuario;
 import negocio.Servicio_Crear_Usuario;
@@ -12,7 +16,10 @@ public class Control_Principal {
 	Control_Entrar cE;
 
 	DAO_Usuario daoc = new DAO_Usuario();
-
+	
+	/**
+	 * Constructor para los 2 metodos que tiene la clase
+	 */
 	public Control_Principal() {
 
 		sC = new Servicio_Crear_Usuario(daoc);
@@ -22,14 +29,19 @@ public class Control_Principal {
 
 	}
 
+	/**
+	 * Dirige a una ventana de registro de usuario
+	 */
 	public void inicia_Crear_Usuario() {
 		Ventana_Crear_Usuario v =new Ventana_Crear_Usuario (cC);
 		v.iniciar();
 
 	}
 
+	/**
+	 * Dirige al login del sistema
+	 */
 	public void inicia_Entrar() {
-
 		Ventana_Entrar v =new Ventana_Entrar(cE); 
 		v.iniciar();
 	}

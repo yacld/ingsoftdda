@@ -1,5 +1,11 @@
 package presentacion;
 
+/**
+ * Es la primera entan que ve el usuario
+ * ESta ventana tiene las opcones relacionadas a la creacion o entrada
+ * al sistema de un usuario 
+ */
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -15,7 +21,7 @@ public class Ventana_Inicio {
 
 
 	/**
-	 * Create the application.
+	 * Crea la aplicacion
 	 */
 	public Ventana_Inicio() {
 		cP = new Control_Principal();
@@ -24,7 +30,8 @@ public class Ventana_Inicio {
 	}
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Initializa los componentes
+	 * 
 	 */
 	private void initialize() {
 		frame = new JFrame();
@@ -46,6 +53,11 @@ public class Ventana_Inicio {
 		lbluno.setBounds(44, 48, 390, 71);
 		frame.getContentPane().add(lbluno);
 
+		
+		/**
+		 * ESte boton al ser presionado invoca a un Control_Principal
+		 * que abrirra una nueva ventana
+		 */
 		btnEntrar.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				btnEntrarActionPerformed(evt);
@@ -54,9 +66,13 @@ public class Ventana_Inicio {
 			private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {
 				cP.inicia_Entrar();
 				frame.setVisible(false);
+				frame.dispose();
 			}
 		});
 
+		/**
+		 * Este boton sisrve para llever a un nuevo usuario a crear una nueva cuenta
+		 */
 		btnCrearCuenta.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				btnCrearCuentaActionPerformed(evt);
@@ -65,7 +81,7 @@ public class Ventana_Inicio {
 			private void btnCrearCuentaActionPerformed(java.awt.event.ActionEvent evt) {
 				cP.inicia_Crear_Usuario();
 				frame.setVisible(false);
-
+				frame.dispose();
 			}
 		});
 

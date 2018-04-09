@@ -13,9 +13,9 @@ public class Ventana_Principal extends javax.swing.JFrame {
 	Control_Principal cP;
 
 	/**
-	 * Creates new form Ventana_Principal
+	 * Crea la ventana Principal
 	 */
-	public Ventana_Principal() {
+	/*public Ventana_Principal() {
 
 		initComponents();
 		cP = new Control_Principal();
@@ -23,8 +23,8 @@ public class Ventana_Principal extends javax.swing.JFrame {
 		Icon icono = new ImageIcon(
 				imagen.getImage().getScaledInstance(labelSOS.getWidth(), labelSOS.getHeight(), Image.SCALE_DEFAULT));
 		labelSOS.setIcon(icono);
-		this.repaint();*/
-	}
+		this.repaint();
+	}*/
 
 	private void initComponents() {
 		btnEntrar = new javax.swing.JButton();

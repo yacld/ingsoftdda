@@ -31,8 +31,10 @@ public class Control_Entrar {
 
 	public boolean inicia(String usuario, String contrasenia) {
 		boolean respuesta = false;
-		respuesta = Servicio_Entrar.entrar(usuario, contrasenia);
-		return respuesta;
+		if(Servicio_Entrar.entrar(usuario, contrasenia) == true) {
+			return true;
+		}
+		return false;
 
 	}
 
@@ -43,10 +45,10 @@ public class Control_Entrar {
 
 	public boolean mostrar(String usuario, String contra) throws SQLException {
 		if (se.mostrar(usuario, contra)) {
-			System.out.println("Fue true");
+			//System.out.println("Fue true");
 			return true;
 		}
-		System.out.println("Fue false");
+		//System.out.println("Fue false");
 			return false;
 
 	}

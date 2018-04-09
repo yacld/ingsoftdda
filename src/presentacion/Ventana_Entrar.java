@@ -1,4 +1,8 @@
 package presentacion;
+/**
+ * Esta ventana es la que se muestra cuando un usuario ya tiene una cuenta 
+ * y quiere entrar al sistema
+ */
 
 import java.awt.Font;
 import java.sql.SQLException;
@@ -32,13 +36,18 @@ public class Ventana_Entrar extends javax.swing.JFrame {
 	Usuario u;
 	//private Control_Entrar cE;
 
+	/**
+	 * La ventana encargada de revisar si el usuario efectivamente tiene una cuenta
+	 * @param control_Entrar: se encarga del acceso al sistema
+	 */
 	public Ventana_Entrar(Control_Entrar control_Entrar) {
 		this.ce = control_Entrar;
 		ventana_Principal = new Ventana_Principal();
-
-		// iniciar();
 	}
-
+	
+	/**
+	 * Inicia los componentes
+	 */
 	public void iniciar() {
 		initComponents();
 		frmEntrar.setVisible(true);
@@ -119,6 +128,11 @@ public class Ventana_Entrar extends javax.swing.JFrame {
 		});
 	}
 
+	/**
+	 * Reisa si el eusario existe o si los datos estan intruducidos correctamente
+	 * @param evt
+	 * @throws SQLException
+	 */
 	private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {
 		char[] arrC = contrasenia.getPassword();
 		String contra = new String(arrC);
@@ -137,42 +151,25 @@ public class Ventana_Entrar extends javax.swing.JFrame {
 				System.out.println("Fue false");
 				JOptionPane.showMessageDialog(null, "¡¡El usuario que introdujo no existe");
 			}
-			//System.out.println("Usuario: " + usuario.getText());
-			//System.out.println("Contrasenia: " + pass);
-		//	JOptionPane.showMessageDialog(null, "Bien hecho");
-
-			//u = new Usuario("Brandon", "Leon", 1, pass, usuario.getText());
-			
-			/*if (u != null) {
-				control_Entrar.abrir(u);
-				//Primera_Ventana vent = new Primera_Ventana(u);
-				this.dispose();
-			} else {
-				int tipoErr = control_Entrar.tipoErr;
-				switch (tipoErr) {
-				case 1:
-					JOptionPane.showMessageDialog(null, "No se encontro nombre de usuario");
-					usuario.setText("");
-					contrasenia.setText("");
-					break;
-				case 2:
-					JOptionPane.showMessageDialog(null, "Contrasenia Incorrecta \n Intente de Nuevo");
-					usuario.setText("");
-					contrasenia.setText("");
-					break;
-				}
-
-			}*/
+		
 		}
 
 	}
-
+	
+	/**
+	 * Regresa a la ventana principal 
+	 * @param evt
+	 */
 	private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {
 		this.setVisible(false);
 		ventana_Principal.setVisible(true);
 
 	}
 
+	/**
+	 * Cierra el sistema
+	 * @param evt
+	 */
 	private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {
 		System.exit(0);
 	}
