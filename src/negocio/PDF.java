@@ -5,8 +5,13 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.StringTokenizer;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -30,22 +35,39 @@ public class PDF {
 	private String Nombre_Diagrama;
 	private JTable tabla;
 	private JPanel Panel;
+	private String usuario;
+	File paso;
+	
+	final String DRIVER_NAME = "com.mysql.jdbc.Driver";
+	final static String HOSTNAME = "mydb-ealpha.cdtc5pclholt.us-west-1.rds.amazonaws.com";
+	final static String DBNAME = "dbeadda";
+	final static String CONNECTION_URL = "jdbc:mysql://"+HOSTNAME +":3306/"+DBNAME;
+	final static String USERNAME = "masterUser";
+	final static String PASSWORD = "equipoalpha";
 
-	public PDF(JTable tabla) {
+	public PDF(JTable tabla, String usuario, File paso) {
 		this.tabla = tabla;
+		this.usuario = usuario;
+		this.paso=paso;
 	}
 
-	public boolean Generador_PDF() {
 
+
+	public boolean Generador_PDF() {
+		
 		Panel_Diagrama = new DAO_Diagrama();
 		Panel = Panel_Diagrama.generaDiagrama(tabla);
 		Panel.setBounds(20, 20, 400, 400);
+		
 		try {
 			Nombre_Diagrama = captureComponent(Panel);
 		} catch (IllegalArgumentException e) {
 			// TODO: handle exception
 			System.out.println(e);
 		}
+		
+		 ResultSet rs = null;
+		
 		PDFont font = PDType1Font.TIMES_ROMAN;
 		float fontSize = 12.0f;
 		int tab = 50;// Tamaño de la Tabulacion
@@ -63,7 +85,7 @@ public class PDF {
 			// Se crea un objeto que sera ocupado para la edicion de la pagina
 			PDPageContentStream contenido = new PDPageContentStream(document, page);
 			// insertar la imagen
-			PDImageXObject imagen = PDImageXObject.createFromFile("SOS_Consulting.png", document);
+			PDImageXObject imagen = PDImageXObject.createFromFile("LOGO.png", document);
 			float scale = 0.2f;
 			contenido.drawImage(imagen, tab, 725, imagen.getWidth() * scale, imagen.getHeight() * scale);
 
@@ -86,19 +108,36 @@ public class PDF {
 
 			contenido.setFont(font, fontSize);// Se modifica el tamaAo
 			contenido.newLineAtOffset((float) (-1.5 * tab), 0);
-			texto = "Nombre del Proceso: ";
+			StringTokenizer st = new StringTokenizer(paso.getAbsolutePath(), "\\");
+			String Nombre="";
+			while(st.hasMoreTokens()) {
+				Nombre= st.nextToken();
+			}
+			texto = "Nombre del Proceso: "+Nombre.substring(0, Nombre.length()-4);
 			contenido.showText(texto);
 			contenido.newLine();
 			contenido.newLine();
 			lineas_hechas += 2;
-
-			texto = "Nombre del Asesor: ";
+			
+			String todas_plantillas = "Select Nombre, Apellido from Usuario where Nick='"+usuario+"'";
+			try (Connection connection = DriverManager.getConnection(CONNECTION_URL, USERNAME, PASSWORD);
+	                PreparedStatement pstmt = connection.prepareStatement(todas_plantillas);){
+				rs = pstmt.executeQuery();
+				rs.next();
+				texto = "Nombre del Asesor: "+rs.getString("Nombre")+" "+rs.getString("Apellido")+".";
+			}
 			contenido.showText(texto);
 			contenido.newLine();
 			contenido.newLine();
 			lineas_hechas += 2;
-
-			texto = "Norma ISO: ";
+			
+			todas_plantillas = "Select ISO from Plantilla where Usuario='"+usuario+"' and Nombre='"+Nombre+"'";
+			try (Connection connection = DriverManager.getConnection(CONNECTION_URL, USERNAME, PASSWORD);
+	                PreparedStatement pstmt = connection.prepareStatement(todas_plantillas);){
+				rs = pstmt.executeQuery();
+				rs.next();
+				texto = "Norma ISO: "+rs.getString("ISO");
+			}
 			contenido.showText(texto);
 			contenido.newLine();
 			contenido.newLine();

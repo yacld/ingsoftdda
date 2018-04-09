@@ -51,7 +51,6 @@ import javax.swing.JTextArea;
 
 public class Tabla {
 	private TableRowSorter trsFiltro;
-
 	// para exportar
 	private JFileChooser FileChooser = new JFileChooser();
 	private Vector columna = new Vector();
@@ -258,7 +257,7 @@ public class Tabla {
 
 			private void btnPDFActionPerformed(ActionEvent evt) {
 				// TODO Auto-generated method stub
-				PDF pdf = new PDF(Tabla);
+				PDF pdf = new PDF(Tabla, cp.us, paso);
 				pdf.Generador_PDF();
 			}
 		});
