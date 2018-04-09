@@ -14,6 +14,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.HeadlessException;
 import java.awt.event.ActionListener;
@@ -59,71 +61,73 @@ public class Ventana_Crear_Usuario {
 		frmNuevoUsuario = new JFrame();
 		frmNuevoUsuario.setFont(new Font("AkrutiTml2", Font.BOLD, 15));
 		frmNuevoUsuario.setTitle("Nuevo Usuario");
-		frmNuevoUsuario.setBounds(100, 100, 710, 404);
+		frmNuevoUsuario.setBounds(100, 100, 450, 450);
 		frmNuevoUsuario.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmNuevoUsuario.getContentPane().setLayout(null);
 		
-		JLabel lblNombre = new JLabel("Nombre");
-		lblNombre.setBounds(32, 31, 66, 15);
+		JLabel lblNombre = new JLabel("NOMBRE");
+		lblNombre.setBounds(35, 30, 66, 15);
 		frmNuevoUsuario.getContentPane().add(lblNombre);
 		
 		textNombre = new JTextField();
-		textNombre.setBounds(116, 29, 124, 19);
+		textNombre.setBounds(120, 30, 224, 20);
 		frmNuevoUsuario.getContentPane().add(textNombre);
 		textNombre.setColumns(10);
 		
-		JLabel lblApellido = new JLabel("Apellido");
-		lblApellido.setBounds(32, 71, 66, 15);
+		JLabel lblApellido = new JLabel("APELLIDO");
+		lblApellido.setBounds(35, 70, 66, 15);
 		frmNuevoUsuario.getContentPane().add(lblApellido);
 		
 		textApellido = new JTextField();
-		textApellido.setBounds(116, 69, 124, 19);
+		textApellido.setBounds(120, 70, 224, 20);
 		frmNuevoUsuario.getContentPane().add(textApellido);
 		textApellido.setColumns(10);
 		
-		JLabel lblAsesor = new JLabel("Asesor");
-		lblAsesor.setBounds(32, 122, 66, 15);
+		JLabel lblAsesor = new JLabel("ASESOR");
+		lblAsesor.setBounds(35, 150, 66, 15);
 		frmNuevoUsuario.getContentPane().add(lblAsesor);
 		
 		JComboBox<Object> cbTipo = new JComboBox<Object>();
 		
 		cbTipo.setModel(new DefaultComboBoxModel<Object>(new String[] {"","SI", "NO"}));
-		cbTipo.setBounds(133, 116, 82, 24);
+		cbTipo.setBounds(120, 150, 82, 20);
 		frmNuevoUsuario.getContentPane().add(cbTipo);
 		
-		JLabel lblContra1 = new JLabel("Contrasenia");
-		lblContra1.setBounds(42, 170, 230, 42);
+		JLabel lblContra1 = new JLabel("CONTRASEÑA");
+		lblContra1.setBounds(35, 200, 230, 15);
 		frmNuevoUsuario.getContentPane().add(lblContra1);
 		
 		textContra1 = new JTextField();
-		textContra1.setBounds(32, 224, 240, 26);
+		textContra1.setBounds(35, 230, 240, 20);
 		frmNuevoUsuario.getContentPane().add(textContra1);
 		textContra1.setColumns(10);
 		
-		JLabel lblContra2 = new JLabel("Verificar contrasenia");
-		lblContra2.setBounds(32, 282, 224, 15);
+		JLabel lblContra2 = new JLabel("VERIFICAR CONTRASEÑA");
+		lblContra2.setBounds(35, 280, 224, 15);
 		frmNuevoUsuario.getContentPane().add(lblContra2);
 		
 		textContra2 = new JTextField();
-		textContra2.setBounds(32, 309, 240, 26);
+		textContra2.setBounds(32, 310, 240, 20);
 		frmNuevoUsuario.getContentPane().add(textContra2);
 		textContra2.setColumns(10);
 		
-		JLabel lblNick = new JLabel("Nombre de usuario(Nickname)");
-		lblNick.setBounds(344, 43, 224, 31);
+		JLabel lblNick = new JLabel("NICKNAME");
+		lblNick.setBounds(35, 110, 100, 15);
 		frmNuevoUsuario.getContentPane().add(lblNick);
 		
 		textNick = new JTextField();
-		textNick.setBounds(344, 86, 224, 37);
+		textNick.setBounds(120, 110, 224, 20);
 		frmNuevoUsuario.getContentPane().add(textNick);
 		textNick.setColumns(10);
 		
-		JButton btnAgregar = new JButton("Agregar Usuario");
-		btnAgregar.setBounds(510, 309, 145, 25);
+		JButton btnAgregar = new JButton("CREAR CUENTA");
+		btnAgregar.setBounds(180, 350, 150, 25);
+		btnAgregar.setBackground(Color.WHITE);
 		frmNuevoUsuario.getContentPane().add(btnAgregar);
 		
-		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(328, 309, 114, 25);
+		JButton btnCancelar = new JButton("REGRESAR");
+		btnCancelar.setBounds(35, 350, 100, 25);
+		btnCancelar.setBackground(Color.WHITE);
 		frmNuevoUsuario.getContentPane().add(btnCancelar);
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {

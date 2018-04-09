@@ -1,5 +1,6 @@
 package presentacion;
 
+import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.JButton;
@@ -12,7 +13,7 @@ import javax.swing.JTextField;
 
 import negocio.Usuario;
 
-public class Ventana_Entrar extends javax.swing.JFrame {
+public class Ventana_Entrar {
 
     private JFrame frmEntrar;
 	private JButton btnCancelar;
@@ -34,7 +35,7 @@ public class Ventana_Entrar extends javax.swing.JFrame {
 
 	public Ventana_Entrar(Control_Entrar control_Entrar) {
 		this.cE = control_Entrar;
-		ventana_Principal = new Ventana_Principal();
+//		ventana_Principal = new Ventana_Principal();
 
 		//iniciar();
 	}
@@ -47,15 +48,15 @@ public class Ventana_Entrar extends javax.swing.JFrame {
 		frmEntrar = new JFrame();
 		frmEntrar.setFont(new Font("AkrutiTml2", Font.BOLD, 15));
 		frmEntrar.setTitle("Entrar al Sistema");
-		frmEntrar.setBounds(100, 100, 300, 300);
+		frmEntrar.setBounds(100, 100, 450, 450);
 		frmEntrar.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmEntrar.getContentPane().setLayout(null);
 
         jPanel1 = new JPanel();
-        jLabel3 = new JLabel();
+        jLabel3 = new JLabel("INICIAR SESION");
         jPanel2 = new JPanel();
-        jLabel1 = new JLabel();
-        jLabel2 = new JLabel();
+        jLabel1 = new JLabel("USUARIO: ");
+        jLabel2 = new JLabel("CONTRASEÑA: ");
         usuario = new JTextField(20);
         contrasenia = new JPasswordField(20);
         btnEntrar = new JButton();
@@ -66,32 +67,33 @@ public class Ventana_Entrar extends javax.swing.JFrame {
         jPanel1.setLayout(null);
         jPanel2.setLayout(null);
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 10, 18)); // NOI18N
         jLabel3.setText("INICIAR SESION");
-        jLabel1.setBounds(90, 10, 80, 25);
-        frmEntrar.getContentPane().add(jLabel3);
+        jLabel1.setBounds(10, 30, 100, 25);
+        frmEntrar.add(jLabel3);
         
         
-        jLabel1.setText("Usuario: "); 
-        jLabel1.setBounds(10, 60, 80, 25);
-        frmEntrar.getContentPane().add(jLabel1);
+//        jLabel1.setText("Usuario: "); 
+        jLabel1.setBounds(120, 60, 100, 25);
+        frmEntrar.add(jLabel1);
         
-        usuario.setBounds(100, 60, 160, 25);
-        frmEntrar.getContentPane().add(usuario);
+        usuario.setBounds(120, 90, 200, 25);
+        frmEntrar.add(usuario);
 
         
         
-        jLabel2.setText("Contrasenia: ");
-        jLabel2.setBounds(10, 90, 80, 25);
-        frmEntrar.getContentPane().add(jLabel2);
+//        jLabel2.setText("Contrasenia: ");
+        jLabel2.setBounds(120, 150, 100, 25);
+        frmEntrar.add(jLabel2);
 
-        contrasenia.setBounds(100, 90, 160, 25);
-        frmEntrar.getContentPane().add(contrasenia);
+        contrasenia.setBounds(120, 190, 200, 25);
+        frmEntrar.add(contrasenia);
 
 
-        btnEntrar.setText("Entrar");
-        btnEntrar.setBounds(50, 120, 80, 25);
-        frmEntrar.getContentPane().add(btnEntrar);
+        btnEntrar.setText("ENTRAR");
+        btnEntrar.setBounds(115, 250, 100, 25);
+        btnEntrar.setBackground(Color.WHITE);
+        frmEntrar.add(btnEntrar);
 
         btnEntrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,9 +101,10 @@ public class Ventana_Entrar extends javax.swing.JFrame {
             }
         });
 
-        btnCancelar.setText("Cancelar");
-        btnCancelar.setBounds(160, 120, 90, 25);
-        frmEntrar.getContentPane().add(btnCancelar);
+        btnCancelar.setText("SALIR");
+        btnCancelar.setBounds(225, 250, 100, 25);
+        btnCancelar.setBackground(Color.WHITE);
+        frmEntrar.add(btnCancelar);
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
@@ -109,9 +112,10 @@ public class Ventana_Entrar extends javax.swing.JFrame {
         });
 
 
-        btnRegresar.setText("Regresar");
-        btnRegresar.setBounds(110, 160, 90, 25);
-        frmEntrar.getContentPane().add(btnRegresar);
+        btnRegresar.setText("REGRESAR");
+        btnRegresar.setBounds(140, 300, 150, 25);
+        btnRegresar.setBackground(Color.WHITE);
+        frmEntrar.add(btnRegresar);
 
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -136,7 +140,7 @@ public class Ventana_Entrar extends javax.swing.JFrame {
 		u= new Usuario("Brandon", "Leon", 1, "123", usuario.getText());// Funcionamiento temporal
             if (u!=null) {
 			Primera_Ventana vent = new Primera_Ventana(u);
-			this.dispose();
+			frmEntrar.dispose();
 		} else {
 			int tipoErr = cE.tipoErr;
 			switch (tipoErr) {
@@ -158,8 +162,8 @@ public class Ventana_Entrar extends javax.swing.JFrame {
 	}
 
 	private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {
-		this.setVisible(false);
-		ventana_Principal.setVisible(true);
+		frmEntrar.dispose();
+		ventana_Principal = new Ventana_Principal();
 
 	}
 

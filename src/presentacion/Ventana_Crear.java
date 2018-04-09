@@ -1,6 +1,8 @@
 package presentacion;
 
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
@@ -41,38 +43,47 @@ public class Ventana_Crear {
 	private void initialize(Usuario usuario) {
 		frmCrearPlantilla = new JFrame();
 		frmCrearPlantilla.setTitle("CREAR PLANTILLA");
-		frmCrearPlantilla.setBounds(100, 100, 700, 326);
+		frmCrearPlantilla.setBounds(100, 100, 450, 450);
 		frmCrearPlantilla.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmCrearPlantilla.getContentPane().setLayout(null);
 		
-		JButton btnNewButton = new JButton("Crear");
-		btnNewButton.setBounds(539, 236, 89, 23);
+		Font font = new Font(null, 10, 15);
+		
+		JLabel lbltitulo = new JLabel("CREAR PLANTILLA");
+		lbltitulo.setBounds(150, 50, 150, 20);
+		lbltitulo.setFont(font);
+		frmCrearPlantilla.getContentPane().add(lbltitulo);
+		
+		
+		JButton btnNewButton = new JButton("CREAR");
+		btnNewButton.setBounds(150, 240, 150, 25);
+		btnNewButton.setBackground(Color.WHITE);
 		frmCrearPlantilla.getContentPane().add(btnNewButton);
 		
-		JLabel lblNewLabel = new JLabel("Nombre");
-		lblNewLabel.setBounds(23, 31, 46, 14);
+		JLabel lblNewLabel = new JLabel("NOMBRE");
+		lblNewLabel.setBounds(50, 100, 100, 20);
 		frmCrearPlantilla.getContentPane().add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("ISO");
-		lblNewLabel_1.setBounds(23, 77, 46, 14);
+		lblNewLabel_1.setBounds(50, 150, 100, 20);
 		frmCrearPlantilla.getContentPane().add(lblNewLabel_1);
 		
-		JLabel lblNewLabel_2 = new JLabel("Asesor");
-		lblNewLabel_2.setBounds(23, 129, 101, 23);
+		JLabel lblNewLabel_2 = new JLabel("ASESOR");
+		lblNewLabel_2.setBounds(50, 200, 100, 25);
 		frmCrearPlantilla.getContentPane().add(lblNewLabel_2);
 		
 		textField = new JTextField();
-		textField.setBounds(94, 28, 258, 20);
+		textField.setBounds(150, 100, 200, 20);
 		frmCrearPlantilla.getContentPane().add(textField);
 		textField.setColumns(10);
 		
 		textField_1 = new JTextField();
-		textField_1.setBounds(97, 74, 86, 20);
+		textField_1.setBounds(150, 150, 200, 20);
 		frmCrearPlantilla.getContentPane().add(textField_1);
 		textField_1.setColumns(10);
 		
 		textField_2 = new JTextField();
-		textField_2.setBounds(97, 130, 258, 20);
+		textField_2.setBounds(150, 200, 200, 20);
 		frmCrearPlantilla.getContentPane().add(textField_2);
 		textField_2.setColumns(10);
 		
@@ -95,6 +106,19 @@ public class Ventana_Crear {
 				
 			}
 		});
+		
+		JButton btnRegresar = new JButton();
+		btnRegresar.setText("REGRESAR");
+        btnRegresar.setBounds(150, 300, 150, 25);
+        btnRegresar.setBackground(Color.WHITE);
+        frmCrearPlantilla.add(btnRegresar);
+
+        btnRegresar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+            	frmCrearPlantilla.dispose();
+//                Ventana_Principal v =new Ventana_Principal();
+            }
+        }); 
 		
 		
 	}

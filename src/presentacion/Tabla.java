@@ -1,6 +1,7 @@
 package presentacion;
 
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
@@ -126,34 +127,56 @@ public class Tabla {
 			// TODO Auto-generated catch block
 			System.out.println("Si esto falla me doy un tiro");
 		}
+		JButton btnCancelar = new JButton("REGRESAR");
+		btnCancelar.setBounds(20, 330, 100, 25);
+		btnCancelar.setBackground(Color.WHITE);
+		frmProceso.getContentPane().add(btnCancelar);
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				frmProceso.dispose();
+				
+			}
+		});
 		
-		JButton btnExportar = new JButton("Exportar");
-		btnExportar.setBounds(20, 330, 100, 25);
+		
+		
+		JButton btnExportar = new JButton("EXPORTAR");
+		btnExportar.setBounds(130, 330, 100, 25);
+		btnExportar.setBackground(Color.WHITE);
 		frmProceso.getContentPane().add(btnExportar);
+		
+		JButton btnGenDiagrama = new JButton("DIAGRAMA");
+		btnGenDiagrama.setBounds(240, 330, 100, 25);
+		btnGenDiagrama.setBackground(Color.WHITE);
+		frmProceso.getContentPane().add(btnGenDiagrama);
 
-		JButton btnInsertar = new JButton("Insertar");
-		btnInsertar.setBounds(130, 330, 100, 25);
-		frmProceso.getContentPane().add(btnInsertar);
-
-		JButton btnPDF = new JButton("Crear PDF");
-		btnPDF.setBounds(240, 330, 150, 25);
+		JButton btnPDF = new JButton("CREAR PDF");
+		btnPDF.setBounds(350, 330, 150, 25);
+		btnPDF.setBackground(Color.WHITE);
 		frmProceso.getContentPane().add(btnPDF);
 		
-		JButton btnActualizar = new JButton("Guardar");
-		btnActualizar.setBounds(400, 330, 100, 25);
+		JButton btnComentarios = new JButton("NVO. COMENTARIO");
+		btnComentarios.setBounds(510, 330, 150, 25);
+		btnComentarios.setBackground(Color.WHITE);
+		frmProceso.getContentPane().add(btnComentarios);
+		
+		JButton btnActualizar = new JButton("GUARDAR");
+		btnActualizar.setBounds(670, 330, 100, 25);
+		btnActualizar.setBackground(Color.WHITE);
 		frmProceso.getContentPane().add(btnActualizar);
 		
-		JButton btnGenDiagrama = new JButton("Diagrama");
-		btnGenDiagrama.setBounds(510, 330, 100, 25);
-		frmProceso.getContentPane().add(btnGenDiagrama);
+		JButton btnInsertar = new JButton("INSERTAR");
+		btnInsertar.setBounds(780, 330, 100, 25);
+		btnInsertar.setBackground(Color.WHITE);
+		frmProceso.getContentPane().add(btnInsertar);
+
 		
-		JButton btnImportar = new JButton("Importar");
-		btnImportar.setBounds(620, 330, 100, 25);
-		frmProceso.getContentPane().add(btnImportar);
-				
-		JButton btnComentarios = new JButton("Nuevo Comentario");
-		btnComentarios.setBounds(730, 330, 150, 25);
-		frmProceso.getContentPane().add(btnComentarios);
+		
+		
+		
+		
+		
+		
 
 		texFiltro = new JTextField();
 		texFiltro.setBounds(770, 89, 80, 25);
@@ -235,6 +258,7 @@ public class Tabla {
 				TexForma.setText("");
 				texResponsable.setText("");
 				//TexCodigo.requestFocus();
+				JOptionPane.showMessageDialog(null, "SE HA INSERTADO CON EXITO!");
 
 			}
 		});
@@ -259,38 +283,11 @@ public class Tabla {
 				// TODO Auto-generated method stub
 				PDF pdf = new PDF(Tabla, cp.us, paso);
 				pdf.Generador_PDF();
+				JOptionPane.showMessageDialog(null, "PDF CREADO CON EXITO!");
 			}
 		});
 
-		btnImportar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
-				try {
-					btnImportarActionPerformed(evt);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-
-			private void btnImportarActionPerformed(ActionEvent evt) throws IOException {// GEN-FIRST:event_btnImportarTablaActionPerformed
-				
-				File file = null;
-				file = cp.importar();
-				//importado = file.getAbsolutePath();
-//				System.out.println(importado);
-				eliminar();
-				CrearTabla(file);
-				Tabla.setEnabled(false);
-			}
-			
-			private void eliminar(){
-		        DefaultTableModel tb = (DefaultTableModel) Tabla.getModel();
-		        int a = Tabla.getRowCount()-1;
-		        for (int i = a; i >= 0; i--) {          
-		        	tb.removeRow(tb.getRowCount()-1);
-		        }
-		    }
-			
-		});
+		
 		
 		/**
 		 * Evento generarDiagrama
@@ -303,6 +300,7 @@ public class Tabla {
 				// TODO Auto-generated method stub
 				try {
 					cd.iniciar(Tabla);
+					JOptionPane.showMessageDialog(null, "DIAGRAMA CREADO!");
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -319,6 +317,7 @@ public class Tabla {
 			private void btnExportarActionPerformed(ActionEvent evt) {
 				cp.exportar(frmProceso, Tabla);
 				Tabla.setEnabled(false);
+				JOptionPane.showMessageDialog(null, "EXPORTADO CON EXITO!");
 			}
 		});
 		

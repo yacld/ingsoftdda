@@ -70,6 +70,28 @@ public class DAO_Crear {
 			return null;
 		}
 	}
+	
+	public boolean importar(File file, String[] datos, String usuario) throws IOException {
+		Conexion con = new Conexion();
+		FileInputStream input = input = new FileInputStream(file);;
+		try {
+			// Crea el statement
+//			Statement statement = connection.createStatement();
+			String sql = "INSERT INTO Plantilla VALUES ('"+datos[0] + "',?"
+					/*+ input*/ + "," + Long.parseLong(datos[1]) + ",'" + usuario + "','" + datos[2] +"')";
+			PreparedStatement pstmt = con.connection.prepareStatement(sql);
+			pstmt.setBinaryStream(1, input);
+			// Envia instruccion SQL, nota el DEFAULT es para insertar la llave
+			// autogeneradaraduacion,String adicion
+
+			pstmt.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			// Cacha excepcion
+			e.printStackTrace();
+			return false;
+		}
+	}
 
 	public static void main(String[] args){
 		DAO_Crear daoc = new DAO_Crear();

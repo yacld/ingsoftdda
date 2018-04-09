@@ -1,5 +1,6 @@
 package presentacion;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,12 +11,17 @@ import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import datos.DAO_Crear;
+import datos.DAO_Paso;
 import datos.DAO_Plantillas;
+import negocio.Servicio_Crear;
+import negocio.Servicio_Paso;
 import negocio.Usuario;
 import principal.Principal;
 
@@ -34,12 +40,6 @@ public class Primera_Ventana {
 		initialize(usuario);
 	}
 	
-//	public void iniciar() {
-//		initialize();
-//		frmPrincipal.setVisible(true);
-//		app = new Principal();
-//	}
-
 	
 	/**
 	 * Initialize the contents of the frame.
@@ -49,7 +49,7 @@ public class Primera_Ventana {
 	private void initialize(Usuario usuario) {
 		frmPrincipal = new JFrame();
 		frmPrincipal.setTitle("PRINCIPAL");
-		frmPrincipal.setBounds(100, 100, 451, 330);
+		frmPrincipal.setBounds(100, 100, 450, 450);
 		frmPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmPrincipal.getContentPane().setLayout(null);
 		frmPrincipal.setVisible(true);
@@ -57,7 +57,7 @@ public class Primera_Ventana {
 		
 		DAO_Plantillas daop  =new DAO_Plantillas();
 		try {
-			daop.Obten_Plantillas(usuario.getNombre(), listModel);
+			daop.Obten_Plantillas(usuario.getNick(), listModel);
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -67,7 +67,7 @@ public class Primera_Ventana {
         
         JScrollPane jsp_l = new JScrollPane(lista_p);
         frmPrincipal.add(jsp_l);
-        jsp_l.setBounds(85, 10, 250, 200);
+        jsp_l.setBounds(68, 10, 300, 250);
         lista_p.addListSelectionListener(new ListSelectionListener() {
             
 			@Override
@@ -81,7 +81,8 @@ public class Primera_Ventana {
         });	
 		
 		JButton btnCrear = new JButton("CREAR");
-		btnCrear.setBounds(86, 220, 89, 23);
+		btnCrear.setBounds(63, 270, 150, 25);
+		btnCrear.setBackground(Color.WHITE);
 		frmPrincipal.getContentPane().add(btnCrear);
 		
 		btnCrear.addActionListener(new ActionListener() {
@@ -100,14 +101,15 @@ public class Primera_Ventana {
 		 * @param file seleccionado
 		 */
 		JButton btnAbrir = new JButton("ABRIR");
-		btnAbrir.setBounds(249, 220, 89, 23);
+		btnAbrir.setBounds(224, 270, 150, 25);
+		btnAbrir.setBackground(Color.WHITE);
 		frmPrincipal.getContentPane().add(btnAbrir);
 		
 		btnAbrir.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					app.paso(lista_p.getSelectedValue(), usuario);
+					app.paso(lista_p.getSelectedValue(), usuario.getNick());
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -115,9 +117,46 @@ public class Primera_Ventana {
 			}
 		});
 		
+		JButton btnImportar = new JButton("IMPORTAR");
+		btnImportar.setBounds(63, 310, 150, 25);
+		btnImportar.setBackground(Color.WHITE);
+		frmPrincipal.getContentPane().add(btnImportar);
+				
+		btnImportar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				try {
+					btnImportarActionPerformed(evt);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+
+			private void btnImportarActionPerformed(ActionEvent evt) throws IOException {// GEN-FIRST:event_btnImportarTablaActionPerformed
+				
+				File file = null;
+				DAO_Paso daopaso=new DAO_Paso();
+				Servicio_Paso sp =new Servicio_Paso(daopaso);
+				Control_Paso cp= new Control_Paso(sp);
+				file = cp.importar();
+				String[] datos = {file.getName(),"000000000", "Asesor?"};
+				DAO_Crear daoc = new DAO_Crear();
+				
+				
+				if(daoc.importar(file,datos, usuario.getNick())){
+					JOptionPane.showMessageDialog(null, "Importado Exitoso");
+					frmPrincipal.dispose();
+					Primera_Ventana p  =new Primera_Ventana(usuario);
+				}else{
+					JOptionPane.showMessageDialog(null, "NO SE HA PODIDO IMPORTAR");
+				}
+				
+			}
+		});
+
 		
 		JButton btnCuenta = new JButton("VER CUENTA");
-		btnCuenta.setBounds(150, 260, 110, 23);
+		btnCuenta.setBounds(224, 310, 150, 25);
+		btnCuenta.setBackground(Color.WHITE);
 		frmPrincipal.getContentPane().add(btnCuenta);
 		
 		btnCuenta.addActionListener(new ActionListener() {
@@ -126,9 +165,21 @@ public class Primera_Ventana {
 				app.ModificarCuenta(u);
 			}
 		});
+		JButton btnRegresar = new JButton();
+		btnRegresar.setText("REGRESAR");
+        btnRegresar.setBounds(135, 350, 150, 25);
+        btnRegresar.setBackground(Color.WHITE);
+        frmPrincipal.add(btnRegresar);
+
+        btnRegresar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                frmPrincipal.dispose();
+                Ventana_Principal v =new Ventana_Principal();
+            }
+        }); 
 	}
 	
-	public static void main(String[] args){
-		Primera_Ventana pv = new Primera_Ventana(new Usuario("leon","leon",2,"leon","leon"));
-	}
+//	public static void main(String[] args){
+//		Primera_Ventana pv = new Primera_Ventana(new Usuario("leon","leon",2,"leon","leon"));
+//	}
 }

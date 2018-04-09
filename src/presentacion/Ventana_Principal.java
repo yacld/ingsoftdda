@@ -1,14 +1,20 @@
 package presentacion;
 
+import java.awt.Color;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 /**
  *
  * @author acer
  */
-public class Ventana_Principal extends javax.swing.JFrame {
+public class Ventana_Principal extends JFrame {
 	Control_Principal cP;
 
 	/**
@@ -19,67 +25,72 @@ public class Ventana_Principal extends javax.swing.JFrame {
 		initComponents();
 		cP = new Control_Principal();
 		ImageIcon imagen = new ImageIcon("SOS_Consulting.png");
-		Icon icono = new ImageIcon(
-				imagen.getImage().getScaledInstance(labelSOS.getWidth(), labelSOS.getHeight(), Image.SCALE_DEFAULT));
+		Icon icono = new ImageIcon(	imagen.getImage());
 		labelSOS.setIcon(icono);
-		this.repaint();
+
 	}
 
 	private void initComponents() {
 
-		labelSOS = new javax.swing.JLabel();
-		btnEntrar = new javax.swing.JButton();
-		btnCrearCuenta = new javax.swing.JButton();
+		labelSOS = new JLabel();
+		btnEntrar = new JButton();
+		btnCrearCuenta = new JButton();
+		this.setSize(450, 450);
 		this.setVisible(true);
-		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		btnEntrar.setText("Entrar al Sistema");
-		btnEntrar.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				btnEntrar1ActionPerformed(evt);
+		btnEntrar.setText("INGRESAR");
+		btnEntrar.setBackground(Color.WHITE);
+		btnEntrar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				btnEntrar1ActionPerformed(e);
+				
 			}
 		});
 
-		btnCrearCuenta.setText("Crear Cuenta");
-		btnCrearCuenta.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		btnCrearCuenta.setText("CREAR CUENTA");
+		btnCrearCuenta.setBackground(Color.WHITE);
+		btnCrearCuenta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				btnCrearCuenta2ActionPerformed(evt);
 			}
 		});
 
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-		getContentPane().setLayout(layout);
-		layout.setHorizontalGroup(
-				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-						.addGroup(
-								layout.createSequentialGroup()
-										.addComponent(labelSOS, javax.swing.GroupLayout.DEFAULT_SIZE, 227,
-												Short.MAX_VALUE)
-										.addGap(18, 18, 18)
-										.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-												.addComponent(btnEntrar).addComponent(btnCrearCuenta))
-										.addGap(69, 69, 69)));
-		layout.setVerticalGroup(
-				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-						.addGroup(layout.createSequentialGroup().addGap(36, 36, 36).addComponent(btnEntrar)
-								.addGap(27, 27, 27).addComponent(btnCrearCuenta).addContainerGap(
-										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-						.addGroup(layout.createSequentialGroup().addComponent(labelSOS,
-								javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addGap(0, 0, Short.MAX_VALUE)));
+		
+		this.setLayout(null);
+		this.add(btnEntrar);
+		this.add(btnCrearCuenta);
+		this.add(labelSOS);
+		labelSOS.setBounds(30, 20, 354, 310);
+		btnCrearCuenta.setBounds(220, 340, 150, 25);
+		btnEntrar.setBounds(60, 340, 150, 25);
+		
+		JButton btnSal = new JButton("SALIR");
+		this.add(btnSal);
+		btnSal.setBounds(140, 370, 150, 25);
+		btnSal.setBackground(Color.WHITE);
+		btnSal.addActionListener(new ActionListener(){
 
-		pack();
-	}// </editor-fold>
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+			
+		});
+		
+	}
 
 	private void btnEntrar1ActionPerformed(java.awt.event.ActionEvent evt) {
 		cP.inicia_Entrar();
-		this.setVisible(false);
+		this.dispose();
 
 	}
 
 	private void btnCrearCuenta2ActionPerformed(java.awt.event.ActionEvent evt) {
 		cP.inicia_Crear_Usuario();
-		this.setVisible(false);
+		this.dispose();
 
 	}
 
