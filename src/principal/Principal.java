@@ -17,6 +17,7 @@ public class Principal {
 	Servicio_Paso sp;
 	Servicio_Crear sc;
 	Servicio_Modificar sm;
+	Ventana_Principal ventana;
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -26,7 +27,7 @@ public class Principal {
 	}
 	
 	public void inicia() {
-		Ventana_Principal ventana = new Ventana_Principal();
+		ventana = new Ventana_Principal();
 		ventana.setVisible(true);
 	}
 	
