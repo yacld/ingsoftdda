@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.awt.Component;
+import java.io.File;
 
 import javax.swing.JFrame;
 import javax.swing.JTable;
@@ -18,12 +19,15 @@ class PDFTest {
 	private PDF pdf;
 	private JTable tabla;
 	private JFrame frame;
+	private File file;
+	private String Name;
 	
 
 	@BeforeEach
 	void setUp() throws Exception {
 		tabla = new JTable();
-		pdf = new PDF(tabla);
+		Name = "";
+		pdf = new PDF(tabla, Name, file);
 		frame = new JFrame("Frame");
 		
 	}

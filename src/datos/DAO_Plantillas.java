@@ -50,7 +50,7 @@ public class DAO_Plantillas {
 	     ResultSet rs = null;
 	 
 	     try (Connection connection = DriverManager.getConnection(CONNECTION_URL, USERNAME, PASSWORD);
-	                PreparedStatement pstmt = connection.prepareStatement(todas_plantillas);) {
+	                PreparedStatement pstmt = connection.prepareStatement(todas_plantillas);){
 	         
 	            rs = pstmt.executeQuery();
 	 
