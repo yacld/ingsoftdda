@@ -39,20 +39,20 @@ public class Servicio_Entrar {
 
 public boolean valida(String usuario2, String contrasenia2) throws SQLException {
 		
-		Usuario[] usu = daoU.Retrieve();
+		Usuario usu = daoU.recuperaUsuario(usuario2);
 		String usuario;
 		String cont;
 
-		for (int i = 0; i < usu.length; i++) {
+//		for (int i = 0; i < usu.length; i++) {
 			
-			usuario = usu[i].getNick();
-			cont =usu[i].getContrasenia();
-			if (usuario.contains(usuario2) && cont.contains(contrasenia2)) {
-				System.out.println("El usuario existe");
+			usuario = usu.getNick();
+			cont =usu.getContrasenia();
+			if (usuario.equals(usuario2) && cont.equals(contrasenia2)) {
+				System.out.println("Login correcto");
 				return false;
 			}
-		}
-		System.out.println("El usuario no existe");
+//		}
+		System.out.println("Login incorrecto");
 		return true;
 	}
 

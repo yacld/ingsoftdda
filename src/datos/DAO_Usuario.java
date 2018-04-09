@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import com.mysql.jdbc.PreparedStatement;
+import java.sql.PreparedStatement;
 
 import negocio.Usuario;
 
@@ -97,9 +97,11 @@ public Usuario recuperaUsuario(String usuario) throws SQLException {
 			// Recibe los resutados
 			ResultSet rs=null;
 			rs = statement.executeQuery(bUsuario);
-			Usuario usuario2 = new Usuario(rs.getString("Nombre"), rs.getString("Apellido"), rs.getInt("Asesor"),
+			Usuario usuario2 =null;
+			while(rs.next()){
+			usuario2 = new Usuario(rs.getString("Nombre"), rs.getString("Apellido"), rs.getInt("Asesor"),
 					rs.getString("Contraseña"),rs.getString("Nick"));
-				
+			}
 			return usuario2;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -114,9 +116,9 @@ public Usuario recuperaUsuario(String usuario) throws SQLException {
 public boolean actualizar(Usuario usuario) throws SQLException {
 	boolean actualizar=false;
 	final String aUsuario=
-			"UPDATE USUARIO SET nombre='"+usuario.getNombre()+"', apellido='"+usuario.getApellido()+
-						"', asesor="+usuario.getAsesor()+", contraseña='"+usuario.getContrasenia()						
-						+" WHERE nick= '"+usuario.getNick()+"'";
+			"UPDATE Usuario SET Nombre=?"+/*usuario.getNombre()*/", Apellido=?"+/*usuario.getApellido()+*/
+						", Asesor=?"/*+usuario.getAsesor()*/+", Contraseña=?"/*+usuario.getContrasenia()*/						
+						+" WHERE Nick= ?"/*'"+usuario.getNick()+*/;
 	
 	/*"UPDATE USUARIO SET nombre='Brandon', apellido = 'Leon Rangel', asesor=0, contraseÃ±a =1234,"
 	+ " WHERE nick = 'branleon' ";
@@ -127,8 +129,13 @@ public boolean actualizar(Usuario usuario) throws SQLException {
 	con = new Conexion();
 	try {
 
-		PreparedStatement stm = (PreparedStatement) con.connection.prepareStatement(aUsuario);
+		PreparedStatement stm = con.connection.prepareStatement(aUsuario);
 		//Statement stm=con.connection.createStatement();
+		stm.setString(1, usuario.getNombre());
+		stm.setString(2, usuario.getApellido());
+		stm.setInt(3, usuario.getAsesor());
+		stm.setString(4, usuario.getContrasenia());
+		stm.setString(5, usuario.getNick());
 		stm.executeUpdate();
 		actualizar=true;
 

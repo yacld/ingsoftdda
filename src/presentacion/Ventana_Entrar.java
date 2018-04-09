@@ -213,7 +213,7 @@ public class Ventana_Entrar {
 				frmEntrar.dispose();
 			}else {
 				System.out.println("Fue false");
-				JOptionPane.showMessageDialog(null, "¡¡El usuario que introdujo no existe");
+				JOptionPane.showMessageDialog(null, "Usuario y/o contrase�a incorrectos");
 			}
 		
 		}

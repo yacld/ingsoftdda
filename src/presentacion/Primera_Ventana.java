@@ -187,8 +187,10 @@ public class Primera_Ventana {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					u=daou.recuperaUsuario(u2);
+					System.out.println(u.getNombre());
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
+					System.out.println("neeeeee");
 					e.printStackTrace();
 				}
 				app.ModificarCuenta(u);
