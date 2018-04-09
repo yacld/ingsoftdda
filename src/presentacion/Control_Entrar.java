@@ -41,8 +41,8 @@ public class Control_Entrar {
 		cc.mostrarPrincipal(cc, u);
 	}
 
-	public boolean mostrar(String nombre, String contra) throws SQLException {
-		if (se.mostrar(nombre, contra)) {
+	public boolean mostrar(String usuario, String contra) throws SQLException {
+		if (se.mostrar(usuario, contra)) {
 			System.out.println("Fue true");
 			return true;
 		}

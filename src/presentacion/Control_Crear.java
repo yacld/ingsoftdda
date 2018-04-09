@@ -38,11 +38,11 @@ public class Control_Crear {
 		
 	}
 
-	public void mostarNueva(File name) {
+	/*public void mostarNueva(File name) {
 		
 		Ventana_Crear vc = new Ventana_Crear(this);	
 		vc.mostrarNueva(name);
-	}
+	}*/
 	
 	public void mostrarPrincipal(Control_Crear cc2, String u) throws SQLException {
 		Primera_Ventana vent = new Primera_Ventana(cc2, u);

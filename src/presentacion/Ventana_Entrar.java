@@ -47,7 +47,7 @@ public class Ventana_Entrar extends javax.swing.JFrame {
 	private void initComponents() {
 		frmEntrar = new JFrame();
 		frmEntrar.setFont(new Font("AkrutiTml2", Font.BOLD, 15));
-		frmEntrar.setTitle("Entrar al Sistema");
+		frmEntrar.setTitle("ENTRAR AL SISTEMA");
 		frmEntrar.setBounds(100, 100, 300, 300);
 		frmEntrar.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmEntrar.getContentPane().setLayout(null);

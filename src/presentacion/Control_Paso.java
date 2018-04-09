@@ -2,6 +2,7 @@ package presentacion;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.swing.JFrame;
 import javax.swing.JTable;
@@ -21,11 +22,20 @@ public class Control_Paso {
 		sp = new Servicio_Paso(daops);
 	}
 
-	public void iniciar(File file2) throws IOException {
+	public void iniciar(File file2, String nombre) throws IOException {
 		File file;
 		file = file2;
-		Tabla ventana = new Tabla(this, file);
+		Tabla ventana = new Tabla(this, file,nombre);
 		ventana.frmProceso.setVisible(true);
+		
+	}
+	
+	public boolean editar1(JTable Tabla, String nombre) throws Exception {
+		if(sp.editar1(Tabla, nombre) == true) {
+			return true;
+		}else {
+			return false;
+		}
 		
 	}
 	
@@ -57,6 +67,14 @@ public class Control_Paso {
 		sp.generador_PDF(tabla);
 
 		
+	}
+
+	public boolean existe(String nombre) throws SQLException {
+		if(sp.existe(nombre)) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 	
 }

@@ -114,7 +114,8 @@ public class Primera_Ventana {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					app.paso(lista_p.getSelectedValue());
+					//System.out.println(lista_p.getSelectedValue().getName());
+					app.paso(lista_p.getSelectedValue(),lista_p.getSelectedValue().getName());
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

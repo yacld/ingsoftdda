@@ -102,9 +102,9 @@ public class Ventana_Crear {
 		
 	}
 
-	public void mostrarNueva(File name) {
-		Tabla tabla = new Tabla(new Control_Paso(new Servicio_Paso(new DAO_Paso())), name);
+	/*public void mostrarNueva(File name) {
+		Tabla tabla = new Tabla(new Control_Paso(new Servicio_Paso(new DAO_Paso())), name, usuario);
 		tabla.frmProceso.setVisible(true);
 		
-	}
+	}*/
 }

@@ -37,17 +37,17 @@ public class Servicio_Entrar {
 		return true;
 
 	}
-public boolean valida(String nombre2, String contrasenia2) throws SQLException {
+public boolean valida(String usuario2, String contrasenia2) throws SQLException {
 		
 		Usuario[] usu = daoU.Retrieve();
-		String nom;
+		String usuario;
 		String cont;
 
 		for (int i = 0; i < usu.length; i++) {
 			
-			nom = usu[i].getNombre();
+			usuario = usu[i].getNick();
 			cont =usu[i].getContrasenia();
-			if (nom.contains(nombre2) && cont.contains(contrasenia2)) {
+			if (usuario.contains(usuario2) && cont.contains(contrasenia2)) {
 				System.out.println("El usuario existe");
 				return false;
 			}
@@ -56,8 +56,8 @@ public boolean valida(String nombre2, String contrasenia2) throws SQLException {
 		return true;
 	}
 
-	public boolean mostrar(String nombre, String contra) throws SQLException {
-		if(valida(nombre,contra)== true) {
+	public boolean mostrar(String usuario, String contra) throws SQLException {
+		if(valida(usuario,contra)== true) {
 			System.out.println("Fue false");
 			return false;
 		}
