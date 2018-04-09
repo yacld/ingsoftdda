@@ -16,6 +16,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import datos.DAO_Plantillas;
+import negocio.Usuario;
 import principal.Principal;
 
 import javax.swing.DefaultListModel;
@@ -26,8 +27,10 @@ public class Primera_Ventana {
 	private JFrame frmPrincipal;
 	private Principal app= new Principal();
 	private JList<File> lista_p;
+	static Usuario u ;
 	 
-	public Primera_Ventana(String usuario){
+	public Primera_Ventana(Usuario usuario){
+		u=usuario;
 		initialize(usuario);
 	}
 	
@@ -43,10 +46,10 @@ public class Primera_Ventana {
 	 * Crea una Jlist que muestra las plantillas de usuario
 	 * @param usuario
 	 */
-	private void initialize(String usuario) {
+	private void initialize(Usuario usuario) {
 		frmPrincipal = new JFrame();
 		frmPrincipal.setTitle("PRINCIPAL");
-		frmPrincipal.setBounds(100, 100, 451, 300);
+		frmPrincipal.setBounds(100, 100, 451, 330);
 		frmPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmPrincipal.getContentPane().setLayout(null);
 		frmPrincipal.setVisible(true);
@@ -54,7 +57,7 @@ public class Primera_Ventana {
 		
 		DAO_Plantillas daop  =new DAO_Plantillas();
 		try {
-			daop.Obten_Plantillas(usuario, listModel);
+			daop.Obten_Plantillas(usuario.getNombre(), listModel);
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -112,9 +115,20 @@ public class Primera_Ventana {
 			}
 		});
 		
+		
+		JButton btnCuenta = new JButton("VER CUENTA");
+		btnCuenta.setBounds(150, 260, 110, 23);
+		frmPrincipal.getContentPane().add(btnCuenta);
+		
+		btnCuenta.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				app.ModificarCuenta(u);
+			}
+		});
 	}
 	
 	public static void main(String[] args){
-		Primera_Ventana pv = new Primera_Ventana("garo");
+		Primera_Ventana pv = new Primera_Ventana(new Usuario("leon","leon",2,"leon","leon"));
 	}
 }

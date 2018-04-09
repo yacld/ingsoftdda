@@ -7,36 +7,44 @@ import presentacion.Control_Entrar;
 
 public class Servicio_Entrar {
 	private static DAO_Usuario daoU;
-	private static Control_Entrar controlE;
+	private Control_Entrar controlE;
+	private static int tipoErr;
 
 	public Servicio_Entrar(DAO_Usuario daoc) {
 		this.daoU = daoc;
+
 	}
 
-	public static boolean entrar(String usuario, String contrasenia) {
+	public static Usuario entrar(String usuario, String contrasenia) {
+		System.out.println("Estoy en Servicio entrar");
 		Usuario u;
 		try {
-			u = daoU.buscarUsuario(usuario);
+			u = daoU.recuperaUsuario(usuario);
 			if (u == null) {
-				controlE.errorUsuario();
-				return false;
+				tipoErr=1;
+				return null;
 
 			} else {
 				if (u.getContrasenia().equals(contrasenia)) {
-					return true;
+					return u;
 
 				} else {
-					controlE.errorContrasenia();
-					return false;
+					tipoErr=2;
+
+					return null;
 				}
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		return true;
+		return null;
 
 	}
+	
+	public static int getTipoErr() {
+		return tipoErr;
+	}
+	
 
 }

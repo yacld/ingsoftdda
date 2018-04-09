@@ -86,7 +86,8 @@ public class Ventana_Crear_Usuario {
 		frmNuevoUsuario.getContentPane().add(lblAsesor);
 		
 		JComboBox<Object> cbTipo = new JComboBox<Object>();
-		cbTipo.setModel(new DefaultComboBoxModel<Object>(new String[] {"", "SI", "NO"}));
+		
+		cbTipo.setModel(new DefaultComboBoxModel<Object>(new String[] {"","SI", "NO"}));
 		cbTipo.setBounds(133, 116, 82, 24);
 		frmNuevoUsuario.getContentPane().add(cbTipo);
 		

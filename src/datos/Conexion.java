@@ -7,6 +7,13 @@ import java.sql.SQLException;
 import negocio.Usuario;
 
 public class Conexion {
+	/*final static String DRIVER_NAME = "com.mysql.jdbc.Driver";
+	final static String CONNECTION_URL = "jdbc:mysql://localhost:3306/Generador";
+	final static String USERNAME = "root";
+	final static String PASSWORD = "123456";
+	
+	*/
+	
 	
 	final String DRIVER_NAME = "com.mysql.jdbc.Driver";
 	final static String HOSTNAME = "mydb-ealpha.cdtc5pclholt.us-west-1.rds.amazonaws.com";
@@ -37,5 +44,4 @@ public class Conexion {
 		}
 	
 	}
-
 }

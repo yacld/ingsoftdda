@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import negocio.Usuario;
+
 public class Ventana_Entrar extends javax.swing.JFrame {
 
     private JFrame frmEntrar;
@@ -25,8 +27,9 @@ public class Ventana_Entrar extends javax.swing.JFrame {
     private JTextField usuario;
 
 	Ventana_Principal ventana_Principal;
-	Control_Entrar control_Entrar;
 	private Control_Entrar cE;
+	
+	Usuario u;
 
 
 	public Ventana_Entrar(Control_Entrar control_Entrar) {
@@ -120,21 +123,22 @@ public class Ventana_Entrar extends javax.swing.JFrame {
 	    char[] arrC = contrasenia.getPassword();
         String pass = new String(arrC);
         System.out.println("Usuario: " + usuario.getText());
-        System.out.println("Contrase�a: " + pass);
+        System.out.println("Contrasenia: " + pass);
         if (usuario.getText().isEmpty()||pass.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Faltan campos por llenar");
         } else {
             System.out.println("Usuario: " + usuario.getText());
-            System.out.println("Contrase�a: " + pass);
+            System.out.println("Contrasenia: " + pass);
             JOptionPane.showMessageDialog(null, "Bien hecho");
         
-		boolean respuesta;
-		respuesta = true;
-		if (respuesta) {
-			Primera_Ventana vent = new Primera_Ventana(usuario.getText());
+		//---> Funcionamiento real con detalles en la base //
+           // u=cE.inicia(usuario.getText(), pass);
+		u= new Usuario("Brandon", "Leon", 1, "123", usuario.getText());// Funcionamiento temporal
+            if (u!=null) {
+			Primera_Ventana vent = new Primera_Ventana(u);
 			this.dispose();
 		} else {
-			int tipoErr = control_Entrar.tipoErr;
+			int tipoErr = cE.tipoErr;
 			switch (tipoErr) {
 			case 1:
 				JOptionPane.showMessageDialog(null, "No se encontro nombre de usuario");
