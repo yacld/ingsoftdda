@@ -194,6 +194,7 @@ public class Tabla {
 
 		JButton btnGuardar =new JButton("GUARDAR");
 		btnGuardar.setBounds(670, 330, 100, 25);
+		btnGuardar.setBackground(Color.WHITE);
 		frmProceso.getContentPane().add(btnGuardar);
 		JComboBox<?> cbBusqueda = new JComboBox();
 
