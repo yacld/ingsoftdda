@@ -33,10 +33,7 @@ public class DAO_Diagrama {
                 	jpDiagrama.agregaposcond(-60, 0);
                 }else{
                     jpDiagrama.agregapos();
-                }
-           
-                
-               
+                }            
                                               
             //}
         }
