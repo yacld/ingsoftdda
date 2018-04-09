@@ -38,11 +38,12 @@ public class Primera_Ventana {
 	private JList<File> lista_p;
 	static Usuario u ;
 	private Control_Crear cc;
+	DAO_Usuario daou;
 
 	public Primera_Ventana(Control_Crear cc2, String u2) throws SQLException {
 		this.cc = cc2;
-		DAO_Usuario daou = new DAO_Usuario();
-		u=daou.recuperaUsuario(u2);
+		daou = new DAO_Usuario();
+//		u=daou.recuperaUsuario(u2);
 		initialize(u2);
 	}
 
@@ -184,6 +185,12 @@ public class Primera_Ventana {
 		btnCuenta.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				try {
+					u=daou.recuperaUsuario(u2);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				app.ModificarCuenta(u);
 			}
 		});

@@ -139,6 +139,12 @@ public class Ventana_Crear {
         btnRegresar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
             	frmCrearPlantilla.dispose();
+            	try {
+					Primera_Ventana p = new Primera_Ventana(cc,usuario);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 //                Ventana_Principal v =new Ventana_Principal();
             }
         }); 

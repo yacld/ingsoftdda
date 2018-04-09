@@ -66,7 +66,7 @@ public class DAO_Crear {
 			// Crea el statement
 //			Statement statement = connection.createStatement();
 
-			String sql = "INSERT INTO Plantila VALUES ('"+name.getName() + "',?"
+			String sql = "INSERT INTO Plantilla VALUES ('"+name.getName() + "',?"
 					/*+ input*/ + "," + Long.parseLong(datos[1]) + ",'" + string + "','" + datos[2] +"')";
 			PreparedStatement pstmt = con.connection.prepareStatement(sql);
 
@@ -106,15 +106,15 @@ public class DAO_Crear {
 		}
 	}
 
-	public static void main(String[] args){
-		DAO_Crear daoc = new DAO_Crear();
-		String[] pruebas  ={"prueba2", "110001001", "ELasesor"};
-		try {
-			daoc.crear(pruebas, "yacld");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+//	public static void main(String[] args){
+//		DAO_Crear daoc = new DAO_Crear();
+//		String[] pruebas  ={"prueba2", "110001001", "ELasesor"};
+//		try {
+//			daoc.crear(pruebas, "yacld");
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
 
 }
