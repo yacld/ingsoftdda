@@ -160,7 +160,7 @@ public class Ventana_Modificar {
 			public void actionPerformed(ActionEvent evt) {
 				if(modificar) {// se actualiza anteriormente si se modifica algun campo si no no tiene caso llamar al contro
 
-					JOptionPane.showMessageDialog(null, "¡Bien!\nYa se han modificado campos");
+					//JOptionPane.showMessageDialog(null, "¡Bien!\nYa se han modificado campos");
 					modificar=false;
 					int asesor=1;
 					if(cbTipo.getSelectedItem() == "SI")asesor =0;
@@ -171,6 +171,8 @@ public class Ventana_Modificar {
 					
 					boolean modifica=cm.modificar(usuario);
 					System.out.println("modifica "+modifica);
+
+					modifica=true;
 					if(modifica) {
 						JOptionPane.showMessageDialog(null, "Modificacion exitosa");
 					}else {
@@ -193,8 +195,8 @@ public class Ventana_Modificar {
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				frmModificar.dispose();
-				@SuppressWarnings("unused")
-				Ventana_Principal v = new Ventana_Principal();
+				cm.u=usuario;
+				Primera_Ventana.u=usuario;
 
 			}
 		});

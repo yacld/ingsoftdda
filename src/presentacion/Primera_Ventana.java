@@ -27,7 +27,7 @@ public class Primera_Ventana {
 	private JFrame frmPrincipal;
 	private Principal app= new Principal();
 	private JList<File> lista_p;
-	Usuario u ;
+	static Usuario u ;
 	 
 	public Primera_Ventana(Usuario usuario){
 		u=usuario;

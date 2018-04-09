@@ -7,35 +7,38 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import com.mysql.jdbc.PreparedStatement;
+
 import negocio.Usuario;
 
 
 
 public class DAO_Usuario {
-	
+	/*
 	final String DRIVER_NAME = "com.mysql.jdbc.Driver";
 	final String HOSTNAME = "localhost";
 	final String DBNAME = "Generador";
 	final String CONNECTION_URL = "jdbc:mysql://"+HOSTNAME +":3306/"+DBNAME;
 	final String USERNAME = "root";
-	final String PASSWORD = "";
-	
+	final String PASSWORD = "123456";
+	*/
 
+	Conexion con;
 	public Usuario[] Retrieve() throws SQLException {
 		
 		final String Todos_usuarios = "Select * from Usuario";
-		Connection connection = DriverManager.getConnection(CONNECTION_URL, USERNAME, PASSWORD);
-		
+		//Connection connection = DriverManager.getConnection(CONNECTION_URL, USERNAME, PASSWORD);
+		con = new Conexion();
 		
 		ArrayList<Usuario> usuarioTemp = new ArrayList<Usuario>();
 		try { // Crea el statement
-			Statement statement = connection.createStatement();
+			Statement statement = con.connection.createStatement();
 			// Recibe los resutados
 			ResultSet rs = statement.executeQuery(Todos_usuarios);
 			while (rs.next()) { // Crea una nueva instancia del objeto
 				Usuario usuario = new Usuario(rs.getString("Nombre"), rs.getString("Apellido"), rs.getInt("Asesor"),
 
-				rs.getString("Contrasenia"),rs.getString("Nick"));
+				rs.getString("Contraseña"),rs.getString("Nick"));
 
 				usuarioTemp.add(usuario);
 			}
@@ -51,10 +54,12 @@ public class DAO_Usuario {
 
 	public boolean crear(Usuario u) throws SQLException {
 		
-		Connection connection = DriverManager.getConnection(CONNECTION_URL, USERNAME, PASSWORD);
+		//Connection connection = DriverManager.getConnection(CONNECTION_URL, USERNAME, PASSWORD);
+		con = new Conexion();
+
 		try {
 			// Crea el statement
-			Statement statement = connection.createStatement();
+			Statement statement = con.connection.createStatement();
 
 			// Envia instruccion SQL, nota el DEFAULT es para insertar la llave
 			// autogeneradaraduacion,String adicion
@@ -74,17 +79,20 @@ public class DAO_Usuario {
 
 public Usuario recuperaUsuario(String usuario) throws SQLException {
 		
-		final String bUsuario = ("Select * from Usuario where Nick = "+usuario);
-		Connection connection = DriverManager.getConnection(CONNECTION_URL, USERNAME, PASSWORD);
-		
+		final String bUsuario = ("Select * from Usuario where Nick = '"+usuario+"'");
+		//Connection connection = DriverManager.getConnection(CONNECTION_URL, USERNAME, PASSWORD);
+		con = new Conexion();
+
 		
 		try { // Crea el statement
-			Statement statement = connection.createStatement();
+			Statement statement = con.connection.createStatement();
 			// Recibe los resutados
-			ResultSet rs = statement.executeQuery(bUsuario);
-				Usuario us = new Usuario(rs.getString("Nombre"), rs.getString("Apellido"), rs.getInt("Asesor"),
-						rs.getString("Contrasenia"),rs.getString("Nick"));				
-			return us;
+			ResultSet rs=null;
+			rs = statement.executeQuery(bUsuario);
+			Usuario usuario2 = new Usuario(rs.getString("Nombre"), rs.getString("Apellido"), rs.getInt("Asesor"),
+					rs.getString("Contraseña"),rs.getString("Nick"));
+				
+			return usuario2;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -97,16 +105,23 @@ public Usuario recuperaUsuario(String usuario) throws SQLException {
 //en este caso por medio del nick que seria la llave primaria
 public boolean actualizar(Usuario usuario) throws SQLException {
 	boolean actualizar=false;
-	final String aUsuario="UPDATE USUARIO SET nombre='"+usuario.getNombre()+"', apellido='"+usuario.getApellido()+
-						"', asesor='"+usuario.getAsesor()+"', contrasenia='"+usuario.getContrasenia()+"', nick='"+usuario.getNick()+"'"
-						+" WHERE nick="+usuario.getNick();
-
-	Connection connection = DriverManager.getConnection(CONNECTION_URL, USERNAME, PASSWORD);
+	final String aUsuario=
+			"UPDATE USUARIO SET nombre='"+usuario.getNombre()+"', apellido='"+usuario.getApellido()+
+						"', asesor="+usuario.getAsesor()+", contraseña='"+usuario.getContrasenia()						
+						+" WHERE nick= '"+usuario.getNick()+"'";
 	
+	/*"UPDATE USUARIO SET nombre='Brandon', apellido = 'Leon Rangel', asesor=0, contraseña =1234,"
+	+ " WHERE nick = 'branleon' ";
+
+*/
+
+	//Connection connection = DriverManager.getConnection(CONNECTION_URL, USERNAME, PASSWORD);
+	con = new Conexion();
 	try {
 
-		Statement stm=connection.createStatement();
-		stm.execute(aUsuario);
+		PreparedStatement stm = (PreparedStatement) con.connection.prepareStatement(aUsuario);
+		//Statement stm=con.connection.createStatement();
+		stm.executeUpdate();
 		actualizar=true;
 
 		return actualizar;

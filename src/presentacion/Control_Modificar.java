@@ -12,7 +12,7 @@ import negocio.Usuario;
 public class Control_Modificar {
 	Servicio_Modificar sm;
 	DAO_Usuario daom = new DAO_Usuario();
-	Usuario u ;
+	Usuario u;
 	/*Constructor inicializa clase servicio
 	 * 
 	 * */

@@ -7,10 +7,12 @@ import presentacion.Control_Entrar;
 
 public class Servicio_Entrar {
 	private static DAO_Usuario daoU;
-	private static Control_Entrar controlE;
+	private Control_Entrar controlE;
+	private static int tipoErr;
 
 	public Servicio_Entrar(DAO_Usuario daoc) {
 		this.daoU = daoc;
+
 	}
 
 	public static Usuario entrar(String usuario, String contrasenia) {
@@ -19,15 +21,16 @@ public class Servicio_Entrar {
 		try {
 			u = daoU.recuperaUsuario(usuario);
 			if (u == null) {
-				controlE.errorUsuario();
-				return u;
+				tipoErr=1;
+				return null;
 
 			} else {
 				if (u.getContrasenia().equals(contrasenia)) {
-					return null;
+					return u;
 
 				} else {
-					controlE.errorContrasenia();
+					tipoErr=2;
+
 					return null;
 				}
 			}
@@ -38,5 +41,10 @@ public class Servicio_Entrar {
 		return null;
 
 	}
+	
+	public static int getTipoErr() {
+		return tipoErr;
+	}
+	
 
 }

@@ -131,8 +131,9 @@ public class Ventana_Entrar extends javax.swing.JFrame {
             System.out.println("Contrasenia: " + pass);
             JOptionPane.showMessageDialog(null, "Bien hecho");
         
-		//---> Funcionamiento real con detalles en la base //u=cE.inicia(usuario.getText(), pass);
-		u= new Usuario("Brandon", "Leon", 0, pass, usuario.getText());// Funcionamiento temporal
+		//---> Funcionamiento real con detalles en la base //
+           // u=cE.inicia(usuario.getText(), pass);
+		u= new Usuario("Brandon", "Leon", 1, "123", usuario.getText());// Funcionamiento temporal
             if (u!=null) {
 			Primera_Ventana vent = new Primera_Ventana(u);
 			this.dispose();
