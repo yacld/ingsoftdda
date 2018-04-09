@@ -32,9 +32,10 @@ public class Principal {
 	}
 	
 	
-	public void paso(File file) throws IOException {
+	public void paso(File file, String usuario) throws IOException {
+		
 		Control_Paso cp = new Control_Paso(this.sp);
-		cp.iniciar(file);
+		cp.iniciar(file, usuario);
 	}
 	
 	public void Crear(Usuario usuario) {

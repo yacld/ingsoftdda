@@ -3,11 +3,10 @@ package test;
  *
  * 
  */
-import static org.junit.jupiter.api.Assertions.*;
-
+import static org.junit.Assert.*;
 import java.sql.SQLException;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import negocio.Servicio_Crear_Usuario;
 import presentacion.Control_Crear_Usuario;
