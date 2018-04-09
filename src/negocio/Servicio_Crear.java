@@ -19,8 +19,10 @@ public class Servicio_Crear {
 		this.daoc = daoc2;
 	}
 
+
 	public boolean Crear(String[] datos, String usuario) throws IOException {
 		File name =daoc.crear(datos, usuario);
+
 		if(name!=null) {
 			//Control_Crear cc= new Control_Crear(this);
 			//cc.mostarNueva(name);

@@ -40,11 +40,13 @@ public class Ventana_Crear {
 		this.cc = control_Crear;
 	}
 
+
 	/**
 	 * Inicia la ventan y la hace visible
 	 * @param usuario: para saber que plantillasbuscar en la base
 	 */
 	public void iniciar(String usuario) {
+
 		initialize(usuario);
 		frmCrearPlantilla.setVisible(true);
 	}
@@ -52,7 +54,7 @@ public class Ventana_Crear {
 	/**
 	 * Initializa el contenido del frame
 	 */
-	private void initialize(String usuario) {
+	private void initialize(Usuario usuario) {
 		frmCrearPlantilla = new JFrame();
 		frmCrearPlantilla.setTitle("CREAR PLANTILLA");
 		frmCrearPlantilla.setBounds(100, 100, 700, 326);

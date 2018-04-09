@@ -9,6 +9,7 @@ import negocio.Servicio_Entrar;
 import negocio.Usuario;
 
 public class Control_Entrar {
+
 	Servicio_Entrar se;
 	Control_Crear cc;
 

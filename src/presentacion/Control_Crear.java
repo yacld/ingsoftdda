@@ -30,10 +30,12 @@ public class Control_Crear {
 	 * @param usuario
 	 */
 	public void iniciar(String usuario) {
+
 		Ventana_Crear vc= new Ventana_Crear(this);
 		vc.iniciar(usuario);
 		
 	}
+
 	
 	/**
 	 * Metodo que crea la plantilla en la base de datos
@@ -59,6 +61,7 @@ public class Control_Crear {
 	public void mostrarPrincipal(Control_Crear cc2, String u) throws SQLException {
 		Primera_Ventana vent = new Primera_Ventana(cc2, u);
 		
+
 	}
 
 	/**

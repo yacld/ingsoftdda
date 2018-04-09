@@ -27,12 +27,15 @@ import negocio.Usuario;
 
 public class DAO_Crear {
 
+
 	final String DRIVER_NAME = "com.mysql.jdbc.Driver";
 	//final String HOSTNAME = "localhost";
 	//final String DBNAME = "Generador";
 	final String CONNECTION_URL = "jdbc:mysql://localhost:3306/Generador";
 	final String USERNAME = "root";
 	final String PASSWORD = "camara";
+
+
 	
 	public File crear(String[] datos, String string) throws IOException {
 //		
@@ -57,26 +60,22 @@ public class DAO_Crear {
 				return null;
 			}
 
-
-		Connection connection=null;
-		try {
-			connection = DriverManager.getConnection(CONNECTION_URL, USERNAME, PASSWORD);
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		Conexion con = new Conexion();
+		
 		try {
 			// Crea el statement
 //			Statement statement = connection.createStatement();
+
 			String sql = "INSERT INTO Plantila VALUES ('"+name.getName() + "',?"
 					/*+ input*/ + "," + Long.parseLong(datos[1]) + ",'" + string + "','" + datos[2] +"')";
 			PreparedStatement pstmt = connection.prepareStatement(sql);
+
 			pstmt.setBinaryStream(1, input);
 			// Envia instruccion SQL, nota el DEFAULT es para insertar la llave
 			// autogeneradaraduacion,String adicion
 
 			pstmt.executeUpdate();
-			JOptionPane.showMessageDialog(null, "TABLAS CREADA CON EXITO!");
+			JOptionPane.showMessageDialog(null, "PLANTILLA CREADA CON EXITO!");
 			return name;
 		} catch (SQLException e) {
 			// Cacha excepcion
@@ -89,7 +88,7 @@ public class DAO_Crear {
 		DAO_Crear daoc = new DAO_Crear();
 		String[] pruebas  ={"prueba2", "110001001", "ELasesor"};
 		try {
-			daoc.crear(pruebas, "garo");
+			daoc.crear(pruebas, "yacld");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

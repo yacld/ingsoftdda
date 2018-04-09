@@ -15,16 +15,7 @@ public class Ventana_Principal extends javax.swing.JFrame {
 	/**
 	 * Crea la ventana Principal
 	 */
-	/*public Ventana_Principal() {
 
-		initComponents();
-		cP = new Control_Principal();
-		/*ImageIcon imagen = new ImageIcon("C:\\Users\\acer\\git\\ingsoftdda\\target\\SOS_Consulting.png");
-		Icon icono = new ImageIcon(
-				imagen.getImage().getScaledInstance(labelSOS.getWidth(), labelSOS.getHeight(), Image.SCALE_DEFAULT));
-		labelSOS.setIcon(icono);
-		this.repaint();
-	}*/
 
 	private void initComponents() {
 		btnEntrar = new javax.swing.JButton();

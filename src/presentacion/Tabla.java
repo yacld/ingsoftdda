@@ -1,11 +1,14 @@
 package presentacion;
 
 
+
 import java.awt.HeadlessException;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -16,6 +19,7 @@ import java.util.logging.Logger;
 import java.util.List;
 import java.util.Random;
 
+import javax.imageio.ImageIO;
 import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -67,13 +71,18 @@ public class Tabla {
 	private String importado;
 	private String nombre;
 	Control_Paso cp;
+	Control_Diagrama cd;
 	File paso;
 	private JTextField texResponsable;
 
 	public Tabla(Control_Paso control_Pasos, File paso, String nombre2) {
 		cp = control_Pasos;
 		this.paso = paso;
+
 		this.nombre = nombre2;
+
+		cd = new Control_Diagrama();
+
 		initialize();
 	}
 
@@ -114,7 +123,7 @@ public class Tabla {
 
 		Tabla.setModel(modelo);
 		Tabla.setEnabled(false);
-		Tabla.setBounds(10, 120, 870, 150);
+		Tabla.setBounds(10, 120, 870, 200);
 		Tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		Tabla.doLayout();
 		frmProceso.getContentPane().add(Tabla);
@@ -124,38 +133,44 @@ public class Tabla {
 			// TODO Auto-generated catch block
 			System.out.println("Si esto falla me doy un tiro");
 		}
-
-		JButton btnInsertar = new JButton("Insertar");
-		btnInsertar.setBounds(180, 280, 90, 25);
-		frmProceso.getContentPane().add(btnInsertar);
-
+		
 		JButton btnExportar = new JButton("Exportar");
-		btnExportar.setText("Exportar Tabla");
-		btnExportar.setBounds(20, 280, 140, 25);
+		btnExportar.setBounds(20, 330, 100, 25);
 		frmProceso.getContentPane().add(btnExportar);
 
-		JButton btnImportar = new JButton("Importar");
-		btnImportar.setText("Importar Tabla");
-		btnImportar.setBounds(560, 280, 140, 25);
-		frmProceso.getContentPane().add(btnImportar);
-		
+		JButton btnInsertar = new JButton("Insertar");
+		btnInsertar.setBounds(130, 330, 100, 25);
+		frmProceso.getContentPane().add(btnInsertar);
+
 		JButton btnPDF = new JButton("Crear PDF");
-		btnPDF.setBounds(290, 280, 140, 25);
+		btnPDF.setBounds(240, 330, 150, 25);
 		frmProceso.getContentPane().add(btnPDF);
 		
-		JButton btnComentarios = new JButton("Agregar Comentarios");
-		btnComentarios.setBounds(720, 280, 150, 25);
+		JButton btnActualizar = new JButton("Guardar");
+		btnActualizar.setBounds(400, 330, 100, 25);
+		frmProceso.getContentPane().add(btnActualizar);
+		
+		JButton btnGenDiagrama = new JButton("Diagrama");
+		btnGenDiagrama.setBounds(510, 330, 100, 25);
+		frmProceso.getContentPane().add(btnGenDiagrama);
+		
+		JButton btnImportar = new JButton("Importar");
+		btnImportar.setBounds(620, 330, 100, 25);
+		frmProceso.getContentPane().add(btnImportar);
+				
+		JButton btnComentarios = new JButton("Nuevo Comentario");
+		btnComentarios.setBounds(730, 330, 150, 25);
 		frmProceso.getContentPane().add(btnComentarios);
 
 		texFiltro = new JTextField();
-		texFiltro.setBounds(770, 89, 90, 25);
+		texFiltro.setBounds(770, 89, 80, 25);
 		frmProceso.getContentPane().add(texFiltro);
 		texFiltro.setColumns(10);
+
 
 		JButton btnGuardar = new JButton("Guardar");
 		btnGuardar.setBounds(450, 280, 90, 25);
 		frmProceso.getContentPane().add(btnGuardar);
-
 		JComboBox<?> cbBusqueda = new JComboBox();
 
 		cbBusqueda.setModel(new DefaultComboBoxModel(
@@ -263,16 +278,11 @@ public class Tabla {
 
 			private void btnPDFActionPerformed(ActionEvent evt) throws IOException {
 				// TODO Auto-generated method stub
-				cp.generador_PDF(Tabla);
-				
-				/*PDF pdf = new PDF();
-				try {
-					pdf.Generador_PDF(Tabla);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}*/
-				//TexCodigo.requestFocus();
+
+			//	cp.generador_PDF(Tabla);
+
+				PDF pdf = new PDF(Tabla, cp.us, paso);
+				pdf.Generador_PDF();
 
 			}
 		});
@@ -307,8 +317,24 @@ public class Tabla {
 			
 		});
 		
+		/**
+		 * Evento generarDiagrama
+		 * Llama al metodo iniciar de control diagrama
+		 */
+		btnGenDiagrama.addActionListener(new ActionListener(){
 
-		
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				try {
+					cd.iniciar(Tabla);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+		});
 		
 		btnExportar.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -445,7 +471,6 @@ public class Tabla {
 			Scanner scanner = new Scanner(new File(importado));
 	        while (scanner.hasNext()) {
 	            List<String> line = CSVUtils.parseLine(scanner.nextLine());
-	            //System.out.println("Country [id= " + line.get(0) + ", code= " + line.get(1) + " , name=" + line.get(2) + "]");
 	            modelo.addRow(line.toArray());
 	        }
 	        scanner.close();

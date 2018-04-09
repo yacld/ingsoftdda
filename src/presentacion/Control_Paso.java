@@ -19,6 +19,7 @@ public class Control_Paso {
 
 	Servicio_Paso sp;
 	DAO_Paso daops = new DAO_Paso();
+	String us;
 	
 	/**
 	 * Constructor que recibe un sericio para estar conectado al DAO
@@ -41,6 +42,8 @@ public class Control_Paso {
 		File file;
 		file = file2;
 		Tabla ventana = new Tabla(this, file,nombre);
+
+
 		ventana.frmProceso.setVisible(true);
 		
 	}

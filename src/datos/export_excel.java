@@ -34,6 +34,7 @@ public class export_excel {
 		            w.createSheet("Plantilla", 0);
 		           
 		            for (int index=0;index<tabla.size();index++) {
+		            	System.out.println(tabla.size());
 		                JTable table=tabla.get(index);
 		              
 		                  WritableSheet s = w.getSheet(0);

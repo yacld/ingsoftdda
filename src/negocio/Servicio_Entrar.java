@@ -7,32 +7,36 @@ import datos.DAO_Usuario;
 
 public class Servicio_Entrar {
 	private static DAO_Usuario daoU;
+
 	public Servicio_Entrar(DAO_Usuario daoc) {
 		Servicio_Entrar.daoU = daoc;
 	}
 
-	public static boolean entrar(String usuario, String contrasenia) {
+	public static Usuario entrar(String usuario, String contrasenia) {
+		System.out.println("Estoy en Servicio entrar");
 		Usuario u;
 		try {
-			u = daoU.buscarUsuario(usuario);
+			u = daoU.recuperaUsuario(usuario);
 			if (u == null) {
 				return false;
 
+
 			} else {
 				if (u.getContrasenia().equals(contrasenia)) {
-					return true;
+					return u;
 
 				} else {
 					return false;
+
 				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
-		return true;
+		return null;
 
 	}
+
 public boolean valida(String usuario2, String contrasenia2) throws SQLException {
 		
 		Usuario[] usu = daoU.Retrieve();
@@ -60,5 +64,6 @@ public boolean valida(String usuario2, String contrasenia2) throws SQLException 
 		System.out.println("Fue true");
 		return true;
 	}
+
 
 }
